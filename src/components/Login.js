@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
 import {handleChange, login} from "../utilities/actions"
+import {Link} from "react-router-dom"
 
 const Login = ({
   history, 
@@ -10,7 +11,7 @@ const Login = ({
   handleChange, 
   token
   }) => {
-    
+
   useEffect(()=> {
     if(!!token){
       localStorage.setItem('token', token);
@@ -40,6 +41,10 @@ const Login = ({
           />
           <button>Log in</button>
         </form>
+        <p>Dont have an account?</p>
+        <Link to="/register">
+          <span>Sign up</span>
+        </Link>
     </>
   );
 };

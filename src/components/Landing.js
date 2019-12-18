@@ -7,6 +7,7 @@ const Landing = props=> {
             <Link to="/login">
                 <p>Login</p>
             </Link>
+            <br/>
             <Link to="/register">
                 <p>Sign up</p>
             </Link>
