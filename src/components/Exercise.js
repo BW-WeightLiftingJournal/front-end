@@ -1,4 +1,5 @@
 import React from "react"
+import {connect} from "react-redux"
 
 const Exercise = props => {
     return (
@@ -6,4 +7,8 @@ const Exercise = props => {
     )
 }
 
-export default Exercise
+const mapStateToProps = state => ({
+    ...state
+  })
+  
+export default connect(mapStateToProps,{})(Exercise);

@@ -1,5 +1,6 @@
 import React from "react"
 import {Link} from "react-router-dom"
+import {connect} from "react-redux"
 
 const Landing = props=> {
     return (
@@ -15,4 +16,8 @@ const Landing = props=> {
     )
 }
 
-export default Landing
+const mapStateToProps = state => ({
+    ...state
+  })
+  
+export default connect(mapStateToProps,{})(Landing);

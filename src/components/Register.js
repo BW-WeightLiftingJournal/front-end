@@ -15,6 +15,7 @@ const Register = ({
 
   useEffect(()=> {
     resetCredentials()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(()=> {
@@ -27,7 +28,7 @@ const Register = ({
 
   return (
     <>
-       <h2>Login below</h2>
+       <h2>Sign up below</h2>
         {error && <div style={{color: 'red'}}>Error.</div>}
         <form onSubmit={(e)=>register(e, credentials)}>
           <input
