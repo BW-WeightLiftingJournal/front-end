@@ -12,8 +12,7 @@ import PrivateRoute from "./utilities/PrivateRoute"
 
 function App() {
   return (
-    <div className="App">
-      <h1>Weightlifting Journal</h1>
+    <div className="app-container">
       <Route exact path="/" component={Landing}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/login" component={Login}/>

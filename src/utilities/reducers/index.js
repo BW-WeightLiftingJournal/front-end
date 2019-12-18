@@ -4,12 +4,13 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     HANDLE_CHANGE,
-    RESET_CREDS
+    RESET_ERRORS
     } 
 from "../actions"
 
 const initialState = {
-    credentials: {},
+    loginCredentials: {},
+    registerCredentials: {},
     error: '',
     token: '',
     isLogging: false,
@@ -46,10 +47,10 @@ switch (type) {
                 [payload.target.name]: payload.target.value
             }
         }
-    case RESET_CREDS:
+    case RESET_ERRORS:
         return {
             ...state,
-            credentials: {}
+            error: ''
         }
     case LOGOUT:
         return initialState

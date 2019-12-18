@@ -1,22 +1,18 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, register, resetCredentials} from "../utilities/actions"
+import {handleChange, register} from "../utilities/actions"
 import {Link} from "react-router-dom"
 
 const Register = ({
   history, 
   error, 
   register, 
-  credentials, 
+  registerCredentials, 
   handleChange, 
-  token,
-  resetCredentials
+  token
   }) => {
 
-  useEffect(()=> {
-    resetCredentials()
-    // eslint-disable-next-line
-  }, [])
+
 
   useEffect(()=> {
     if(!!token){
@@ -30,20 +26,20 @@ const Register = ({
     <>
        <h2>Sign up below</h2>
         {error && <div style={{color: 'red'}}>Error.</div>}
-        <form onSubmit={(e)=>register(e, credentials)}>
+        <form onSubmit={(e)=>register(e, registerCredentials)}>
           <input
             type="text"
             name="username"
             placeholder="Username"
-            value={credentials.username}
-            onChange={e=>handleChange(e, 'credentials')}
+            value={registerCredentials.username}
+            onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
-            value={credentials.password}
-            onChange={e=>handleChange(e, 'credentials')}
+            value={registerCredentials.password}
+            onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <button>Log in</button>
         </form>
@@ -56,11 +52,11 @@ const Register = ({
 };
 
 const mapStateToProps = state => ({
-  credentials: state.credentials,
+  registerCredentials: state.registerCredentials,
   error: state.error,
   token: state.token
 
 })
 
-export default connect(mapStateToProps,{handleChange, register, resetCredentials})(Register);
+export default connect(mapStateToProps,{handleChange, register})(Register);
 

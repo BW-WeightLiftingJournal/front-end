@@ -9,7 +9,7 @@ export const HANDLE_CHANGE = 'HANDLE_CHANGE'
 export const REGISTER_START = 'REGISTER_START'
 export const REGISTER_SUCCESS ='REGISTER_SUCCESS'
 export const REGISTER_FAIL ='REGISTER_FAIL'
-export const RESET_CREDS='RESET_CREDS'
+export const RESET_ERRORS='RESET_CREDS'
 
 export const login = (event, credentials) => dispatch => {
   event.preventDefault()
@@ -45,8 +45,8 @@ export const handleChange = (event, formType) => ({
     payload: { target: event.target, form: formType}
 })
 
-export const resetCredentials= ()=> ({
-  type: RESET_CREDS
+export const resetErrors= ()=> ({
+  type: RESET_ERRORS
 })
 
 export const logout = ()=> dispatch => {
