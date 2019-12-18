@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, login} from "../utilities/actions"
+import {handleChange, login, resetCredentials} from "../utilities/actions"
 import {Link} from "react-router-dom"
 
 const Login = ({
@@ -9,8 +9,13 @@ const Login = ({
   login, 
   credentials, 
   handleChange, 
-  token
+  token,
+  resetCredentials
   }) => {
+
+  useEffect(()=> {
+    resetCredentials()
+  }, [])
 
   useEffect(()=> {
     if(!!token){
@@ -56,5 +61,5 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps,{handleChange, login})(Login);
+export default connect(mapStateToProps,{handleChange, login, resetCredentials})(Login);
 
