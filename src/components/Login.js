@@ -4,6 +4,7 @@ import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Login = ({
   history, 
@@ -12,7 +13,8 @@ const Login = ({
   loginCredentials, 
   handleChange, 
   token,
-  resetErrors
+  resetErrors,
+  isLogging
   }) => {
 
   useEffect(()=> {
@@ -59,7 +61,7 @@ const Login = ({
             onChange={e=>handleChange(e, 'loginCredentials')}
           />
           <br/>
-          <Button variant="outlined" type="submit">Login</Button>
+          <Button variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Login'}</Button>
         </div>
       </form>
       <p>Don't have an account?</p>
@@ -73,7 +75,8 @@ const Login = ({
 const mapStateToProps = state => ({
   loginCredentials: state.loginCredentials,
   error: state.error,
-  token: state.token
+  token: state.token,
+  isLogging: state.isLogging
 
 })
 

@@ -4,6 +4,7 @@ import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Register = ({
   history, 
@@ -12,7 +13,8 @@ const Register = ({
   registerCredentials, 
   handleChange, 
   token,
-  resetErrors
+  resetErrors,
+  isRegister
   }) => {
 
   useEffect(()=> {
@@ -59,7 +61,7 @@ const Register = ({
             onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
-          <Button variant="outlined" type="submit">Sign up</Button>
+          <Button variant="outlined" type="submit">{isRegister ? <CircularProgress size={25}/> : 'Sign up'}</Button>
         </div>
       </form>
       <p>Already have an account?</p>
@@ -73,7 +75,8 @@ const Register = ({
 const mapStateToProps = state => ({
   registerCredentials: state.registerCredentials,
   error: state.error,
-  token: state.token
+  token: state.token,
+  isRegister: state.isRegister
 
 })
 
