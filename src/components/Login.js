@@ -37,6 +37,7 @@ const Login = ({
           <TextField
             error={error}
             required
+            helperText={!loginCredentials.username && error && "Username Required"}
             id="outlined-required"
             label="Username"
             variant="outlined"
@@ -48,6 +49,7 @@ const Login = ({
           <TextField
             error={error}
             required
+            helperText={!loginCredentials.password && error && "Password Required"}
             type="password"
             id="outlined-required"
             label="Password"
@@ -60,7 +62,7 @@ const Login = ({
           <Button variant="outlined" type="submit">Login</Button>
         </div>
       </form>
-      <p>Dont have an account?</p>
+      <p>Don't have an account?</p>
       <Link to="/register" onClick={resetErrors}>
         <span>Sign up</span>
       </Link>
