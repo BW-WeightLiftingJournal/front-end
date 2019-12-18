@@ -1,9 +1,23 @@
 import React from 'react';
 
+//components import
+import Login from "./components/Login"
+import Dashboard from "./components/Dashboard"
+import Register from "./components/Register"
+import Landing from "./components/Landing"
+
+//utilities import
+import {Route} from "react-router-dom"
+import PrivateRoute from "./utilities/PrivateRoute"
+
 function App() {
   return (
     <div className="App">
       <h1>Weightlifting Journal</h1>
+      <Route exact path="/" component={Landing}/>
+      <Route exact path="/register" component={Register}/>
+      <Route exact path="/login" component={Login}/>
+      <PrivateRoute exact path="/dashboard" component={Dashboard}/>
     </div>
   );
 }
