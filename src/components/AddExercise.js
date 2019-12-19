@@ -1,54 +1,57 @@
 import React from "react"
 import {connect} from "react-redux"
-import  TextField from '@material-ui/core/TextField'
+import TextField from '@material-ui/core/TextField'
 
 const AddExercise = props => {
     return (
-        <div>
+        <div className='add-exercise-container'>
             <div>Add Exercise</div>
             <form>
-                    <input 
-                        type='date'
-                        name='date'
-                        placeholder='Date*'
-                    />
-                    {/* <input 
-                        type='text'
-                        name='exercise'
-                        placeholder='Exercise Name*'
-                    /> */}
-                <TextField 
-                outlined
-                varient='outlined'
+                <div className='add-exercise-form'>
+                <TextField
+                id='outline-required'
+                variant='outlined'
+                label='Date*'
+                name='date'
+                />
+                <br/>
+                <TextField
+                id='outline-required'
+                variant='outlined'
                 label='Exercise Name*'
-                >
-                    <input
-                    value=''
-                    onChange=''
-                    />
-                </TextField>
-
-                    <input 
-                        type='text'
-                        name='Sets'
-                        placeholder='Sets Completed'
-                    />
-                    <input 
-                        type='text'
-                        name='reps'
-                        placeholder='Reps Completed'
-                    />
-                    <input 
-                        type='text'
-                        name='weight'
-                        placeholder='Weight Lifted'
-                    />
-                    <input 
-                        type='text'
-                        name='body'
-                        placeholder='Body Region*'
-                    />
+                name='exercise'
+                />
+                <br/>
+                <TextField
+                id='outline-required'
+                variant='outlined'
+                label='Sets Completed'
+                name='sets'
+                />
+                <br/>
+                <TextField
+                id='outline-required'
+                variant='outlined'
+                label='Reps Completed'
+                name='reps'
+                />
+                <br/>
+                <TextField
+                id='outline-required'
+                variant='outlined'
+                label='Weight Lifted'
+                name='weight'
+                />
+                <br/>
+                <TextField
+                id='outline-required'
+                variant='outlined'
+                label='Body Region'
+                name='body'
+                />
+                <br/>
                     <button type='submit'> ADD EXCERCISE</button>
+                </div>
                 </form>
             </div>
     )

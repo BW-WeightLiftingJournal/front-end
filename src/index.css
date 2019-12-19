@@ -60,3 +60,13 @@ ul {
   padding: 20px;
   text-align: center;
 }
+
+.add-exercise-container {
+  text-align: center;
+}
+
+.add-exercise-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
