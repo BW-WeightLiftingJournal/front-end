@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 
 const ExerciseList = props => {
     return (
-        <div>Exercise List</div>
+            <div>Excercise List</div>
     )
 }
 
