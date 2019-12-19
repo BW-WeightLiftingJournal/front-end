@@ -16,7 +16,7 @@ export const login = (event, credentials) => dispatch => {
   console.log(credentials)
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
-    .post('http://localhost:5000/api/login', credentials)
+    .post('http://localhost:5000/api/auth/login', credentials)
     .then(res =>
       dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload })
     )
@@ -30,7 +30,7 @@ export const register = (event, credentials) => dispatch => {
   console.log(credentials)
   dispatch({ type: REGISTER_START });
   axios
-    .post('http://localhost:5000/api/register', credentials)
+    .post('http://localhost:5000/api/auth/register', credentials)
     .then(res => {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data.payload })
       login(event,credentials)

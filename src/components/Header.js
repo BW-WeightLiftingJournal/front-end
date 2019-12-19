@@ -1,11 +1,11 @@
 import React from "react"
-import FitnessCenterRoundedIcon from '@material-ui/icons/FitnessCenter';
 import {Link} from "react-router-dom"
+import {FaDumbbell} from 'react-icons/fa'
 
 const Header = props => {
     return (
         <div className='header-container'>
-            <FitnessCenterRoundedIcon fontSize="large"/>
+            <FaDumbbell style={{fontSize: '2rem'}}/>
             <div className="navbar">
                 <Link to="/dashboard">
                     Home
