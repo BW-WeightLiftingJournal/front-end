@@ -3,7 +3,9 @@ import {connect} from "react-redux"
 
 const Dashboard = props => {
     return (
-        <div>Dashboard</div>
+        <div>
+            Dashboard
+        </div>
     )
 }
 
