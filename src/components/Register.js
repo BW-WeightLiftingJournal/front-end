@@ -65,12 +65,17 @@ const Register = ({
           />
           <br/>
           <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25}/> : 'Create Account'}</BlackButton>
+          <div style={{textAlign: 'right'}}>
+            <p>Already have an account?</p>
+            <Link to="/login" onClick={resetErrors}>
+              <span style={{textTransform: 'uppercase'}}>Sign in</span>
+            </Link>
+          </div>
         </div>
+        
       </form>
-      <p>Already have an account?</p>
-      <Link to="/login" onClick={resetErrors}>
-        <span>Sign in</span>
-      </Link>
+      
+      
     </div>
   );
 };

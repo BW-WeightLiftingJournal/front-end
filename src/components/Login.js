@@ -73,10 +73,10 @@ const Login = ({
             <a>
               Forgot password?
             </a>
-            <div>
+            <div style={{textAlign: 'right'}}>
               <p>Don't have an account?</p>
               <Link to="/register" onClick={resetErrors}>
-                <span>Sign up</span>
+                <span style={{fontTransform: 'uppercase'}}>Sign up</span>
               </Link>
             </div>
           </div>
