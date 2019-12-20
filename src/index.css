@@ -70,3 +70,10 @@ ul {
   flex-direction: column;
   align-items: center;
 }
+
+.short-inputs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}

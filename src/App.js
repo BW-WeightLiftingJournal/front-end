@@ -21,7 +21,7 @@ function App() {
       <Route exact path="/register" component={Register}/>
       <Route exact path="/login" component={Login}/>
       <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-      <AddExercise />
+      {/* <AddExercise /> */}
       <Footer/>
     </div>
   );

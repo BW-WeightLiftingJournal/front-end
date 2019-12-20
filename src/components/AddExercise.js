@@ -1,56 +1,54 @@
 import React from "react"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
 const AddExercise = props => {
     return (
         <div className='add-exercise-container'>
-            <div>Add Exercise</div>
+            <h2>Add New Exercise</h2>
             <form>
                 <div className='add-exercise-form'>
                 <TextField
-                id='outline-required'
-                variant='outlined'
-                label='Date*'
-                name='date'
+                    id='outline-required'
+                    variant='outlined'
+                    label='Date*'
+                    name='date'
                 />
                 <br/>
                 <TextField
-                id='outline-required'
-                variant='outlined'
-                label='Exercise Name*'
-                name='exercise'
+                    id='outline-required'
+                    variant='outlined'
+                    label='Exercise Name*'
+                    name='exercise'
                 />
+                <br/>
+                <div className='short-inputs'>
+                    <TextField
+                        className='short-input'
+                        id='outline-required'
+                        variant='outlined'
+                        label='Weight Lifted'
+                        name='weight'
+                    />
+                    <br/>
+                    <TextField
+                        className='short-input'
+                        id='outline-required'
+                        variant='outlined'
+                        label='Reps Completed'
+                        name='reps'
+                    />
+                </div>
                 <br/>
                 <TextField
-                id='outline-required'
-                variant='outlined'
-                label='Sets Completed'
-                name='sets'
+                    id='outline-required'
+                    variant='outlined'
+                    label='Sets Completed'
+                    name='sets'
                 />
                 <br/>
-                <TextField
-                id='outline-required'
-                variant='outlined'
-                label='Reps Completed'
-                name='reps'
-                />
-                <br/>
-                <TextField
-                id='outline-required'
-                variant='outlined'
-                label='Weight Lifted'
-                name='weight'
-                />
-                <br/>
-                <TextField
-                id='outline-required'
-                variant='outlined'
-                label='Body Region'
-                name='body'
-                />
-                <br/>
-                    <button type='submit'> ADD EXCERCISE</button>
+                    <Button variant='outlined' type='submit'> ADD EXCERCISE</Button>
                 </div>
                 </form>
             </div>
