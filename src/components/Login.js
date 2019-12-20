@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import {FaDumbbell} from 'react-icons/fa'
-import { Checkbox, TextField, CircularProgress, Button, FormControlLabel } from '@material-ui/core'
+import { Checkbox, TextField, CircularProgress, FormControlLabel } from '@material-ui/core'
 import {StyledButton} from "../utilities/styles"
 
 
@@ -70,13 +70,13 @@ const Login = ({
           />
           <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Sign In'}</StyledButton>
           <div className="below-button">
-            <a>
+            <a href="#">
               Forgot password?
             </a>
             <div style={{textAlign: 'right'}}>
               <p>Don't have an account?</p>
               <Link to="/register" onClick={resetErrors}>
-                <span style={{fontTransform: 'uppercase'}}>Sign up</span>
+                <span style={{textTransform: 'uppercase'}}>Sign up</span>
               </Link>
             </div>
           </div>

@@ -5,7 +5,7 @@ import {FaDumbbell} from 'react-icons/fa'
 const Header = props => {
     return (
         <div className='header-container'>
-            <FaDumbbell style={{fontSize: '2rem'}}/>
+            <FaDumbbell style={{fontSize: '3rem'}}/>
             <div className="navbar">
                 <Link to="/dashboard">
                     Home

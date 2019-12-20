@@ -3,7 +3,6 @@ import {connect} from "react-redux"
 import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {FaDumbbell} from 'react-icons/fa'
 import {BlackButton} from "../utilities/styles"
