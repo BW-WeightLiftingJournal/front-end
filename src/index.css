@@ -88,10 +88,6 @@ p {
   justify-content: space-between;
 }
 
-#outline-required {
-  margin: 10px;
-}
-
 .footer-container {
   position: absolute;
   bottom: 0;
