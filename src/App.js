@@ -15,7 +15,7 @@ import PrivateRoute from "./utilities/PrivateRoute"
 function App() {
   return (
     <div className="app-container">
-      <Header/>
+      <Header />
       <Route exact path="/" component={Landing}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/login" component={Login}/>
