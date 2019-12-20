@@ -3,8 +3,9 @@ import {connect} from "react-redux"
 import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {FaDumbbell} from 'react-icons/fa'
+import {BlackButton} from "../utilities/styles"
 
 const Register = ({
   history, 
@@ -27,7 +28,8 @@ const Register = ({
 
   return (
     <div className="login-container">
-      <h2>Sign up below</h2>
+      <FaDumbbell style={{fontSize: '4rem', color: '#F26363'}}/>
+      <h2>Sign Up</h2>
       {error ? <div style={{color: 'red'}}>Error.</div> : <br/>}
       <br/>
       <form 
@@ -61,13 +63,18 @@ const Register = ({
             onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
-          <Button variant="outlined" type="submit">{isRegister ? <CircularProgress size={25}/> : 'Sign up'}</Button>
+          <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25}/> : 'Create Account'}</BlackButton>
+          <div style={{textAlign: 'right'}}>
+            <p>Already have an account?</p>
+            <Link to="/login" onClick={resetErrors}>
+              <span style={{textTransform: 'uppercase'}}>Sign in</span>
+            </Link>
+          </div>
         </div>
+        
       </form>
-      <p>Already have an account?</p>
-      <Link to="/login" onClick={resetErrors}>
-        <span>Log in</span>
-      </Link>
+      
+      
     </div>
   );
 };

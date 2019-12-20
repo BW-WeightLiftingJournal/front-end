@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import {connect} from "react-redux"
 import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {FaDumbbell} from 'react-icons/fa'
+import { Checkbox, TextField, CircularProgress, FormControlLabel } from '@material-ui/core'
+import {StyledButton} from "../utilities/styles"
+
 
 const Login = ({
   history, 
@@ -16,7 +17,6 @@ const Login = ({
   resetErrors,
   isLogging
   }) => {
-
   useEffect(()=> {
     if(!!token){
       localStorage.setItem('token', token);
@@ -27,7 +27,8 @@ const Login = ({
 
   return (
     <div className="login-container">
-      <h2>Login below</h2>
+      <FaDumbbell style={{fontSize: '4rem'}}/>
+      <h2>Sign In</h2>
       {error ? <div style={{color: 'red'}}>Username or Password incorrect.</div> : <br/>}
       <br/>
       <form 
@@ -61,13 +62,27 @@ const Login = ({
             onChange={e=>handleChange(e, 'loginCredentials')}
           />
           <br/>
-          <Button variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Login'}</Button>
+          <FormControlLabel
+            value="remember me"
+            control={<Checkbox color="primary" />}
+            label="Remember me"
+            labelPlacement="end"
+          />
+          <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Sign In'}</StyledButton>
+          <div className="below-button">
+            <a href="#">
+              Forgot password?
+            </a>
+            <div style={{textAlign: 'right'}}>
+              <p>Don't have an account?</p>
+              <Link to="/register" onClick={resetErrors}>
+                <span style={{textTransform: 'uppercase'}}>Sign up</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </form>
-      <p>Don't have an account?</p>
-      <Link to="/register" onClick={resetErrors}>
-        <span>Sign up</span>
-      </Link>
+      
     </div>
   );
 };
@@ -81,4 +96,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps,{handleChange, login, resetErrors})(Login);
+
 
