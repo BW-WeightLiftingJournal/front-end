@@ -106,12 +106,22 @@ p {
 .add-exercise-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  margin: 0 auto;
+  width: 30%;
 }
 
 .short-inputs {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.short-input {
+  width: 48%;
+}
+
+.add-title {
+  margin-bottom: 10px;
 }
