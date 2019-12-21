@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {connect} from "react-redux"
 import {BlackButton} from "../utilities/styles"
 import ExerciseList from "./ExerciseList"
@@ -15,7 +15,7 @@ const Dashboard = ({
             <section className="dashboard-top">
                 <p>Welcome {username}</p>
                 <p>{date}</p>
-                <BlackButton onClick={()=>history.push('/AddExercise')}>Add new exercise</BlackButton>
+                <BlackButton onClick={()=>history.push('/add')}>Add new exercise</BlackButton>
             </section>
             <section className="dashboard-body">
                 <h1 style={{color: 'white', textAlign: 'center'}}>Previous Workouts</h1>
@@ -23,7 +23,6 @@ const Dashboard = ({
             </section>
         </div>
     )
-}
 
 const mapStateToProps = state => ({
     username: state.loginCredentials.username

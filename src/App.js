@@ -20,8 +20,9 @@ function App() {
       <Route exact path="/" component={Landing}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/login" component={Login}/>
+      <Route exact path="/dashboard" component={Dashboard}/>
+      <Route exact path="/add" component={AddExercise}/> 
       <Route exact path="/recover" component={RecoverPassword}/>
-      <PrivateRoute exact path="/dashboard" component={Dashboard}/>
       <Footer/>
     </div>
   );
