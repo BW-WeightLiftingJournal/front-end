@@ -12,7 +12,7 @@ const AddExercise = props => {
                 <TextField
                     id='outline-required'
                     variant='outlined'
-                    label='Date*'
+                    label='Date'
                     name='date'
                 />
                 <br/>

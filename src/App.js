@@ -7,7 +7,7 @@ import Register from "./components/Register"
 import Landing from "./components/Landing"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import AddExercise from "./components/AddExercise"
+import RecoverPassword from "./components/RecoverPassword"
 
 //utilities import
 import {Route} from "react-router-dom"
@@ -20,8 +20,8 @@ function App() {
       <Route exact path="/" component={Landing}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/login" component={Login}/>
+      <Route exact path="/recover" component={RecoverPassword}/>
       <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-      {/* <AddExercise /> */}
       <Footer/>
     </div>
   );
