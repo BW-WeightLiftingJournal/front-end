@@ -70,9 +70,9 @@ const Login = ({
           />
           <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Sign In'}</StyledButton>
           <div className="below-button">
-            <a href="#">
+            <Link to="/recover">
               Forgot password?
-            </a>
+            </Link>
             <div style={{textAlign: 'right'}}>
               <p>Don't have an account?</p>
               <Link to="/register" onClick={resetErrors}>
