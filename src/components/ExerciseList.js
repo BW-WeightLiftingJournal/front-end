@@ -1,14 +1,23 @@
 import React from "react"
 import {connect} from "react-redux"
+import Exercise from "./Exercise"
 
-const ExerciseList = props => {
+const ExerciseList = ({
+  exerciseList
+}) => {
   return (
-    <div>Exercise List</div>
+    <div classList="exercise-list-container">
+      {exerciseList.map(item=>{
+        return (
+          <Exercise key={item.id} exercise={item}/>
+        )
+      })}
+    </div>
   )
 }
 
 const mapStateToProps = state => ({
-    ...state
+    exerciseList: state.exerciseList
   })
   
 export default connect(mapStateToProps,{})(ExerciseList);

@@ -106,10 +106,26 @@ p {
 .add-exercise-form {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   margin: 0 auto;
   width: 30%;
 }
+
+.exercise-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #F2F2F2;
+  margin: 10px auto;
+  padding: 5px
+}
+.exercise-container>p {
+  margin-left: 8px;
+}
+
+.exercise-container>* {
+  border-right: 1px solid black;
+  padding-right: 5px;
+}
+
 
 .short-inputs {
   display: flex;

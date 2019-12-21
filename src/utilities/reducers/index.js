@@ -8,6 +8,7 @@ import {
     VERIFY_EMAIL
     } 
 from "../actions"
+import { FaDumbbell } from "react-icons/fa"
 
 const initialState = {
     loginCredentials: {},
@@ -19,6 +20,23 @@ const initialState = {
     isRegistering: false,
     isFetching: false,
     isVerify: false,
+    exerciseList: [
+        {
+            id: 1,
+            name: 'dumbbell',
+            weight: 20,
+            reps: 10,
+            sets: 3
+        },
+        {
+            id: 2,
+            name: 'benchpress',
+            weight: 200,
+            reps: 11,
+            sets: 2
+        }
+    ],
+
 }
 
 export const rootReducer = (state = initialState, {type, payload})=> {
