@@ -115,3 +115,14 @@ p {
   flex-wrap: wrap;
   align-items: center;
 }
+
+.dashboard-top {
+  display: flex;
+  flex-direction: column;
+  background: #F26363;
+}
+.dashboard-body {
+  display: flex;
+  flex-direction: column;
+  background: #809FA6;
+}
