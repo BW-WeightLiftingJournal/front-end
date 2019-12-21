@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import {connect} from "react-redux"
 import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
-import TextField from '@material-ui/core/TextField'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {FaDumbbell} from 'react-icons/fa'
-import {BlackButton} from "../utilities/styles"
+import {BlackButton, GrayTextField} from "../utilities/styles"
 
 const Register = ({
   history, 
@@ -38,7 +37,7 @@ const Register = ({
         onSubmit={(e)=>login(e, registerCredentials)}
       >
         <div className="login-form">
-          <TextField
+          <GrayTextField
             error={!registerCredentials.username && error}
             required
             helperText={!registerCredentials.username && error && "Username Required"}
@@ -50,7 +49,7 @@ const Register = ({
             onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
-          <TextField
+          <GrayTextField
             error={!registerCredentials.password && error}
             required
             helperText={!registerCredentials.password && error && "Password Required"}
@@ -64,7 +63,7 @@ const Register = ({
           />
           <br/>
           <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25}/> : 'Create Account'}</BlackButton>
-          <div style={{textAlign: 'right'}}>
+          <div>
             <p>Already have an account?</p>
             <Link to="/login" onClick={resetErrors}>
               <span style={{textTransform: 'uppercase'}}>Sign in</span>

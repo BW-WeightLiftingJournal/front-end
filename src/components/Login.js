@@ -3,8 +3,8 @@ import {connect} from "react-redux"
 import {handleChange, login, resetErrors} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import {FaDumbbell} from 'react-icons/fa'
-import { Checkbox, TextField, CircularProgress, FormControlLabel } from '@material-ui/core'
-import {StyledButton} from "../utilities/styles"
+import {CircularProgress, FormControlLabel } from '@material-ui/core'
+import {StyledButton, GrayCheckbox, GrayTextField} from "../utilities/styles"
 
 
 const Login = ({
@@ -37,7 +37,7 @@ const Login = ({
         onSubmit={(e)=>login(e, loginCredentials)}
       >
         <div className="login-form">
-          <TextField
+          <GrayTextField
             error={error}
             required
             helperText={!loginCredentials.username && error && "Username Required"}
@@ -49,7 +49,7 @@ const Login = ({
             onChange={e=>handleChange(e, 'loginCredentials')}
           />
           <br/>
-          <TextField
+          <GrayTextField
             error={error}
             required
             helperText={!loginCredentials.password && error && "Password Required"}
@@ -64,15 +64,15 @@ const Login = ({
           <br/>
           <FormControlLabel
             value="remember me"
-            control={<Checkbox color="primary" />}
+            control={<GrayCheckbox/>}
             label="Remember me"
             labelPlacement="end"
           />
           <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Sign In'}</StyledButton>
           <div className="below-button">
-            <a href="#">
+            <Link to="/recover">
               Forgot password?
-            </a>
+            </Link>
             <div style={{textAlign: 'right'}}>
               <p>Don't have an account?</p>
               <Link to="/register" onClick={resetErrors}>
