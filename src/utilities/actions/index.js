@@ -10,6 +10,7 @@ export const REGISTER_START = 'REGISTER_START'
 export const REGISTER_SUCCESS ='REGISTER_SUCCESS'
 export const REGISTER_FAIL ='REGISTER_FAIL'
 export const RESET_ERRORS='RESET_CREDS'
+export const VERIFY_EMAIL = 'VERIFY_EMAIL'
 
 export const login = (event, credentials) => dispatch => {
   event.preventDefault()
@@ -38,6 +39,11 @@ export const register = (event, credentials) => dispatch => {
     .catch(err => {
       return dispatch({ type: REGISTER_FAIL, payload: err })
     });
+}
+
+export const verifyEmail = (e, email) => dispatch=>{
+  e.preventDefault()
+  dispatch({type: VERIFY_EMAIL, payload: email})
 }
 
 export const handleChange = (event, formType) => ({

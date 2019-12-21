@@ -4,18 +4,21 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     HANDLE_CHANGE,
-    RESET_ERRORS
+    RESET_ERRORS,
+    VERIFY_EMAIL
     } 
 from "../actions"
 
 const initialState = {
     loginCredentials: {},
     registerCredentials: {},
+    recoverEmail: {},
     error: '',
     token: '',
     isLogging: false,
     isRegistering: false,
     isFetching: false,
+    isVerify: false,
 }
 
 export const rootReducer = (state = initialState, {type, payload})=> {
@@ -46,6 +49,10 @@ switch (type) {
                 ...state[payload.form],
                 [payload.target.name]: payload.target.value
             }
+        }
+    case VERIFY_EMAIL:
+        return {
+            ...state
         }
     case RESET_ERRORS:
         return {

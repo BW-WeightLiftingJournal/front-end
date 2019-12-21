@@ -17,6 +17,10 @@ const Register = ({
   isRegister
   }) => {
 
+  useEffect(()=>{
+    resetErrors()
+  },[])
+
   useEffect(()=> {
     if(!!token){
       localStorage.setItem('token', token);
@@ -37,6 +41,18 @@ const Register = ({
         onSubmit={(e)=>login(e, registerCredentials)}
       >
         <div className="login-form">
+          <GrayTextField
+            error={!registerCredentials.email && error}
+            required
+            helperText={!registerCredentials.email && error && "Email Required"}
+            id="outlined-required"
+            label="Email"
+            variant="outlined"
+            name="email"
+            value={registerCredentials.email}
+            onChange={e=>handleChange(e, 'registerCredentials')}
+          />
+          <br/>
           <GrayTextField
             error={!registerCredentials.username && error}
             required
