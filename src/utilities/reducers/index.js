@@ -5,10 +5,11 @@ import {
     LOGOUT,
     HANDLE_CHANGE,
     RESET_ERRORS,
-    VERIFY_EMAIL
+    VERIFY_EMAIL,
+    EDIT,
+    DELETE
     } 
 from "../actions"
-import { FaDumbbell } from "react-icons/fa"
 
 const initialState = {
     loginCredentials: {},
@@ -26,14 +27,24 @@ const initialState = {
             name: 'dumbbell',
             weight: 20,
             reps: 10,
-            sets: 3
+            sets: 3,
+            date: '12/20/2019'
         },
         {
             id: 2,
             name: 'benchpress',
             weight: 200,
             reps: 11,
-            sets: 2
+            sets: 2,
+            date: '12/20/2019'
+        },
+        {
+            id: 3,
+            name: 'lunges',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/21/2019'
         }
     ],
 
@@ -76,6 +87,16 @@ switch (type) {
         return {
             ...state,
             error: ''
+        }
+    case EDIT:
+        console.log('editing item ' + payload)
+        return {
+            ...state
+        }
+    case DELETE:
+        console.log('deleting item ' + payload)
+        return {
+            ...state
         }
     case LOGOUT:
         return initialState

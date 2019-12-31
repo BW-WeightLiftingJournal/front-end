@@ -5,11 +5,19 @@ import Exercise from "./Exercise"
 const ExerciseList = ({
   exerciseList
 }) => {
+  let isSame=true;
+  let previousDate=''
   return (
     <div classList="exercise-list-container">
       {exerciseList.map(item=>{
+        isSame=item.date===previousDate;
+        previousDate=item.date
         return (
-          <Exercise key={item.id} exercise={item}/>
+          <>
+            {!isSame && <h4>{item.date}</h4>}
+            <Exercise key={item.id} exercise={item}/>
+          </>
+          
         )
       })}
     </div>

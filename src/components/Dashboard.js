@@ -13,9 +13,13 @@ const Dashboard = ({
     return (
         <div className="dashboard-container">
             <section className="dashboard-top">
-                <p>Welcome {username}</p>
-                <p>{date}</p>
-                <BlackButton onClick={()=>history.push('/add')}>Add new workout</BlackButton>
+                <div>
+                    <p>Welcome {username}</p>
+                    <p>{date}</p>
+                </div>
+                <div>
+                    <BlackButton style={{width:'100%'}} onClick={()=>history.push('/add')}>Add new workout</BlackButton>
+                </div>
             </section>
             <section className="dashboard-body">
                 <h1 style={{color: 'white', textAlign: 'center'}}>Previous Workouts</h1>

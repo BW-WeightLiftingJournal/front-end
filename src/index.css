@@ -50,7 +50,7 @@ ul {
   list-style: none;
 }
 
-p {
+p, span {
   margin: 0;
 }
 
@@ -62,6 +62,7 @@ p {
 
 .navbar {
   display: flex;
+  align-self: center;
 }
 .navbar>* {
   margin: 0 15px;
@@ -98,6 +99,13 @@ p {
   padding: 20px;
   text-align: center;
 }
+.dashboard-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #F26363;
+  align-items: center;
+}
 
 .add-exercise-container {
   text-align: center;
@@ -114,30 +122,34 @@ p {
   display: flex;
   flex-direction: row;
   background-color: #F2F2F2;
+  justify-content: space-between;
   margin: 10px auto;
-  padding: 5px
+  padding: 5px;
+  vertical-align: middle;
+  align-items: center;
 }
-.exercise-container>p {
+.single-exercise-data {
+  display: flex;
+  flex-direction: row;
+}
+.single-exercise-data>p {
   margin-left: 8px;
 }
 
-.exercise-container>* {
+.single-exercise-data>* {
   border-right: 1px solid black;
   padding-right: 5px;
 }
-
+.single-exercise-buttons {
+  display: flex;
+  align-items: center;
+}
 
 .short-inputs {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.dashboard-top {
-  display: flex;
-  flex-direction: column;
-  background: #F26363;
 }
 .dashboard-body {
   display: flex;

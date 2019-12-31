@@ -11,6 +11,8 @@ export const REGISTER_SUCCESS ='REGISTER_SUCCESS'
 export const REGISTER_FAIL ='REGISTER_FAIL'
 export const RESET_ERRORS='RESET_CREDS'
 export const VERIFY_EMAIL = 'VERIFY_EMAIL'
+export const EDIT = 'EDIT'
+export const DELETE = 'DELETE'
 
 export const login = (event, credentials) => dispatch => {
   event.preventDefault()
@@ -59,8 +61,17 @@ export const logout = ()=> dispatch => {
   localStorage.clear()
   dispatch({
     type: LOGOUT
-})
+  })
 }
+
+export const edit = (id) => dispatch => {
+  dispatch({type: EDIT, payload: id})
+}
+
+export const deleteItem = (id) => dispatch => {
+  dispatch({type: DELETE, payload: id})
+}
+
 
 
 
