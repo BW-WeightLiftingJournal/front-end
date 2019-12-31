@@ -14,7 +14,7 @@ const ExerciseList = ({
         previousDate=item.date
         return (
           <>
-            {!isSame && <h4>{item.date}</h4>}
+            {!isSame && <h4 style={{margin: '20px 0px 10px 10px', letterSpacing: '1.5px'}}>{item.date}</h4>}
             <Exercise key={item.id} exercise={item}/>
           </>
           

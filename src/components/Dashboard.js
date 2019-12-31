@@ -18,11 +18,11 @@ const Dashboard = ({
                     <p>{date}</p>
                 </div>
                 <div>
-                    <BlackButton style={{width:'100%'}} onClick={()=>history.push('/add')}>Add new workout</BlackButton>
+                    <div className="add-button-dashboard" onClick={()=>history.push('/add')}>Add new workout</div>
                 </div>
             </section>
             <section className="dashboard-body">
-                <h1 style={{color: 'white', textAlign: 'center'}}>Previous Workouts</h1>
+                <h1 style={{color: 'white', textAlign: 'center', marginBottom: '10px'}}>Previous Workouts</h1>
                 <ExerciseList/>
             </section>
         </div>
