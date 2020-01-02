@@ -6,8 +6,10 @@ import {
     HANDLE_CHANGE,
     RESET_ERRORS,
     VERIFY_EMAIL,
-    EDIT,
-    DELETE
+    START_EDIT,
+    FINISH_EDIT,
+    DELETE,
+    COPY
     } 
 from "../actions"
 
@@ -21,9 +23,11 @@ const initialState = {
     isRegistering: false,
     isFetching: false,
     isVerify: false,
+    isEdit: false,
+    editedItem: {},
     exerciseList: [
         {
-            id: 1,
+            id: 0,
             name: 'dumbbell',
             weight: 20,
             reps: 10,
@@ -31,7 +35,7 @@ const initialState = {
             date: '12/20/2019'
         },
         {
-            id: 2,
+            id: 1,
             name: 'benchpress',
             weight: 200,
             reps: 11,
@@ -39,7 +43,7 @@ const initialState = {
             date: '12/20/2019'
         },
         {
-            id: 3,
+            id: 2,
             name: 'lunges',
             weight: 200,
             reps: 11,
@@ -88,13 +92,22 @@ switch (type) {
             ...state,
             error: ''
         }
-    case EDIT:
-        console.log('editing item ' + payload)
+    case START_EDIT:
+        return {
+            ...state,
+            isEdit: true,
+            editedItem: {...state.exerciseList[payload]}
+        }
+    case FINISH_EDIT:
+        return {
+            ...state,
+            isEdit: false,
+        }
+    case DELETE:
         return {
             ...state
         }
-    case DELETE:
-        console.log('deleting item ' + payload)
+    case COPY:
         return {
             ...state
         }

@@ -11,8 +11,10 @@ export const REGISTER_SUCCESS ='REGISTER_SUCCESS'
 export const REGISTER_FAIL ='REGISTER_FAIL'
 export const RESET_ERRORS='RESET_CREDS'
 export const VERIFY_EMAIL = 'VERIFY_EMAIL'
-export const EDIT = 'EDIT'
+export const START_EDIT = 'START_EDIT'
+export const FINISH_EDIT = 'FINISH_EDIT'
 export const DELETE = 'DELETE'
+export const COPY = 'COPY'
 
 export const login = (event, credentials) => dispatch => {
   event.preventDefault()
@@ -63,15 +65,38 @@ export const logout = ()=> dispatch => {
     type: LOGOUT
   })
 }
+export const startEdit = (id) => ({
+  type: START_EDIT,
+  payload: id
+})
 
-export const edit = (id) => dispatch => {
-  dispatch({type: EDIT, payload: id})
+export const finishEdit = (event, id, exercise) => dispatch => {
+  event.preventDefault()
+  axios
+  .put(`http://localhost:5000/api/edit/${id}`, exercise)
+  .then(res => {
+    dispatch({ type: FINISH_EDIT, payload: res.data })
+  })
+  .catch(err => console.log(err));
 }
 
 export const deleteItem = (id) => dispatch => {
-  dispatch({type: DELETE, payload: id})
+  axios
+  .delete(`http://localhost:5000/api/auth/delete/${id}`)
+  .then(res => {
+    dispatch({ type: DELETE, payload: res.data })
+  })
+  .catch(err => console.log(err));
 }
 
+export const copy = (exercise)=> dispatch => {
+  axios
+  .post('http://localhost:5000/api/add', exercise)
+  .then(res => {
+    dispatch({ type: COPY, payload: res.data })
+  })
+  .catch(err => console.log(err));
+}
 
 
 
