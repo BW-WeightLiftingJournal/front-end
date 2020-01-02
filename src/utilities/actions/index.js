@@ -70,8 +70,8 @@ export const startEdit = (id) => ({
   payload: id
 })
 
-export const finishEdit = (event, id, exercise) => dispatch => {
-  event.preventDefault()
+export const finishEdit = (e, id, exercise) => dispatch => {
+  e.preventDefault()
   axios
   .put(`http://localhost:5000/api/edit/${id}`, exercise)
   .then(res => {
@@ -82,7 +82,7 @@ export const finishEdit = (event, id, exercise) => dispatch => {
 
 export const deleteItem = (id) => dispatch => {
   axios
-  .delete(`http://localhost:5000/api/auth/delete/${id}`)
+  .delete(`http://localhost:5000/api/delete/${id}`)
   .then(res => {
     dispatch({ type: DELETE, payload: res.data })
   })

@@ -1,13 +1,30 @@
 import React from "react"
 import {connect} from "react-redux"
 import DeleteIcon from '@material-ui/icons/Delete';
-import {startEdit, finishEdit, deleteItem, copy, handleChange} from "../utilities/actions"
+import {
+        startEdit, 
+        finishEdit, 
+        deleteItem, 
+        copy, 
+        handleChange
+    } from "../utilities/actions"
 
-const Exercise = ({editedItem, isEdit, exercise, startEdit, finishEdit, deleteItem, handleChange}) => {
+const Exercise = ({
+        editedItem, 
+        isEdit, 
+        exercise, 
+        startEdit, 
+        finishEdit, 
+        deleteItem, 
+        handleChange
+    }) => {
     return (
         <div className="exercise-container">
             {isEdit && editedItem.id===exercise.id ? 
-                <form className="single-exercise-edit" onSubmit={e=> finishEdit(e, exercise.id, editedItem)}>
+                <form 
+                    className="single-exercise-edit" 
+                    onSubmit={e=> finishEdit(e, exercise.id, editedItem)}
+                    >
                     <input 
                         type='text'
                         placeholder='Name'
@@ -67,4 +84,10 @@ const mapStateToProps = state => ({
     ...state
   })
   
-export default connect(mapStateToProps,{startEdit, finishEdit, deleteItem, copy, handleChange})(Exercise);
+export default connect(mapStateToProps,{
+        startEdit, 
+        finishEdit, 
+        deleteItem, 
+        copy, 
+        handleChange
+    })(Exercise);
