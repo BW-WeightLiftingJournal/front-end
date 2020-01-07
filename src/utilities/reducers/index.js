@@ -4,18 +4,55 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     HANDLE_CHANGE,
-    RESET_ERRORS
+    RESET_ERRORS,
+    VERIFY_EMAIL,
+    START_EDIT,
+    FINISH_EDIT,
+    DELETE,
+    COPY
     } 
 from "../actions"
 
 const initialState = {
     loginCredentials: {},
     registerCredentials: {},
+    recoverEmail: {},
     error: '',
     token: '',
     isLogging: false,
     isRegistering: false,
     isFetching: false,
+    isVerify: false,
+    isEdit: false,
+    editedItem: {},
+    exerciseList: [
+        {
+            id: 2,
+            name: 'lunges',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/21/2019'
+        },
+        {
+            id: 0,
+            name: 'dumbbell',
+            weight: 20,
+            reps: 10,
+            sets: 3,
+            date: '12/20/2019'
+        },
+        {
+            id: 1,
+            name: 'benchpress',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/20/2019'
+        },
+        
+    ],
+
 }
 
 export const rootReducer = (state = initialState, {type, payload})=> {
@@ -47,10 +84,35 @@ switch (type) {
                 [payload.target.name]: payload.target.value
             }
         }
+    case VERIFY_EMAIL:
+        return {
+            ...state
+        }
     case RESET_ERRORS:
         return {
             ...state,
             error: ''
+        }
+    case START_EDIT:
+        return {
+            ...state,
+            isEdit: true,
+            editedItem: state.exerciseList.find(ele=> ele.id===payload)
+        }
+    case FINISH_EDIT:
+        return {
+            ...state,
+            isEdit: false,
+        }
+    case DELETE:
+        return {
+            ...state,
+            exerciseList: state.exerciseList.map(ele=> ele.id!=payload && ele)
+        }
+    case COPY:
+        return {
+            ...state,
+            exerciseList: [payload, ...state.exerciseList]
         }
     case LOGOUT:
         return initialState
