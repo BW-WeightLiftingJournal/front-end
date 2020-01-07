@@ -2,12 +2,14 @@ import React, { useState } from "react"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
+import { submitForm } from "../utilities/actions"
 
-const AddExercise = ({ addNewExercise }) => {
+const AddExercise = ({ history, addNewExercise,  submitForm}) => {
 
     const [exercise, setExercise] = useState({
+        id: '',
         date: '',
-        exercise: '',
+        name: '',
         weight: '',
         reps: '',
         sets: ''
@@ -17,24 +19,28 @@ const AddExercise = ({ addNewExercise }) => {
         setExercise({ ...exercise, [event.target.name]: event.target.value });
     };
 
-    const submitForm = event => {
-        event.preventDefault();
+    // const submitForm = event => {
+    //     event.preventDefault();
 
-        addNewExercise(exercise);
+    //     addNewExercise(exercise);
 
-        setExercise({ 
-            date: '',
-            exercise: '',
-            weight: '',
-            reps: '',
-            sets: ''
-        });
-    }
+    //     setExercise({ 
+    //         date: '',
+    //         exercise: '',
+    //         weight: '',
+    //         reps: '',
+    //         sets: ''
+    //     });
+    // }
 
     return (
         <div className='add-exercise-container'>
             <h2 className='add-title'>Add New Exercise</h2>
-            <form onSubmit={submitForm}>
+            <form onSubmit={e=>{
+                submitForm(e,exercise)
+                history.push('/dashboard')
+            }
+            }>
                 <div className='add-exercise-form'>
                 <TextField
                     required
@@ -48,7 +54,7 @@ const AddExercise = ({ addNewExercise }) => {
                     required
                     variant='outlined'
                     label='Exercise Name'
-                    name='exercise'
+                    name='name'
                     onChange={handleChanges}
                 />
                 <br/>
@@ -88,7 +94,7 @@ const mapStateToProps = state => ({
     ...state
   })
   
-export default connect(mapStateToProps,{})(AddExercise);
+export default connect(mapStateToProps,{submitForm})(AddExercise);
 
 
 // const [exercises, setExercises ] = useState([]);

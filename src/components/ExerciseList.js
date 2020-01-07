@@ -9,6 +9,7 @@ const ExerciseList = ({
   let previousDate=''
   return (
     <div classList="exercise-list-container">
+      {console.log(exerciseList)}
       {exerciseList.map(item=>{
         isSame=item.date===previousDate;
         previousDate=item.date
