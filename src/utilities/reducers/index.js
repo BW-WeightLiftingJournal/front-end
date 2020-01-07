@@ -2,14 +2,17 @@ import {
     LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT,
+    LOGOUT_START,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAIL,
     HANDLE_CHANGE,
     RESET_ERRORS,
     VERIFY_EMAIL,
     START_EDIT,
     FINISH_EDIT,
     DELETE,
-    COPY
+    COPY,
+    SUBMIT_FORM
     } 
 from "../actions"
 
@@ -19,7 +22,8 @@ const initialState = {
     recoverEmail: {},
     error: '',
     token: '',
-    isLogging: false,
+    isLoggingIn: false,
+    isLoggingOut: false,
     isRegistering: false,
     isFetching: false,
     isVerify: false,
@@ -60,19 +64,19 @@ switch (type) {
     case LOGIN_START:
         return {
             ...state,
-            isLogging: true,
+            isLoggingIn: true,
             error: ''
         }
     case LOGIN_SUCCESS:
         return {
             ...state,
-            isLogging: false,
+            isLoggingIn: false,
             error: ''
         }
     case LOGIN_FAIL:
         return {
             ...state,
-            isLogging: false,
+            isLoggingIn: false,
             error: 'Login Fail'
         }
     case HANDLE_CHANGE:
@@ -105,17 +109,40 @@ switch (type) {
             isEdit: false,
         }
     case DELETE:
+        
         return {
             ...state,
-            exerciseList: state.exerciseList.map(ele=> ele.id!=payload && ele)
+            exerciseList: state.exerciseList.filter(ele=> ele.id!=payload)
+            
         }
     case COPY:
         return {
             ...state,
             exerciseList: [payload, ...state.exerciseList]
         }
-    case LOGOUT:
-        return initialState
+    case LOGOUT_START:
+        return {
+            ...state,
+            isLoggingOut: true,
+            error: ''
+        }
+    case LOGOUT_SUCCESS:
+        return {
+            ...state,
+            isLoggingOut: false,
+            error: ''
+        }
+    case LOGOUT_FAIL:
+        return {
+            ...state,
+            isLoggingOut: false,
+            error: 'Logout Fail'
+        }
+    case SUBMIT_FORM:
+        return {
+            ...state,
+            exerciseList: [payload, ...state.exerciseList]
+        }
     default:
         return state
 }

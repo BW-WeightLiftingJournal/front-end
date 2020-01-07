@@ -4,7 +4,9 @@ import axios from "axios"
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
-export const LOGOUT = 'LOGOUT'
+export const LOGOUT_START = 'LOGOUT_START'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAIL = 'LOGOUT_FAIL'
 export const HANDLE_CHANGE = 'HANDLE_CHANGE'
 export const REGISTER_START = 'REGISTER_START'
 export const REGISTER_SUCCESS ='REGISTER_SUCCESS'
@@ -15,6 +17,7 @@ export const START_EDIT = 'START_EDIT'
 export const FINISH_EDIT = 'FINISH_EDIT'
 export const DELETE = 'DELETE'
 export const COPY = 'COPY'
+export const SUBMIT_FORM = "SUBMIT_FORM"
 
 export const login = (event, credentials) => dispatch => {
   event.preventDefault()
@@ -58,10 +61,14 @@ export const resetErrors= ()=> ({
 })
 
 export const logout = ()=> dispatch => {
-  localStorage.clear()
-  dispatch({
-    type: LOGOUT
+  dispatch({ type: LOGOUT_START });
+  axios
+  .get(`http://localhost:5000/api/auth/logout`)
+  .then(res => {
+    dispatch({ type: LOGOUT_SUCCESS})
+    localStorage.clear()
   })
+  .catch(err => dispatch({ type: LOGOUT_FAIL, payload: err}))
 }
 export const startEdit = (id) => ({
   type: START_EDIT,
@@ -110,5 +117,17 @@ export const copy = (exercise)=> dispatch => {
   dispatch({ type: COPY, payload: temp})
 }
 
+export const submitForm = (event, exercise) => dispatch=> {
+  
+  event.preventDefault()
+  const newExercise = {
+    ...exercise,
+    id: new Date().getMilliseconds()
+  }
+  dispatch({
+    type: SUBMIT_FORM,
+    payload: newExercise
+  })
+}
 
 
