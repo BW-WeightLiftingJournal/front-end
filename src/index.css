@@ -1,6 +1,4 @@
-html {
-  
-}
+
 body {
   font-size: 62.5%;
   margin: 0;
@@ -10,6 +8,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
 }
 
 code {
@@ -55,6 +55,10 @@ p, span {
   margin: 0;
 }
 
+.app-container {
+  flex: 1 0 auto;
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -91,15 +95,18 @@ p, span {
 }
 
 .footer-container {
-  position: absolute;
+  /* position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  padding: 20px; */
+  padding: 20px;
   background-color: #69868C;
   color: #F2F2F2;
-  padding: 20px;
   text-align: center;
+  flex-shrink: 0;
 }
+
 .dashboard-top {
   display: flex;
   flex-direction: row;

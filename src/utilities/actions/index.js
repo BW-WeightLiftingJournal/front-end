@@ -18,7 +18,6 @@ export const COPY = 'COPY'
 
 export const login = (event, credentials) => dispatch => {
   event.preventDefault()
-  console.log(credentials)
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
     .post('http://localhost:5000/api/auth/login', credentials)
@@ -32,7 +31,6 @@ export const login = (event, credentials) => dispatch => {
 
 export const register = (event, credentials) => dispatch => {
   event.preventDefault()
-  console.log(credentials)
   dispatch({ type: REGISTER_START });
   axios
     .post('http://localhost:5000/api/auth/register', credentials)
@@ -78,6 +76,8 @@ export const finishEdit = (e, id, exercise) => dispatch => {
     dispatch({ type: FINISH_EDIT, payload: res.data })
   })
   .catch(err => console.log(err));
+  //following line is to test UI features without access to API.  can be removed once server is setup
+  dispatch({ type: FINISH_EDIT, payload: exercise })
 }
 
 export const deleteItem = (id) => dispatch => {
@@ -87,15 +87,27 @@ export const deleteItem = (id) => dispatch => {
     dispatch({ type: DELETE, payload: res.data })
   })
   .catch(err => console.log(err));
+  //following line is to test UI features without access to API.  can be removed once server is setup
+  dispatch({ type: DELETE, payload: id })
 }
 
 export const copy = (exercise)=> dispatch => {
+  const today = new Date()
+  const date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
+  const temp = 
+  {
+    ...exercise,
+    id: today.getTime(),
+    date: date
+  }
   axios
-  .post('http://localhost:5000/api/add', exercise)
+  .post('http://localhost:5000/api/add', temp)
   .then(res => {
     dispatch({ type: COPY, payload: res.data })
   })
   .catch(err => console.log(err));
+  //following line is to test UI features without access to API.  can be removed once server is setup
+  dispatch({ type: COPY, payload: temp})
 }
 
 

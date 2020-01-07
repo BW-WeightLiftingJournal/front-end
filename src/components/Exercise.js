@@ -16,7 +16,8 @@ const Exercise = ({
         startEdit, 
         finishEdit, 
         deleteItem, 
-        handleChange
+        handleChange,
+        copy
     }) => {
     return (
         <div className="exercise-container">

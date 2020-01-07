@@ -27,6 +27,14 @@ const initialState = {
     editedItem: {},
     exerciseList: [
         {
+            id: 2,
+            name: 'lunges',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/21/2019'
+        },
+        {
             id: 0,
             name: 'dumbbell',
             weight: 20,
@@ -42,14 +50,7 @@ const initialState = {
             sets: 2,
             date: '12/20/2019'
         },
-        {
-            id: 2,
-            name: 'lunges',
-            weight: 200,
-            reps: 11,
-            sets: 2,
-            date: '12/21/2019'
-        }
+        
     ],
 
 }
@@ -96,7 +97,7 @@ switch (type) {
         return {
             ...state,
             isEdit: true,
-            editedItem: {...state.exerciseList[payload]}
+            editedItem: state.exerciseList.find(ele=> ele.id===payload)
         }
     case FINISH_EDIT:
         return {
@@ -105,11 +106,13 @@ switch (type) {
         }
     case DELETE:
         return {
-            ...state
+            ...state,
+            exerciseList: state.exerciseList.map(ele=> ele.id!=payload && ele)
         }
     case COPY:
         return {
-            ...state
+            ...state,
+            exerciseList: [payload, ...state.exerciseList]
         }
     case LOGOUT:
         return initialState
