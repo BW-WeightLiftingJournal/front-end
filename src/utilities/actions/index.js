@@ -110,5 +110,3 @@ export const copy = (exercise)=> dispatch => {
   dispatch({ type: COPY, payload: temp})
 }
 
-
-

@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
+import { TweenMax, Power3 } from 'gsap'
 
 const AddExercise = ({ addNewExercise }) => {
+
+    let formItem = useRef()
 
     const [exercise, setExercise] = useState({
         date: '',
@@ -31,8 +34,19 @@ const AddExercise = ({ addNewExercise }) => {
         });
     }
 
+    useEffect(() => {
+        TweenMax.to(
+            formItem,
+            2,
+                {
+                    y: -10,
+                    ease: Power3.easeOut,
+                }
+            )
+    })
+
     return (
-        <div className='add-exercise-container'>
+        <div ref={el => {formItem = el}} className='add-exercise-container'>
             <h2 className='add-title'>Add New Exercise</h2>
             <form onSubmit={submitForm}>
                 <div className='add-exercise-form'>
