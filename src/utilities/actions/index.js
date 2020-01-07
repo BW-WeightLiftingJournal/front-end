@@ -21,29 +21,42 @@ export const SUBMIT_FORM = "SUBMIT_FORM"
 
 export const login = (event, credentials) => dispatch => {
   event.preventDefault()
+  console.log(credentials)
   dispatch({ type: LOGIN_START });
-  axiosWithAuth()
-    .post('http://localhost:5000/api/auth/login', credentials)
-    .then(res =>
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload })
-    )
-    .catch(err => {
-      return dispatch({ type: LOGIN_FAIL, payload: err })
-    });
+  if(credentials.username && credentials.username.toUpperCase()=== 'TEST' && credentials.password==='test'){
+    dispatch({ type: LOGIN_SUCCESS })
+  }
+  else {
+    dispatch({ type: LOGIN_FAIL, payload: 'Incorrect Username or Password' })
+  }
+  // axiosWithAuth()
+  //   .post('http://localhost:5000/api/auth/login', credentials)
+  //   .then(res => {
+  //     dispatch({ type: LOGIN_SUCCESS , payload: res.data})
+  //   })
+  //   .catch(err => {
+  //     return dispatch({ type: LOGIN_FAIL, payload: err })
+  //   });
 };
 
-export const register = (event, credentials) => dispatch => {
+// export const register = (event, credentials) => dispatch => {
+//   event.preventDefault()
+  // dispatch({ type: REGISTER_START });
+  // axios
+  //   .post('http://localhost:5000/api/auth/register', credentials)
+  //   .then(res => {
+  //     dispatch({ type: REGISTER_SUCCESS, payload: res.data.payload })
+  //     login(event,credentials)
+  //   })
+  //   .catch(err => {
+  //     return dispatch({ type: REGISTER_FAIL, payload: err })
+  //   });
+// }
+
+//temporary with API down
+export const register = (event, creds) => dispatch =>{
   event.preventDefault()
-  dispatch({ type: REGISTER_START });
-  axios
-    .post('http://localhost:5000/api/auth/register', credentials)
-    .then(res => {
-      dispatch({ type: REGISTER_SUCCESS, payload: res.data.payload })
-      login(event,credentials)
-    })
-    .catch(err => {
-      return dispatch({ type: REGISTER_FAIL, payload: err })
-    });
+  login(event, {username: 'test', password: 'test'})
 }
 
 export const verifyEmail = (e, email) => dispatch=>{
@@ -62,13 +75,18 @@ export const resetErrors= ()=> ({
 
 export const logout = ()=> dispatch => {
   dispatch({ type: LOGOUT_START });
-  axios
-  .get(`http://localhost:5000/api/auth/logout`)
-  .then(res => {
-    dispatch({ type: LOGOUT_SUCCESS})
-    localStorage.clear()
-  })
-  .catch(err => dispatch({ type: LOGOUT_FAIL, payload: err}))
+  // axios
+  // .get(`http://localhost:5000/api/auth/logout`)
+  // .then(res => {
+  //   dispatch({ type: LOGOUT_SUCCESS})
+  //   localStorage.clear()
+  // })
+  // .catch(err => dispatch({ type: LOGOUT_FAIL, payload: err}))
+
+  //following line is to test functional features without access to API.  can be removed once server is setup
+  dispatch({ type: LOGOUT_SUCCESS })
+  localStorage.setItem('token','')
+
 }
 export const startEdit = (id) => ({
   type: START_EDIT,

@@ -71,13 +71,14 @@ switch (type) {
         return {
             ...state,
             isLoggingIn: false,
-            error: ''
+            error: '',
+            token: '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116'
         }
     case LOGIN_FAIL:
         return {
             ...state,
             isLoggingIn: false,
-            error: 'Login Fail'
+            error: payload
         }
     case HANDLE_CHANGE:
         return {
@@ -112,7 +113,7 @@ switch (type) {
         
         return {
             ...state,
-            exerciseList: state.exerciseList.filter(ele=> ele.id!=payload)
+            exerciseList: state.exerciseList.filter(ele=> ele.id!==payload)
             
         }
     case COPY:
@@ -130,7 +131,8 @@ switch (type) {
         return {
             ...state,
             isLoggingOut: false,
-            error: ''
+            error: '',
+            token: ''
         }
     case LOGOUT_FAIL:
         return {

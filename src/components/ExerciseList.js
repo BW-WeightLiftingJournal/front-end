@@ -8,16 +8,15 @@ const ExerciseList = ({
   let isSame=true;
   let previousDate=''
   return (
-    <div classList="exercise-list-container">
-      {console.log(exerciseList)}
+    <div className="exercise-list-container">
       {exerciseList.map(item=>{
         isSame=item.date===previousDate;
         previousDate=item.date
         return (
-          <>
+          <div key={item.id}>
             {!isSame && <h4 style={{margin: '20px 0px 10px 10px', letterSpacing: '1.5px'}}>{item.date}</h4>}
-            <Exercise key={item.id} exercise={item}/>
-          </>
+            <Exercise exercise={item}/>
+          </div>
           
         )
       })}

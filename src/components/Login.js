@@ -34,7 +34,7 @@ const Login = ({
     <div className="login-container">
       <FaDumbbell style={{fontSize: '4rem'}}/>
       <h2>Sign In</h2>
-      {error ? <div style={{color: 'red'}}>Username or Password incorrect.</div> : <br/>}
+      {error ? <div style={{color: 'red'}}>{error}</div> : <br/>}
       <br/>
       <form 
         noValidate 
@@ -46,7 +46,6 @@ const Login = ({
             error={error}
             required
             helperText={!loginCredentials.username && error && "Username Required"}
-            id="outlined-required"
             label="Username"
             variant="outlined"
             name="username"
@@ -59,7 +58,6 @@ const Login = ({
             required
             helperText={!loginCredentials.password && error && "Password Required"}
             type="password"
-            id="outlined-required"
             label="Password"
             variant="outlined"
             name="password"
