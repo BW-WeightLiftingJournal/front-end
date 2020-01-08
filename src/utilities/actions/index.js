@@ -150,7 +150,6 @@ export const copy = (exercise)=> dispatch => {
   const temp = 
   {
     ...exercise,
-    id: today.getTime(),
     date: date
   }
   axios
