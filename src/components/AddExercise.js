@@ -4,8 +4,9 @@ import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { TweenMax, Bounce } from 'gsap'
 import { submitForm } from "../utilities/actions"
+import axios from "axios"
 
-const AddExercise = ({ history, addNewExercise,  submitForm}) => {
+const AddExercise = ({ history, addNewExercise }) => {
 
     let formItem = useRef()
 
@@ -22,19 +23,26 @@ const AddExercise = ({ history, addNewExercise,  submitForm}) => {
         setExercise({ ...exercise, [event.target.name]: event.target.value });
     };
 
-    // const submitForm = event => {
-    //     event.preventDefault();
+    const submitForm = event => {
+        event.preventDefault();
 
-    //     addNewExercise(exercise);
+        axios 
+            .post("https://bw-weight-lifting-journal.herokuapp.com/api")
+            .then(res => {
+                console.log('success', res)
+            })
+            .catch(error => console.log(error.response))
 
-    //     setExercise({ 
-    //         date: '',
-    //         exercise: '',
-    //         weight: '',
-    //         reps: '',
-    //         sets: ''
-    //     });
-    // }
+        // addNewExercise(exercise);
+
+        setExercise({ 
+            date: '',
+            exercise: '',
+            weight: '',
+            reps: '',
+            sets: ''
+        });
+    }
 
     useEffect(() => {
         TweenMax.to(
@@ -46,6 +54,9 @@ const AddExercise = ({ history, addNewExercise,  submitForm}) => {
                 }
             )
     })
+
+//In lieu of a succes message on successfull submit form will reroute to the home page.
+//There is also no form validation on button three inputs, this was done on purpose as we didn't want them to be required inputs for our app.
 
     return (
         <div ref={el => {formItem = el}} className='add-exercise-container'>
