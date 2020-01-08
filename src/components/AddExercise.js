@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { TweenMax, Bounce } from 'gsap'
+import axios from 'axios'
 
 const AddExercise = ({ addNewExercise }) => {
 
@@ -22,6 +23,15 @@ const AddExercise = ({ addNewExercise }) => {
 
     const submitForm = event => {
         event.preventDefault();
+
+        axios
+            .post("https://bw-weight-lifting-journal.herokuapp.com/api")
+            .then(res => {
+                console.log("success", res);
+            })
+            .catch(err => 
+                console.log(err.response)
+            )
 
         addNewExercise(exercise);
 
@@ -45,6 +55,9 @@ const AddExercise = ({ addNewExercise }) => {
             )
     })
 
+//In lieu of a succes message on successfull submit form will reroute to the home page.
+//There is also no form validation on button three inputs, this was done on purpose as we didn't want them to be required inputs for our app.
+    
     return (
         <div ref={el => {formItem = el}} className='add-exercise-container'>
             <h2 className='add-title'>Add New Exercise</h2>
@@ -121,5 +134,5 @@ export default connect(mapStateToProps,{})(AddExercise);
 //         setExercises(newExerciseCollection);
 // } 
 
-{/* <h1>New Exercises</h1>
-            <AddExercise addNewExercise={addNewExercise} /> */}
+//  { <h1>New Exercises</h1>
+//  <AddExercise addNewExercise={addNewExercise} /> }
