@@ -20,6 +20,15 @@ export const COPY = 'COPY'
 export const SUBMIT_FORM = "SUBMIT_FORM"
 export const RESET_FORM= 'RESET_FORM'
 
+export const getList = ()=> dispatch => {
+  axios
+    .get('https://bw-weight-lifting-journal.herokuapp.com/api/workouts')
+    .then(res=> {
+      console.log(res)
+    })
+    .catch(err=> console.log(err))
+}
+
 export const login = (event, credentials) => dispatch => {
   /*Below is for use when API down for testing and demo */
 
@@ -32,33 +41,39 @@ export const login = (event, credentials) => dispatch => {
   // else {
   //   dispatch({ type: LOGIN_FAIL, payload: 'Incorrect Username or Password' })
   // }
-
-
   event.preventDefault()
   dispatch({ type: LOGIN_START });
-  axios()
+  axios
     .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/login', credentials)
     .then(res => {
-      console.log(res.data)
-      dispatch({ type: LOGIN_SUCCESS , payload: res.data})
+      console.log(res)
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data})
+      
     })
     .catch(err => {
-      return dispatch({ type: LOGIN_FAIL, payload: err })
+      console.log(err)
+      dispatch({ type: LOGIN_FAIL, payload: err })
     });
 };
 
 export const register = (event, credentials) => dispatch => {
   event.preventDefault()
+  const correctedCredentials = {
+    username: credentials.username,
+    password: credentials.password,
+    department: 'student'
+  }
   dispatch({ type: REGISTER_START });
   axios
-    .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/register', credentials)
+    .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/register', correctedCredentials)
     .then(res => {
-      console.log(res.data)
-      dispatch({ type: REGISTER_SUCCESS, payload: res.data.payload })
-      login(event,credentials)
+      console.log(res)
+      dispatch({ type: REGISTER_SUCCESS, payload: res })
+      dispatch(login(event,credentials))
     })
     .catch(err => {
-      return dispatch({ type: REGISTER_FAIL, payload: err })
+      console.log(err)
+      dispatch({ type: REGISTER_FAIL, payload: err })
     });
 }
 
@@ -88,17 +103,17 @@ export const resetForm = (form) => ({
 
 export const logout = ()=> dispatch => {
   dispatch({ type: LOGOUT_START });
-  // axios
-  // .get(`http://localhost:5000/api/auth/logout`)
-  // .then(res => {
-  //   dispatch({ type: LOGOUT_SUCCESS})
-  //   localStorage.clear()
-  // })
-  // .catch(err => dispatch({ type: LOGOUT_FAIL, payload: err}))
+  axios
+  .get(`https://bw-weight-lifting-journal.herokuapp.com/api/auth/logout`)
+  .then(res => {
+    localStorage.clear()
+    dispatch({ type: LOGOUT_SUCCESS})
+  })
+  .catch(err => dispatch({ type: LOGOUT_FAIL, payload: err}))
 
   //following line is to test functional features without access to API.  can be removed once server is setup
-  dispatch({ type: LOGOUT_SUCCESS })
-  localStorage.setItem('token','')
+  // dispatch({ type: LOGOUT_SUCCESS })
+  // localStorage.setItem('token','')
 
 }
 export const startEdit = (id) => ({
@@ -115,7 +130,7 @@ export const finishEdit = (e, id, exercise) => dispatch => {
   })
   .catch(err => console.log(err));
   //following line is to test UI features without access to API.  can be removed once server is setup
-  dispatch({ type: FINISH_EDIT, payload: exercise })
+  // dispatch({ type: FINISH_EDIT, payload: exercise })
 }
 
 export const deleteItem = (id) => dispatch => {
@@ -126,7 +141,7 @@ export const deleteItem = (id) => dispatch => {
   })
   .catch(err => console.log(err));
   //following line is to test UI features without access to API.  can be removed once server is setup
-  dispatch({ type: DELETE, payload: id })
+  // dispatch({ type: DELETE, payload: id })
 }
 
 export const copy = (exercise)=> dispatch => {

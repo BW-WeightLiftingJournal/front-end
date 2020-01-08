@@ -4,7 +4,7 @@ import ExerciseList from "./ExerciseList"
 
 const Dashboard = ({
     history,
-    username,
+    message,
 
 }) => {
     const today = new Date()
@@ -13,8 +13,8 @@ const Dashboard = ({
         <div className="dashboard-container">
             <section className="dashboard-top">
                 <div>
-                    <p>Welcome {username}</p>
-                    <p>{date}</p>
+                    <h4 style={{marginLeft: '10px'}}>{message}</h4>
+                    <h4 style={{marginLeft: '10px', letterSpacing: '1.5px'}}>{date}</h4>
                 </div>
                 <div>
                     <div className="add-button-dashboard" onClick={()=>history.push('/add')}>Add new workout</div>
@@ -29,7 +29,7 @@ const Dashboard = ({
 }
 
 const mapStateToProps = state => ({
-    username: state.loggedInUsername
+    message: state.loggedInUsername
   })
   
 export default connect(mapStateToProps,{})(Dashboard);

@@ -5,6 +5,9 @@ import {
     LOGOUT_START,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    REGISTER_START,
+    REGISTER_FAIL,
+    REGISTER_SUCCESS,
     HANDLE_CHANGE,
     RESET_ERRORS,
     RESET_FORM,
@@ -32,30 +35,30 @@ const initialState = {
     isEdit: false,
     editedItem: {},
     exerciseList: [
-        {
-            id: 2,
-            name: 'lunges',
-            weight: 200,
-            reps: 11,
-            sets: 2,
-            date: '12/21/2019'
-        },
-        {
-            id: 0,
-            name: 'dumbbell',
-            weight: 20,
-            reps: 10,
-            sets: 3,
-            date: '12/20/2019'
-        },
-        {
-            id: 1,
-            name: 'benchpress',
-            weight: 200,
-            reps: 11,
-            sets: 2,
-            date: '12/20/2019'
-        },
+        // {
+        //     id: 2,
+        //     name: 'lunges',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/21/2019'
+        // },
+        // {
+        //     id: 0,
+        //     name: 'dumbbell',
+        //     weight: 20,
+        //     reps: 10,
+        //     sets: 3,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
         
     ],
 
@@ -75,13 +78,31 @@ switch (type) {
             isLoggingIn: false,
             error: '',
             token: '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116',
-            loggedInUsername: payload
+            loggedInUsername: payload.message
         }
     case LOGIN_FAIL:
         return {
             ...state,
             isLoggingIn: false,
-            error: payload
+            error: 'Invalid Username or Password'
+        }
+    case REGISTER_START:
+        return {
+            ...state,
+            isRegistering: true,
+            error: ''
+        }
+    case REGISTER_SUCCESS:
+        return {
+            ...state,
+            isRegistering: false,
+            error: ''
+        }
+    case REGISTER_FAIL:
+        return {
+            ...state,
+            isRegistering: false,
+            error: 'Error.  One or more required items invalid'
         }
     case HANDLE_CHANGE:
         return {

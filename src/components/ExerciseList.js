@@ -1,10 +1,16 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {connect} from "react-redux"
 import Exercise from "./Exercise"
+import {getList} from "../utilities/actions"
 
 const ExerciseList = ({
   exerciseList
 }) => {
+
+  useEffect(()=> {
+    getList()
+  }, [])
+  
   let isSame=true;
   let previousDate=''
   return (
