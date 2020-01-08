@@ -20,6 +20,7 @@ const Register = ({
 
   useEffect(()=>{
     resetErrors()
+    // eslint-disable-next-line
   },[])
 
   useEffect(()=> {

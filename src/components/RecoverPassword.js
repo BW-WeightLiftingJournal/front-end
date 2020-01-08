@@ -16,6 +16,7 @@ const RecoverPassword = ({
 
     useEffect(()=>{
         resetErrors()
+        // eslint-disable-next-line
     },[])
 
   return (

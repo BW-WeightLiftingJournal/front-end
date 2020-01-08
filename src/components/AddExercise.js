@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react"
+import { axiosWithAuth } from "../utilities/axiosAuth"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { TweenMax, Bounce } from 'gsap'
 import { submitForm } from "../utilities/actions"
-import axios from "axios"
+// import axios from "axios"
 
 const AddExercise = ({ history, addNewExercise }) => {
 
@@ -26,7 +27,7 @@ const AddExercise = ({ history, addNewExercise }) => {
     const submitForm = event => {
         event.preventDefault();
 
-        axios 
+        axiosWithAuth()
             .post("https://bw-weight-lifting-journal.herokuapp.com/api")
             .then(res => {
                 console.log('success', res)
@@ -138,5 +139,5 @@ export default connect(mapStateToProps,{submitForm})(AddExercise);
 //         setExercises(newExerciseCollection);
 // } 
 
-{/* <h1>New Exercises</h1>
-            <AddExercise addNewExercise={addNewExercise} /> */}
+/* <h1>New Exercises</h1>
+            <AddExercise addNewExercise={addNewExercise} /> */

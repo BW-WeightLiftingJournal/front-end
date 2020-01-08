@@ -19,12 +19,16 @@ export const DELETE = 'DELETE'
 export const COPY = 'COPY'
 export const SUBMIT_FORM = "SUBMIT_FORM"
 export const RESET_FORM= 'RESET_FORM'
+export const RETRIEVE_START = 'RETRIEVE_START'
+export const RETRIEVE_SUCCESS = 'RETRIEVE_SUCCESS'
 
 export const getList = ()=> dispatch => {
-  axios
+  dispatch({type: RETRIEVE_START})
+  axiosWithAuth()
     .get('https://bw-weight-lifting-journal.herokuapp.com/api/workouts')
     .then(res=> {
       console.log(res)
+      dispatch({type: RETRIEVE_SUCCESS, payload: res})
     })
     .catch(err=> console.log(err))
 }
@@ -106,10 +110,10 @@ export const logout = ()=> dispatch => {
   axios
   .get(`https://bw-weight-lifting-journal.herokuapp.com/api/auth/logout`)
   .then(res => {
-    localStorage.clear()
     dispatch({ type: LOGOUT_SUCCESS})
   })
   .catch(err => dispatch({ type: LOGOUT_FAIL, payload: err}))
+  
 
   //following line is to test functional features without access to API.  can be removed once server is setup
   // dispatch({ type: LOGOUT_SUCCESS })
@@ -123,7 +127,7 @@ export const startEdit = (id) => ({
 
 export const finishEdit = (e, id, exercise) => dispatch => {
   e.preventDefault()
-  axios
+  axiosWithAuth()
   .put(`https://bw-weight-lifting-journal.herokuapp.com/api/edit/${id}`, exercise)
   .then(res => {
     dispatch({ type: FINISH_EDIT, payload: res.data })
@@ -134,7 +138,7 @@ export const finishEdit = (e, id, exercise) => dispatch => {
 }
 
 export const deleteItem = (id) => dispatch => {
-  axios
+  axiosWithAuth()
   .delete(`https://bw-weight-lifting-journal.herokuapp.com/api/delete/${id}`)
   .then(res => {
     dispatch({ type: DELETE, payload: res.data })
@@ -152,7 +156,7 @@ export const copy = (exercise)=> dispatch => {
     ...exercise,
     date: date
   }
-  axios
+  axiosWithAuth()
   .post('https://bw-weight-lifting-journal.herokuapp.com/api/add', temp)
   .then(res => {
     dispatch({ type: COPY, payload: res.data })

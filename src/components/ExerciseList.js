@@ -4,11 +4,13 @@ import Exercise from "./Exercise"
 import {getList} from "../utilities/actions"
 
 const ExerciseList = ({
-  exerciseList
+  exerciseList,
+  getList
 }) => {
 
   useEffect(()=> {
     getList()
+    // eslint-disable-next-line
   }, [])
   
   let isSame=true;
@@ -34,4 +36,4 @@ const mapStateToProps = state => ({
     exerciseList: state.exerciseList
   })
   
-export default connect(mapStateToProps,{})(ExerciseList);
+export default connect(mapStateToProps,{getList})(ExerciseList);

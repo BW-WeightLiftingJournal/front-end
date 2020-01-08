@@ -16,7 +16,9 @@ import {
     FINISH_EDIT,
     DELETE,
     COPY,
-    SUBMIT_FORM
+    SUBMIT_FORM,
+    RETRIEVE_SUCCESS,
+    RETRIEVE_START,
     } 
 from "../actions"
 
@@ -26,7 +28,7 @@ const initialState = {
     recoverEmail: {},
     loggedInUsername: '',
     error: '',
-    token: '',
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     isLoggingIn: false,
     isLoggingOut: false,
     isRegistering: false,
@@ -66,6 +68,17 @@ const initialState = {
 
 export const rootReducer = (state = initialState, {type, payload})=> {
 switch (type) {
+    case RETRIEVE_START:
+        return {
+            ...state,
+            isFetching: true
+        }
+    case RETRIEVE_SUCCESS:
+        return {
+            ...state,
+            exerciseList: payload.data,
+            isFetching: false
+        }
     case LOGIN_START:
         return {
             ...state,
@@ -73,11 +86,13 @@ switch (type) {
             error: ''
         }
     case LOGIN_SUCCESS:
+        const tok = '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116'
+        localStorage.setItem('token', tok)
         return {
             ...state,
             isLoggingIn: false,
             error: '',
-            token: '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116',
+            token: tok,
             loggedInUsername: payload.message
         }
     case LOGIN_FAIL:
@@ -93,6 +108,7 @@ switch (type) {
             error: ''
         }
     case REGISTER_SUCCESS:
+        
         return {
             ...state,
             isRegistering: false,
@@ -154,7 +170,8 @@ switch (type) {
         return {
             ...state,
             isLoggingOut: true,
-            error: ''
+            error: '',
+            token: ''
         }
     case LOGOUT_SUCCESS:
         return {
@@ -167,7 +184,8 @@ switch (type) {
         return {
             ...state,
             isLoggingOut: false,
-            error: 'Logout Fail'
+            error: 'Logout Fail',
+            token: ''
         }
     case SUBMIT_FORM:
         return {
