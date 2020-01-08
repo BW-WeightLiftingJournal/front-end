@@ -17,10 +17,7 @@ const Header = ({token,logout}) => {
                     About
                 </Link>
                 {!!token ? 
-                    <Link to="/login" onClick={()=>{
-                        localStorage.setItem('token', '')
-                        logout()
-                        }}>
+                    <Link to="/login" onClick={logout}>
                         Logout
                     </Link>    
                     : 

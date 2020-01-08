@@ -21,16 +21,19 @@ export const SUBMIT_FORM = "SUBMIT_FORM"
 export const RESET_FORM= 'RESET_FORM'
 export const RETRIEVE_START = 'RETRIEVE_START'
 export const RETRIEVE_SUCCESS = 'RETRIEVE_SUCCESS'
+export const RETRIEVE_FAIL = 'RETRIEVE_FAIL'
 
-export const getList = ()=> dispatch => {
+export const getList = (id)=> dispatch => {
   dispatch({type: RETRIEVE_START})
   axiosWithAuth()
-    .get('https://bw-weight-lifting-journal.herokuapp.com/api/workouts')
+    .get(`https://bw-weight-lifting-journal.herokuapp.com/api/users/workouts/${id}`)
     .then(res=> {
-      console.log(res)
       dispatch({type: RETRIEVE_SUCCESS, payload: res})
     })
-    .catch(err=> console.log(err))
+    .catch(err=> {
+      console.log(err)
+      dispatch({type: RETRIEVE_FAIL, payload: 'Failed to retrieve Exercise List'})
+    })
 }
 
 export const login = (event, credentials) => dispatch => {
@@ -71,7 +74,6 @@ export const register = (event, credentials) => dispatch => {
   axios
     .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/register', correctedCredentials)
     .then(res => {
-      console.log(res)
       dispatch({ type: REGISTER_SUCCESS, payload: res })
       dispatch(login(event,credentials))
     })
@@ -106,6 +108,7 @@ export const resetForm = (form) => ({
 })
 
 export const logout = ()=> dispatch => {
+  localStorage.setItem('token', '')
   dispatch({ type: LOGOUT_START });
   axios
   .get(`https://bw-weight-lifting-journal.herokuapp.com/api/auth/logout`)

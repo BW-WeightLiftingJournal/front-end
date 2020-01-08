@@ -76,7 +76,7 @@ const Login = ({
             label="Remember me"
             labelPlacement="end"
           />
-          <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Sign In'}</StyledButton>
+          <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25} style={{color: 'white'}}/> : 'Sign In'}</StyledButton>
           <div className="below-button">
             <Link to="/recover">
               Forgot password?
@@ -99,7 +99,7 @@ const mapStateToProps = state => ({
   loginCredentials: state.loginCredentials,
   error: state.error,
   token: state.token,
-  isLogging: state.isLogging
+  isLogging: state.isLoggingIn
 
 })
 

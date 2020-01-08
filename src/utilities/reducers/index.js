@@ -19,6 +19,7 @@ import {
     SUBMIT_FORM,
     RETRIEVE_SUCCESS,
     RETRIEVE_START,
+    RETRIEVE_FAIL
     } 
 from "../actions"
 
@@ -27,6 +28,7 @@ const initialState = {
     registerCredentials: {},
     recoverEmail: {},
     loggedInUsername: '',
+    userId: 0,
     error: '',
     token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     isLoggingIn: false,
@@ -79,6 +81,12 @@ switch (type) {
             exerciseList: payload.data,
             isFetching: false
         }
+    case RETRIEVE_FAIL:
+        return {
+            ...state,
+            isFetching: false,
+            error: payload
+        }
     case LOGIN_START:
         return {
             ...state,
@@ -93,7 +101,8 @@ switch (type) {
             isLoggingIn: false,
             error: '',
             token: tok,
-            loggedInUsername: payload.message
+            loggedInUsername: payload.message,
+            userId: payload.session.user.id ? payload.session.user.id : payload.session.admin.id
         }
     case LOGIN_FAIL:
         return {
@@ -164,7 +173,7 @@ switch (type) {
     case COPY:
         return {
             ...state,
-            exerciseList: [payload, ...state.exerciseList]
+            // exerciseList: [payload, ...state.exerciseList]
         }
     case LOGOUT_START:
         return {

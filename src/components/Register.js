@@ -80,7 +80,7 @@ const Register = ({
             onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
-          <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25}/> : 'Create Account'}</BlackButton>
+          <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25} style={{color: 'white'}}/> : 'Create Account'}</BlackButton>
           <div>
             <p>Already have an account?</p>
             <Link to="/login" onClick={resetErrors}>
@@ -100,7 +100,7 @@ const mapStateToProps = state => ({
   registerCredentials: state.registerCredentials,
   error: state.error,
   token: state.token,
-  isRegister: state.isRegister
+  isRegister: state.isRegistering
 
 })
 
