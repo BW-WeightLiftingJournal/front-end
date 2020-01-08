@@ -3,13 +3,10 @@ import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { TweenMax, Bounce } from 'gsap'
-<<<<<<< HEAD
-import axios from 'axios'
-=======
 import { submitForm } from "../utilities/actions"
->>>>>>> origin
+import axios from "axios"
 
-const AddExercise = ({ history, addNewExercise,  submitForm}) => {
+const AddExercise = ({ history, addNewExercise }) => {
 
     let formItem = useRef()
 
@@ -26,32 +23,26 @@ const AddExercise = ({ history, addNewExercise,  submitForm}) => {
         setExercise({ ...exercise, [event.target.name]: event.target.value });
     };
 
-    // const submitForm = event => {
-    //     event.preventDefault();
+    const submitForm = event => {
+        event.preventDefault();
 
-<<<<<<< HEAD
-        axios
+        axios 
             .post("https://bw-weight-lifting-journal.herokuapp.com/api")
             .then(res => {
-                console.log("success", res);
+                console.log('success', res)
             })
-            .catch(err => 
-                console.log(err.response)
-            )
+            .catch(error => console.log(error.response))
 
-        addNewExercise(exercise);
-=======
-    //     addNewExercise(exercise);
->>>>>>> origin
+        // addNewExercise(exercise);
 
-    //     setExercise({ 
-    //         date: '',
-    //         exercise: '',
-    //         weight: '',
-    //         reps: '',
-    //         sets: ''
-    //     });
-    // }
+        setExercise({ 
+            date: '',
+            exercise: '',
+            weight: '',
+            reps: '',
+            sets: ''
+        });
+    }
 
     useEffect(() => {
         TweenMax.to(
@@ -66,7 +57,7 @@ const AddExercise = ({ history, addNewExercise,  submitForm}) => {
 
 //In lieu of a succes message on successfull submit form will reroute to the home page.
 //There is also no form validation on button three inputs, this was done on purpose as we didn't want them to be required inputs for our app.
-    
+
     return (
         <div ref={el => {formItem = el}} className='add-exercise-container'>
             <h2 className='add-title'>Add New Exercise</h2>
@@ -147,5 +138,5 @@ export default connect(mapStateToProps,{submitForm})(AddExercise);
 //         setExercises(newExerciseCollection);
 // } 
 
-//  { <h1>New Exercises</h1>
-//  <AddExercise addNewExercise={addNewExercise} /> }
+{/* <h1>New Exercises</h1>
+            <AddExercise addNewExercise={addNewExercise} /> */}
