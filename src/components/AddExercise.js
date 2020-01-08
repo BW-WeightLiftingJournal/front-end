@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
-import { TweenMax, Power3 } from 'gsap'
+import { TweenMax, Bounce } from 'gsap'
 
 const AddExercise = ({ addNewExercise }) => {
 
@@ -40,7 +40,7 @@ const AddExercise = ({ addNewExercise }) => {
             2,
                 {
                     y: -10,
-                    ease: Power3.easeOut,
+                    ease: Bounce.easeOut,
                 }
             )
     })
