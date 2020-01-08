@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, login, resetErrors} from "../utilities/actions"
+import {handleChange, register, resetErrors, login, resetForm} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {FaDumbbell} from 'react-icons/fa'
@@ -9,7 +9,8 @@ import {BlackButton, GrayTextField} from "../utilities/styles"
 const Register = ({
   history, 
   error, 
-  login, 
+  register,
+  login,
   registerCredentials, 
   handleChange, 
   token,
@@ -33,19 +34,21 @@ const Register = ({
     <div className="login-container">
       <FaDumbbell style={{fontSize: '4rem', color: '#F26363'}}/>
       <h2>Sign Up</h2>
-      {error ? <div style={{color: 'red'}}>Error.</div> : <br/>}
+      {error ? <div style={{color: 'red'}}>{error}</div> : <br/>}
       <br/>
       <form 
         noValidate 
         autoComplete="off" 
-        onSubmit={(e)=>login(e, registerCredentials)}
+        onSubmit={(e)=>{
+          register(e, registerCredentials)
+          resetForm('registerCredentials')
+        }}
       >
         <div className="login-form">
           <GrayTextField
             error={!registerCredentials.email && error}
             required
             helperText={!registerCredentials.email && error && "Email Required"}
-            id="outlined-required"
             label="Email"
             variant="outlined"
             name="email"
@@ -57,7 +60,6 @@ const Register = ({
             error={!registerCredentials.username && error}
             required
             helperText={!registerCredentials.username && error && "Username Required"}
-            id="outlined-required"
             label="Username"
             variant="outlined"
             name="username"
@@ -70,7 +72,6 @@ const Register = ({
             required
             helperText={!registerCredentials.password && error && "Password Required"}
             type="password"
-            id="outlined-required"
             label="Password"
             variant="outlined"
             name="password"
@@ -102,5 +103,5 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps,{handleChange, login, resetErrors})(Register);
+export default connect(mapStateToProps,{handleChange, register, login,resetErrors})(Register);
 

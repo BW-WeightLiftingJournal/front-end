@@ -39,7 +39,7 @@ const Header = ({token,logout}) => {
 }
 
 const mapStateToProps = state => ({
-    token: true
+    token: state.token
 })
   
 export default connect(mapStateToProps,{logout})(Header);
