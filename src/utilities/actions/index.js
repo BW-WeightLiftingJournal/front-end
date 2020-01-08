@@ -160,5 +160,3 @@ export const submitForm = (event, exercise) => dispatch=> {
     payload: newExercise
   })
 }
-
-
