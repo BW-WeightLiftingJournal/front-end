@@ -29,7 +29,7 @@ const Dashboard = ({
 }
 
 const mapStateToProps = state => ({
-    username: state.loginCredentials.username
+    username: state.loggedInUsername
   })
   
 export default connect(mapStateToProps,{})(Dashboard);

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, login, resetErrors} from "../utilities/actions"
+import {handleChange, login, resetErrors, resetForm} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import {FaDumbbell} from 'react-icons/fa'
 import {CircularProgress, FormControlLabel } from '@material-ui/core'
@@ -15,7 +15,8 @@ const Login = ({
   handleChange, 
   token,
   resetErrors,
-  isLogging
+  isLogging,
+  resetForm
   }) => {
     
   useEffect(()=>{
@@ -39,7 +40,10 @@ const Login = ({
       <form 
         noValidate 
         autoComplete="off" 
-        onSubmit={(e)=>login(e, loginCredentials)}
+        onSubmit={(e)=>{
+          login(e, loginCredentials)
+          resetForm('loginCredentials')
+        }}
       >
         <div className="login-form">
           <GrayTextField
@@ -98,6 +102,6 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps,{handleChange, login, resetErrors})(Login);
+export default connect(mapStateToProps,{handleChange, login, resetErrors, resetForm})(Login);
 
 

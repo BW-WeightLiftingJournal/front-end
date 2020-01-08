@@ -18,46 +18,55 @@ export const FINISH_EDIT = 'FINISH_EDIT'
 export const DELETE = 'DELETE'
 export const COPY = 'COPY'
 export const SUBMIT_FORM = "SUBMIT_FORM"
+export const RESET_FORM= 'RESET_FORM'
 
 export const login = (event, credentials) => dispatch => {
+  /*Below is for use when API down for testing and demo */
+
+  // event.preventDefault()
+  // dispatch({ type: LOGIN_START });
+  // if(credentials.username && credentials.username.toUpperCase()=== 'TEST' && credentials.password==='test'){
+  //   dispatch({ type: LOGIN_SUCCESS, payload: credentials.username })
+    
+  // }
+  // else {
+  //   dispatch({ type: LOGIN_FAIL, payload: 'Incorrect Username or Password' })
+  // }
+
+
   event.preventDefault()
-  console.log(credentials)
   dispatch({ type: LOGIN_START });
-  if(credentials.username && credentials.username.toUpperCase()=== 'TEST' && credentials.password==='test'){
-    dispatch({ type: LOGIN_SUCCESS })
-  }
-  else {
-    dispatch({ type: LOGIN_FAIL, payload: 'Incorrect Username or Password' })
-  }
-  // axiosWithAuth()
-  //   .post('http://localhost:5000/api/auth/login', credentials)
-  //   .then(res => {
-  //     dispatch({ type: LOGIN_SUCCESS , payload: res.data})
-  //   })
-  //   .catch(err => {
-  //     return dispatch({ type: LOGIN_FAIL, payload: err })
-  //   });
+  axios()
+    .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/login', credentials)
+    .then(res => {
+      console.log(res.data)
+      dispatch({ type: LOGIN_SUCCESS , payload: res.data})
+    })
+    .catch(err => {
+      return dispatch({ type: LOGIN_FAIL, payload: err })
+    });
 };
 
-// export const register = (event, credentials) => dispatch => {
-//   event.preventDefault()
-  // dispatch({ type: REGISTER_START });
-  // axios
-  //   .post('http://localhost:5000/api/auth/register', credentials)
-  //   .then(res => {
-  //     dispatch({ type: REGISTER_SUCCESS, payload: res.data.payload })
-  //     login(event,credentials)
-  //   })
-  //   .catch(err => {
-  //     return dispatch({ type: REGISTER_FAIL, payload: err })
-  //   });
-// }
+export const register = (event, credentials) => dispatch => {
+  event.preventDefault()
+  dispatch({ type: REGISTER_START });
+  axios
+    .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/register', credentials)
+    .then(res => {
+      console.log(res.data)
+      dispatch({ type: REGISTER_SUCCESS, payload: res.data.payload })
+      login(event,credentials)
+    })
+    .catch(err => {
+      return dispatch({ type: REGISTER_FAIL, payload: err })
+    });
+}
 
 //temporary with API down
-export const register = (event, creds) => dispatch =>{
-  event.preventDefault()
-  login(event, {username: 'test', password: 'test'})
-}
+// export const register = (event, creds) => dispatch =>{
+//   event.preventDefault()
+//   login(event, {username: 'test', password: 'test'})
+// }
 
 export const verifyEmail = (e, email) => dispatch=>{
   e.preventDefault()
@@ -71,6 +80,10 @@ export const handleChange = (event, formType) => ({
 
 export const resetErrors= ()=> ({
   type: RESET_ERRORS
+})
+
+export const resetForm = (form) => ({
+  type: RESET_FORM, payload: form
 })
 
 export const logout = ()=> dispatch => {
@@ -96,7 +109,7 @@ export const startEdit = (id) => ({
 export const finishEdit = (e, id, exercise) => dispatch => {
   e.preventDefault()
   axios
-  .put(`http://localhost:5000/api/edit/${id}`, exercise)
+  .put(`https://bw-weight-lifting-journal.herokuapp.com/api/edit/${id}`, exercise)
   .then(res => {
     dispatch({ type: FINISH_EDIT, payload: res.data })
   })
@@ -107,7 +120,7 @@ export const finishEdit = (e, id, exercise) => dispatch => {
 
 export const deleteItem = (id) => dispatch => {
   axios
-  .delete(`http://localhost:5000/api/delete/${id}`)
+  .delete(`https://bw-weight-lifting-journal.herokuapp.com/api/delete/${id}`)
   .then(res => {
     dispatch({ type: DELETE, payload: res.data })
   })
@@ -126,7 +139,7 @@ export const copy = (exercise)=> dispatch => {
     date: date
   }
   axios
-  .post('http://localhost:5000/api/add', temp)
+  .post('https://bw-weight-lifting-journal.herokuapp.com/api/add', temp)
   .then(res => {
     dispatch({ type: COPY, payload: res.data })
   })

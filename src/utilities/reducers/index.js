@@ -7,6 +7,7 @@ import {
     LOGOUT_FAIL,
     HANDLE_CHANGE,
     RESET_ERRORS,
+    RESET_FORM,
     VERIFY_EMAIL,
     START_EDIT,
     FINISH_EDIT,
@@ -20,6 +21,7 @@ const initialState = {
     loginCredentials: {},
     registerCredentials: {},
     recoverEmail: {},
+    loggedInUsername: '',
     error: '',
     token: '',
     isLoggingIn: false,
@@ -72,7 +74,8 @@ switch (type) {
             ...state,
             isLoggingIn: false,
             error: '',
-            token: '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116'
+            token: '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116',
+            loggedInUsername: payload
         }
     case LOGIN_FAIL:
         return {
@@ -97,6 +100,11 @@ switch (type) {
         return {
             ...state,
             error: ''
+        }
+    case RESET_FORM:
+        return {
+            ...state,
+            [payload]: {}
         }
     case START_EDIT:
         return {
