@@ -14,7 +14,6 @@ body {
   
 }
 
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -126,7 +125,7 @@ p, span {
 }
 
 .add-button-dashboard {
-  border: 1px solid #69868C;
+  /* border: 1px solid #69868C; */
   border-radius: 4px;
   padding: 10px;
   margin-right: 10px;
