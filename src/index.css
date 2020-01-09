@@ -134,7 +134,7 @@ p, span {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 30%;
+  width: 55%;
 }
 
 .exercise-container {
@@ -186,7 +186,7 @@ p, span {
 }
 
 .short-input {
-  width: 48%;
+  width: 50%;
 }
 
 .add-title {
