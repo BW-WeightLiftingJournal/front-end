@@ -16,7 +16,10 @@ import {
     FINISH_EDIT,
     DELETE,
     COPY,
-    SUBMIT_FORM
+    SUBMIT_FORM,
+    RETRIEVE_SUCCESS,
+    RETRIEVE_START,
+    RETRIEVE_FAIL
     } 
 from "../actions"
 
@@ -25,8 +28,9 @@ const initialState = {
     registerCredentials: {},
     recoverEmail: {},
     loggedInUsername: '',
+    userId: 0,
     error: '',
-    token: '',
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     isLoggingIn: false,
     isLoggingOut: false,
     isRegistering: false,
@@ -66,6 +70,23 @@ const initialState = {
 
 export const rootReducer = (state = initialState, {type, payload})=> {
 switch (type) {
+    case RETRIEVE_START:
+        return {
+            ...state,
+            isFetching: true
+        }
+    case RETRIEVE_SUCCESS:
+        return {
+            ...state,
+            exerciseList: payload.data,
+            isFetching: false
+        }
+    case RETRIEVE_FAIL:
+        return {
+            ...state,
+            isFetching: false,
+            error: payload
+        }
     case LOGIN_START:
         return {
             ...state,
@@ -73,12 +94,15 @@ switch (type) {
             error: ''
         }
     case LOGIN_SUCCESS:
+        const tok = '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116'
+        localStorage.setItem('token', tok)
         return {
             ...state,
             isLoggingIn: false,
             error: '',
-            token: '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116',
-            loggedInUsername: payload.message
+            token: tok,
+            loggedInUsername: payload.message,
+            userId: payload.session.user.id ? payload.session.user.id : payload.session.admin.id
         }
     case LOGIN_FAIL:
         return {
@@ -93,6 +117,7 @@ switch (type) {
             error: ''
         }
     case REGISTER_SUCCESS:
+        
         return {
             ...state,
             isRegistering: false,
@@ -148,13 +173,14 @@ switch (type) {
     case COPY:
         return {
             ...state,
-            exerciseList: [payload, ...state.exerciseList]
+            // exerciseList: [payload, ...state.exerciseList]
         }
     case LOGOUT_START:
         return {
             ...state,
             isLoggingOut: true,
-            error: ''
+            error: '',
+            token: ''
         }
     case LOGOUT_SUCCESS:
         return {
@@ -167,7 +193,8 @@ switch (type) {
         return {
             ...state,
             isLoggingOut: false,
-            error: 'Logout Fail'
+            error: 'Logout Fail',
+            token: ''
         }
     case SUBMIT_FORM:
         return {

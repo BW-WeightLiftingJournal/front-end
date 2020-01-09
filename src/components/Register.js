@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, register, resetErrors, login, resetForm} from "../utilities/actions"
+import {handleChange, register, resetErrors, resetForm} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {FaDumbbell} from 'react-icons/fa'
@@ -10,7 +10,6 @@ const Register = ({
   history, 
   error, 
   register,
-  login,
   registerCredentials, 
   handleChange, 
   token,
@@ -20,6 +19,7 @@ const Register = ({
 
   useEffect(()=>{
     resetErrors()
+    // eslint-disable-next-line
   },[])
 
   useEffect(()=> {
@@ -79,7 +79,7 @@ const Register = ({
             onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
-          <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25}/> : 'Create Account'}</BlackButton>
+          <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25} style={{color: 'white'}}/> : 'Create Account'}</BlackButton>
           <div>
             <p>Already have an account?</p>
             <Link to="/login" onClick={resetErrors}>
@@ -99,9 +99,9 @@ const mapStateToProps = state => ({
   registerCredentials: state.registerCredentials,
   error: state.error,
   token: state.token,
-  isRegister: state.isRegister
+  isRegister: state.isRegistering
 
 })
 
-export default connect(mapStateToProps,{handleChange, register, login,resetErrors})(Register);
+export default connect(mapStateToProps,{handleChange, register, resetErrors})(Register);
 
