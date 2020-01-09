@@ -122,6 +122,8 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps,{submitForm})(AddExercise);
 
 
+
+
 // const [exercises, setExercises ] = useState([]);
 
 //     const addNewExercise = exercise => {
