@@ -1,5 +1,6 @@
 import { axiosWithAuth } from "../axiosAuth"
 import axios from "axios"
+import {validateCredentials} from "../validation"
 
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -37,17 +38,6 @@ export const getList = (id)=> dispatch => {
 }
 
 export const login = (event, credentials) => dispatch => {
-  /*Below is for use when API down for testing and demo */
-
-  // event.preventDefault()
-  // dispatch({ type: LOGIN_START });
-  // if(credentials.username && credentials.username.toUpperCase()=== 'TEST' && credentials.password==='test'){
-  //   dispatch({ type: LOGIN_SUCCESS, payload: credentials.username })
-    
-  // }
-  // else {
-  //   dispatch({ type: LOGIN_FAIL, payload: 'Incorrect Username or Password' })
-  // }
   event.preventDefault()
   dispatch({ type: LOGIN_START });
   axios
@@ -65,22 +55,28 @@ export const login = (event, credentials) => dispatch => {
 
 export const register = (event, credentials) => dispatch => {
   event.preventDefault()
-  const correctedCredentials = {
-    username: credentials.username,
-    password: credentials.password,
-    department: 'student'
-  }
   dispatch({ type: REGISTER_START });
-  axios
-    .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/register', correctedCredentials)
-    .then(res => {
-      dispatch({ type: REGISTER_SUCCESS, payload: res })
-      dispatch(login(event,credentials))
-    })
-    .catch(err => {
-      console.log(err)
-      dispatch({ type: REGISTER_FAIL, payload: err })
-    });
+  const errorList = validateCredentials(credentials)
+  console.log(errorList)
+  if(!!errorList.length>0) dispatch({type: REGISTER_FAIL, payload: errorList})
+  else {
+    const correctedCredentials = {
+      username: credentials.username,
+      password: credentials.password,
+      department: 'student'
+    }
+    axios
+      .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/register', correctedCredentials)
+      .then(res => {
+        dispatch({ type: REGISTER_SUCCESS, payload: res })
+        dispatch(login(event,credentials))
+      })
+      .catch(err => {
+        console.log(err.message)
+        const eList = [err.message]
+        dispatch({ type: REGISTER_FAIL, payload: eList })
+      });
+  }
 }
 
 //temporary with API down

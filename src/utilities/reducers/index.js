@@ -30,6 +30,7 @@ const initialState = {
     loggedInUsername: '',
     userId: 0,
     error: '',
+    errorList: [],
     token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     isLoggingIn: false,
     isLoggingOut: false,
@@ -124,10 +125,11 @@ switch (type) {
             error: ''
         }
     case REGISTER_FAIL:
+        let serverError = payload[0]
         return {
             ...state,
             isRegistering: false,
-            error: 'Error.  One or more required items invalid'
+            errorList: serverError==='Request failed with status code 500' ? ['Username not available.'] : payload
         }
     case HANDLE_CHANGE:
         return {
