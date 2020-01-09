@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, login, resetErrors} from "../utilities/actions"
+import {handleChange, login, resetErrors, resetForm} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import {FaDumbbell} from 'react-icons/fa'
 import {CircularProgress, FormControlLabel } from '@material-ui/core'
@@ -15,7 +15,8 @@ const Login = ({
   handleChange, 
   token,
   resetErrors,
-  isLogging
+  isLogging,
+  resetForm
   }) => {
     
   useEffect(()=>{
@@ -34,19 +35,21 @@ const Login = ({
     <div className="login-container">
       <FaDumbbell style={{fontSize: '4rem'}}/>
       <h2>Sign In</h2>
-      {error ? <div style={{color: 'red'}}>Username or Password incorrect.</div> : <br/>}
+      {error ? <div style={{color: 'red'}}>{error}</div> : <br/>}
       <br/>
       <form 
         noValidate 
         autoComplete="off" 
-        onSubmit={(e)=>login(e, loginCredentials)}
+        onSubmit={(e)=>{
+          login(e, loginCredentials)
+          resetForm('loginCredentials')
+        }}
       >
         <div className="login-form">
           <GrayTextField
             error={error}
             required
             helperText={!loginCredentials.username && error && "Username Required"}
-            id="outlined-required"
             label="Username"
             variant="outlined"
             name="username"
@@ -59,7 +62,6 @@ const Login = ({
             required
             helperText={!loginCredentials.password && error && "Password Required"}
             type="password"
-            id="outlined-required"
             label="Password"
             variant="outlined"
             name="password"
@@ -100,6 +102,6 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps,{handleChange, login, resetErrors})(Login);
+export default connect(mapStateToProps,{handleChange, login, resetErrors, resetForm})(Login);
 
 

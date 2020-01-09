@@ -73,7 +73,7 @@ const Exercise = ({
                     onClick={()=>startEdit(exercise.id)}>EDIT</span>
                 <DeleteIcon 
                     style={{color: '#F26363', cursor: 'pointer'}} 
-                    fontSize='medium' 
+                    fontSize='default' 
                     onClick={()=>deleteItem(exercise.id)}/>
             </div>
             
