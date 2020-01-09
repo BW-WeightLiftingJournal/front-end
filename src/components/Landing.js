@@ -1,23 +1,13 @@
-import React from "react"
-import {Link} from "react-router-dom"
-import {connect} from "react-redux"
+import React, {useEffect} from "react"
 
 const Landing = props=> {
+
+    useEffect(()=> {
+        window.location.replace('https://focused-goldberg-f7fd47.netlify.com/index.html')
+    },[])
     return (
-        <div>
-            <Link to="/login">
-                <p>Login</p>
-            </Link>
-            <br/>
-            <Link to="/register">
-                <p>Sign up</p>
-            </Link>
-        </div>
+        <div>Redirecting...</div>
     )
 }
 
-const mapStateToProps = state => ({
-    ...state
-  })
-  
-export default connect(mapStateToProps,{})(Landing);
+export default Landing
