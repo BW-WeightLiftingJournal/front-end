@@ -7,12 +7,13 @@ import { TweenMax, Bounce } from 'gsap'
 import { submitForm } from "../utilities/actions"
 // import axios from "axios"
 
-const AddExercise = ({ history, addNewExercise }) => {
+const AddExercise = ({ history, addNewExercise, userId }) => {
 
     let formItem = useRef()
 
     const [exercise, setExercise] = useState({
-        id: '',
+        workout_id: 2,
+        user_id: userId,
         date: '',
         name: '',
         weight: '',
@@ -26,9 +27,10 @@ const AddExercise = ({ history, addNewExercise }) => {
 
     const submitForm = event => {
         event.preventDefault();
+        console.log(userId)
 
         axiosWithAuth()
-            .post("https://bw-weight-lifting-journal.herokuapp.com/api")
+            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/users/workouts/${userId}`, exercise)
             .then(res => {
                 console.log('success', res)
             })

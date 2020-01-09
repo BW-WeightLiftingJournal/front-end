@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, register, resetErrors, login, resetForm} from "../utilities/actions"
+import {handleChange, register, resetErrors, resetForm} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {FaDumbbell} from 'react-icons/fa'
@@ -10,7 +10,6 @@ const Register = ({
   history, 
   error, 
   register,
-  login,
   registerCredentials, 
   handleChange, 
   token,
@@ -104,5 +103,5 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps,{handleChange, register, login,resetErrors})(Register);
+export default connect(mapStateToProps,{handleChange, register, resetErrors})(Register);
 
