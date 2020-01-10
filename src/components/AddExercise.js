@@ -48,15 +48,20 @@ const AddExercise = ({ history, addNewExercise, userId }) => {
     }
 
     useEffect(() => {
-        TweenMax.to(
+
+        TweenMax.set(formItem, {
+            y: 0
+        })
+           TweenMax.to(
             formItem,
             2,
                 {
                     y: -10,
                     ease: Bounce.easeOut,
                 }
-            )
-    })
+            ) 
+       }
+    )
 
 //In lieu of a succes message on successfull submit form will reroute to the home page.
 //There is also no form validation on button three inputs, this was done on purpose as we didn't want them to be required inputs for our app.
