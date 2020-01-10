@@ -23,6 +23,8 @@ export const RESET_FORM= 'RESET_FORM'
 export const RETRIEVE_START = 'RETRIEVE_START'
 export const RETRIEVE_SUCCESS = 'RETRIEVE_SUCCESS'
 export const RETRIEVE_FAIL = 'RETRIEVE_FAIL'
+export const VERIFY_START = 'VERIFY_START'
+export const VERIFY_FAIL = 'VERIFY_FAIL'
 
 export const getList = (id)=> dispatch => {
   dispatch({type: RETRIEVE_START})
@@ -79,15 +81,18 @@ export const register = (event, credentials) => dispatch => {
   }
 }
 
-//temporary with API down
-// export const register = (event, creds) => dispatch =>{
-//   event.preventDefault()
-//   login(event, {username: 'test', password: 'test'})
-// }
-
 export const verifyEmail = (e, email) => dispatch=>{
   e.preventDefault()
-  dispatch({type: VERIFY_EMAIL, payload: email})
+  dispatch({type: VERIFY_START})
+  if(!!email) {
+    setTimeout(()=> {
+      dispatch({type: VERIFY_EMAIL, payload: email})
+    }, 2000)
+  }
+  else {
+    dispatch({type: VERIFY_FAIL})
+  }
+  
 }
 
 export const handleChange = (event, formType) => ({

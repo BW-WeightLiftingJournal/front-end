@@ -47,6 +47,7 @@ const Register = ({
       >
         <div className="login-form">
           <GrayTextField
+            disabled = {isRegister}
             error={!registerCredentials.email && !!errorList.length>0}
             required
             helperText={!registerCredentials.email && !!errorList.length>0 && "Email Required"}
@@ -58,6 +59,7 @@ const Register = ({
           />
           <br/>
           <GrayTextField
+            disabled = {isRegister}
             error={!registerCredentials.username && !!errorList.length>0}
             required
             helperText={!registerCredentials.username && !!errorList.length>0 && "Username Required"}
@@ -69,6 +71,7 @@ const Register = ({
           />
           <br/>
           <GrayTextField
+            disabled = {isRegister}
             error={!registerCredentials.password && !!errorList.length>0}
             required
             helperText={!registerCredentials.password && !!errorList.length>0 && "Password Required"}
