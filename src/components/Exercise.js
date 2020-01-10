@@ -8,8 +8,8 @@ import {
         copy, 
         handleChange
     } from "../utilities/actions"
-    import FileCopyIcon from '@material-ui/icons/FileCopy';
-    import EditIcon from '@material-ui/icons/Edit';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import EditIcon from '@material-ui/icons/Edit';
 
 const Exercise = ({
         editedItem, 
