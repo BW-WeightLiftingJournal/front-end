@@ -3,8 +3,7 @@ import { axiosWithAuth } from "../utilities/axiosAuth"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
-import { gsap, TweenMax, Bounce } from 'gsap'
-import { submitForm } from "../utilities/actions"
+import { gsap, Bounce } from 'gsap'
 import { DatePicker } from '@material-ui/pickers'
 
 const AddExercise = ({ history, userId }) => {
