@@ -3,8 +3,7 @@ import { axiosWithAuth } from "../utilities/axiosAuth"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
-import { gsap, TweenMax, Bounce } from 'gsap'
-import { submitForm } from "../utilities/actions"
+import { gsap, Bounce } from 'gsap'
 import { DatePicker } from '@material-ui/pickers'
 
 const AddExercise = ({ history, userId }) => {
@@ -27,13 +26,12 @@ const AddExercise = ({ history, userId }) => {
     const submitForm = event => {
         event.preventDefault();
         const reformattedExercise = {
-            weight: exercise.weight,
-            reps: exercise.reps,
-            sets: exercise.sets,
+            ...exercise,
             date_completed: exercise.date,
             workout_name: exercise.name
         }
-        axiosWithAuth()
+
+        axiosWithAuth() 
             .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, reformattedExercise)
             .then(res => {
                 console.log('success', res)
