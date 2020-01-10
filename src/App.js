@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 //components import
 import Login from "./components/Login"
@@ -11,6 +11,7 @@ import RecoverPassword from "./components/RecoverPassword"
 import AddExercise from "./components/AddExercise"
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import LuxonUtils from '@date-io/luxon'
+import About from "./components/About"
 
 //utilities import
 import {Route} from "react-router-dom"
@@ -25,11 +26,12 @@ function App() {
       <Route exact path="/" component={Landing}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/login" component={Login}/>
-      <Route exact path="/dashboard" component={Dashboard}/>
-      <Route exact path="/add" component={AddExercise}/> 
+      <Route exact path="/about" component={About}/>
+      <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+      <PrivateRoute exact path="/add" component={AddExercise}/> 
       <Route exact path="/recover" component={RecoverPassword}/>
-      <Footer/>
-    </div>
+     </div>
+     <Footer/>
     </MuiPickersUtilsProvider>
   );
 }

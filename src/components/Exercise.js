@@ -2,18 +2,18 @@ import React from "react"
 import {connect} from "react-redux"
 import DeleteIcon from '@material-ui/icons/Delete';
 import {
-        startEdit, 
         finishEdit, 
         deleteItem, 
         copy, 
         handleChange
     } from "../utilities/actions"
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import EditIcon from '@material-ui/icons/Edit';
 
 const Exercise = ({
         editedItem, 
         isEdit, 
-        exercise, 
-        startEdit, 
+        exercise,  
         finishEdit, 
         deleteItem, 
         handleChange,
@@ -54,26 +54,31 @@ const Exercise = ({
                         value={editedItem.weight}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <button>SAVE</button>
+                    <button style={{padding: '10px', borderRadius: '4px'}}>SAVE</button>
 
                 </form> :
                 <div className="single-exercise-data">
-                    <h4 style={{minWidth: '150px'}}>{exercise.name}</h4>
+                    <h4 style={{minWidth: '100px'}}>{exercise.name}</h4>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
                     <p>Weight: {exercise.weight} lbs</p>
                 </div>}
             
             <div className="single-exercise-buttons">
-                <span 
-                    style={{cursor: 'pointer', marginRight: '10px'}} 
-                    onClick={()=>copy(exercise)}>COPY</span>
-                <span 
-                    style={{cursor: 'pointer', marginRight: '10px'}} 
-                    onClick={()=>startEdit(exercise.id)}>EDIT</span>
+                <FileCopyIcon
+                    title='Copy'
+                    style={{cursor: 'pointer', marginRight: '10px', opacity: '60%'}} 
+                    onClick={()=>copy(exercise)}
+                />
+                <EditIcon
+                    title='Edit'
+                    style={{cursor: 'pointer', marginRight: '10px', color: '#69868C'}} 
+                    onClick={()=>copy(exercise.id)}
+                />
                 <DeleteIcon 
+                    title='Delete'
                     style={{color: '#F26363', cursor: 'pointer'}} 
-                    fontSize='medium' 
+                    fontSize='default' 
                     onClick={()=>deleteItem(exercise.id)}/>
             </div>
             
@@ -86,7 +91,6 @@ const mapStateToProps = state => ({
   })
   
 export default connect(mapStateToProps,{
-        startEdit, 
         finishEdit, 
         deleteItem, 
         copy, 

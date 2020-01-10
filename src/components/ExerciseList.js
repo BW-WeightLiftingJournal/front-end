@@ -1,23 +1,31 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {connect} from "react-redux"
 import Exercise from "./Exercise"
+import {getList} from "../utilities/actions"
 
 const ExerciseList = ({
-  exerciseList
+  exerciseList,
+  getList,
+  userId
 }) => {
+
+  useEffect(()=> {
+    getList(userId)
+    // eslint-disable-next-line
+  }, [])
+  
   let isSame=true;
   let previousDate=''
   return (
-    <div classList="exercise-list-container">
-      {console.log(exerciseList)}
+    <div className="exercise-list-container">
       {exerciseList.map(item=>{
         isSame=item.date===previousDate;
         previousDate=item.date
         return (
-          <>
+          <div key={item.id}>
             {!isSame && <h4 style={{margin: '20px 0px 10px 10px', letterSpacing: '1.5px'}}>{item.date}</h4>}
-            <Exercise key={item.id} exercise={item}/>
-          </>
+            <Exercise exercise={item}/>
+          </div>
           
         )
       })}
@@ -26,7 +34,8 @@ const ExerciseList = ({
 }
 
 const mapStateToProps = state => ({
-    exerciseList: state.exerciseList
+    exerciseList: state.exerciseList,
+    userId: state.userId
   })
   
-export default connect(mapStateToProps,{})(ExerciseList);
+export default connect(mapStateToProps,{getList})(ExerciseList);

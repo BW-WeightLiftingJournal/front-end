@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux"
-import {handleChange, login, resetErrors} from "../utilities/actions"
+import {handleChange, login, resetErrors, resetForm} from "../utilities/actions"
 import {Link} from "react-router-dom"
 import {FaDumbbell} from 'react-icons/fa'
 import {CircularProgress, FormControlLabel } from '@material-ui/core'
@@ -15,17 +15,20 @@ const Login = ({
   handleChange, 
   token,
   resetErrors,
-  isLogging
+  isLogging,
+  resetForm
   }) => {
     
   useEffect(()=>{
     resetErrors()
+    // eslint-disable-next-line
   },[])
 
   useEffect(()=> {
     if(!!token){
       localStorage.setItem('token', token);
       history.push('/Dashboard')
+      resetForm('loginCredentials')
     }
     // eslint-disable-next-line
   } ,[token])
@@ -34,19 +37,21 @@ const Login = ({
     <div className="login-container">
       <FaDumbbell style={{fontSize: '4rem'}}/>
       <h2>Sign In</h2>
-      {error ? <div style={{color: 'red'}}>Username or Password incorrect.</div> : <br/>}
+      {error ? <div style={{color: 'red'}}>{error}</div> : <br/>}
       <br/>
       <form 
         noValidate 
         autoComplete="off" 
-        onSubmit={(e)=>login(e, loginCredentials)}
+        onSubmit={(e)=>{
+          login(e, loginCredentials)
+        }}
       >
         <div className="login-form">
           <GrayTextField
+            disabled = {isLogging}
             error={error}
             required
             helperText={!loginCredentials.username && error && "Username Required"}
-            id="outlined-required"
             label="Username"
             variant="outlined"
             name="username"
@@ -55,11 +60,11 @@ const Login = ({
           />
           <br/>
           <GrayTextField
+            disabled = {isLogging}
             error={error}
             required
             helperText={!loginCredentials.password && error && "Password Required"}
             type="password"
-            id="outlined-required"
             label="Password"
             variant="outlined"
             name="password"
@@ -73,7 +78,7 @@ const Login = ({
             label="Remember me"
             labelPlacement="end"
           />
-          <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25}/> : 'Sign In'}</StyledButton>
+          <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25} style={{color: 'white'}}/> : 'Sign In'}</StyledButton>
           <div className="below-button">
             <Link to="/recover">
               Forgot password?
@@ -96,10 +101,10 @@ const mapStateToProps = state => ({
   loginCredentials: state.loginCredentials,
   error: state.error,
   token: state.token,
-  isLogging: state.isLogging
+  isLogging: state.isLoggingIn
 
 })
 
-export default connect(mapStateToProps,{handleChange, login, resetErrors})(Login);
+export default connect(mapStateToProps,{handleChange, login, resetErrors, resetForm})(Login);
 
 

@@ -5,14 +5,23 @@ import {
     LOGOUT_START,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    REGISTER_START,
+    REGISTER_FAIL,
+    REGISTER_SUCCESS,
     HANDLE_CHANGE,
     RESET_ERRORS,
+    RESET_FORM,
     VERIFY_EMAIL,
     START_EDIT,
     FINISH_EDIT,
     DELETE,
     COPY,
-    SUBMIT_FORM
+    SUBMIT_FORM,
+    RETRIEVE_SUCCESS,
+    RETRIEVE_START,
+    RETRIEVE_FAIL,
+    VERIFY_START,
+    VERIFY_FAIL
     } 
 from "../actions"
 
@@ -20,8 +29,11 @@ const initialState = {
     loginCredentials: {},
     registerCredentials: {},
     recoverEmail: {},
+    loggedInUsername: '',
+    userId: 0,
     error: '',
-    token: '',
+    errorList: [],
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     isLoggingIn: false,
     isLoggingOut: false,
     isRegistering: false,
@@ -54,6 +66,78 @@ const initialState = {
             sets: 2,
             date: '12/20/2019'
         },
+        {
+            id: 1,
+            name: 'benchpress',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/20/2019'
+        },
+        {
+            id: 1,
+            name: 'benchpress',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/20/2019'
+        },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
         
     ],
 
@@ -61,6 +145,23 @@ const initialState = {
 
 export const rootReducer = (state = initialState, {type, payload})=> {
 switch (type) {
+    case RETRIEVE_START:
+        return {
+            ...state,
+            isFetching: true
+        }
+    case RETRIEVE_SUCCESS:
+        return {
+            ...state,
+            exerciseList: payload.data,
+            isFetching: false
+        }
+    case RETRIEVE_FAIL:
+        return {
+            ...state,
+            isFetching: false,
+            error: payload
+        }
     case LOGIN_START:
         return {
             ...state,
@@ -68,16 +169,41 @@ switch (type) {
             error: ''
         }
     case LOGIN_SUCCESS:
+        const tok = '1P462YTHSHSS6422527HSDVADFAD8764372523111KJHGS73G6G6524116'
+        localStorage.setItem('token', tok)
         return {
             ...state,
             isLoggingIn: false,
-            error: ''
+            error: '',
+            token: tok,
+            loggedInUsername: payload.message,
+            userId: payload.session.user.id ? payload.session.user.id : payload.session.admin.id
         }
     case LOGIN_FAIL:
         return {
             ...state,
             isLoggingIn: false,
-            error: 'Login Fail'
+            error: 'Invalid Username or Password'
+        }
+    case REGISTER_START:
+        return {
+            ...state,
+            isRegistering: true,
+            error: ''
+        }
+    case REGISTER_SUCCESS:
+        
+        return {
+            ...state,
+            isRegistering: false,
+            error: ''
+        }
+    case REGISTER_FAIL:
+        let serverError = payload[0]
+        return {
+            ...state,
+            isRegistering: false,
+            errorList: serverError==='Request failed with status code 500' ? ['Username not available.'] : payload
         }
     case HANDLE_CHANGE:
         return {
@@ -88,14 +214,34 @@ switch (type) {
                 [payload.target.name]: payload.target.value
             }
         }
+    case VERIFY_START:
+        return {
+            ...state,
+            isVerify: true,
+            error: ''
+        }
     case VERIFY_EMAIL:
         return {
-            ...state
+            ...state,
+            recoverEmail: {...state.recoverEmail, message: 'Email sent'},
+            isVerify: false,
+            error: ''
+        }
+    case VERIFY_FAIL:
+        return {
+            ...state,
+            error: 'Please enter an email',
+            isVerify: false
         }
     case RESET_ERRORS:
         return {
             ...state,
             error: ''
+        }
+    case RESET_FORM:
+        return {
+            ...state,
+            [payload]: {}
         }
     case START_EDIT:
         return {
@@ -112,31 +258,35 @@ switch (type) {
         
         return {
             ...state,
-            exerciseList: state.exerciseList.filter(ele=> ele.id!=payload)
+            exerciseList: state.exerciseList.filter(ele=> ele.id!==payload)
             
         }
     case COPY:
         return {
             ...state,
-            exerciseList: [payload, ...state.exerciseList]
+            // exerciseList: [payload, ...state.exerciseList]
         }
     case LOGOUT_START:
         return {
             ...state,
             isLoggingOut: true,
-            error: ''
+            error: '',
+            token: ''
         }
     case LOGOUT_SUCCESS:
         return {
             ...state,
             isLoggingOut: false,
-            error: ''
+            error: '',
+            token: '',
+            exerciseList: []
         }
     case LOGOUT_FAIL:
         return {
             ...state,
             isLoggingOut: false,
-            error: 'Logout Fail'
+            error: 'Logout Fail',
+            token: ''
         }
     case SUBMIT_FORM:
         return {

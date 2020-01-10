@@ -1,23 +1,14 @@
-import React from "react"
-import {Link} from "react-router-dom"
-import {connect} from "react-redux"
+import React, {useEffect} from "react"
+import {CircularProgress} from '@material-ui/core'
 
 const Landing = props=> {
+
+    useEffect(()=> {
+        window.location.replace('https://focused-goldberg-f7fd47.netlify.com/index.html')
+    },[])
     return (
-        <div>
-            <Link to="/login">
-                <p>Login</p>
-            </Link>
-            <br/>
-            <Link to="/register">
-                <p>Sign up</p>
-            </Link>
-        </div>
+        <div style={{textAlign: 'center', marginTop: '100px', marginBottom: '100px'}}><CircularProgress size={60} style={{color: '#F26363'}}/></div>
     )
 }
 
-const mapStateToProps = state => ({
-    ...state
-  })
-  
-export default connect(mapStateToProps,{})(Landing);
+export default Landing

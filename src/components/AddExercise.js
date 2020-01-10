@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react"
+import { axiosWithAuth } from "../utilities/axiosAuth"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { gsap, TweenMax, Bounce } from 'gsap'
 import { submitForm } from "../utilities/actions"
-import axios from "axios"
 import { DatePicker } from '@material-ui/pickers'
 
-const AddExercise = ({ history, addNewExercise, userId }) => {
+const AddExercise = ({ history, userId }) => {
 
     let formItem = useRef()
 
@@ -32,14 +32,12 @@ const AddExercise = ({ history, addNewExercise, userId }) => {
             workout_name: exercise.name
         }
 
-        axios 
+        axiosWithAuth() 
             .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, reformattedExercise)
             .then(res => {
                 console.log('success', res)
             })
             .catch(error => console.log(error.response))
-
-        // addNewExercise(exercise);
 
         setExercise({ 
             date: '',
@@ -126,26 +124,4 @@ const mapStateToProps = state => ({
     ...state
   })
   
-export default connect(mapStateToProps,{submitForm})(AddExercise);
-
-
-
-
-// const [exercises, setExercises ] = useState([]);
-
-//     const addNewExercise = exercise => {
-//         const newExercise = {
-//             date: exercise.date,
-//             exercise: exercise.exercise,
-//             weight: exercise.weight,
-//             reps: exercise.reps,
-//             sets: exercise.sets
-//         };
-
-//         const newExerciseCollection = [ ...exercises, newExercise];
-
-//         setExercises(newExerciseCollection);
-// } 
-
-{/* <h1>New Exercises</h1>
-            <AddExercise addNewExercise={addNewExercise} /> */}
+export default connect(mapStateToProps,{})(AddExercise);
