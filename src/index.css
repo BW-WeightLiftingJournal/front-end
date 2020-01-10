@@ -150,6 +150,7 @@ p, span {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 70%;
 }
 .single-exercise-data>p {
   margin-left: 8px;

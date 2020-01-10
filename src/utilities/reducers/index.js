@@ -65,81 +65,8 @@ const initialState = {
             reps: 11,
             sets: 2,
             date: '12/20/2019'
-        },
-        {
-            id: 1,
-            name: 'benchpress',
-            weight: 200,
-            reps: 11,
-            sets: 2,
-            date: '12/20/2019'
-        },
-        {
-            id: 1,
-            name: 'benchpress',
-            weight: 200,
-            reps: 11,
-            sets: 2,
-            date: '12/20/2019'
-        },
-        // {
-        //     id: 1,
-        //     name: 'benchpress',
-        //     weight: 200,
-        //     reps: 11,
-        //     sets: 2,
-        //     date: '12/20/2019'
-        // },
-        // {
-        //     id: 1,
-        //     name: 'benchpress',
-        //     weight: 200,
-        //     reps: 11,
-        //     sets: 2,
-        //     date: '12/20/2019'
-        // },
-        // {
-        //     id: 1,
-        //     name: 'benchpress',
-        //     weight: 200,
-        //     reps: 11,
-        //     sets: 2,
-        //     date: '12/20/2019'
-        // },
-        // {
-        //     id: 1,
-        //     name: 'benchpress',
-        //     weight: 200,
-        //     reps: 11,
-        //     sets: 2,
-        //     date: '12/20/2019'
-        // },
-        // {
-        //     id: 1,
-        //     name: 'benchpress',
-        //     weight: 200,
-        //     reps: 11,
-        //     sets: 2,
-        //     date: '12/20/2019'
-        // },
-        // {
-        //     id: 1,
-        //     name: 'benchpress',
-        //     weight: 200,
-        //     reps: 11,
-        //     sets: 2,
-        //     date: '12/20/2019'
-        // },
-        // {
-        //     id: 1,
-        //     name: 'benchpress',
-        //     weight: 200,
-        //     reps: 11,
-        //     sets: 2,
-        //     date: '12/20/2019'
-        // },
-        
-    ],
+        }
+    ]
 
 }
 
@@ -153,7 +80,7 @@ switch (type) {
     case RETRIEVE_SUCCESS:
         return {
             ...state,
-            exerciseList: payload.data,
+            exerciseList: !!payload.data ? payload.data : [],
             isFetching: false
         }
     case RETRIEVE_FAIL:

@@ -17,7 +17,8 @@ const Exercise = ({
         finishEdit, 
         deleteItem, 
         handleChange,
-        copy
+        copy,
+        userId
     }) => {
     return (
         <div className="exercise-container">
@@ -68,7 +69,7 @@ const Exercise = ({
                 <FileCopyIcon
                     title='Copy'
                     style={{cursor: 'pointer', marginRight: '10px', opacity: '60%'}} 
-                    onClick={()=>copy(exercise)}
+                    onClick={()=>copy(exercise, userId)}
                 />
                 <EditIcon
                     title='Edit'

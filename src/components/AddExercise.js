@@ -27,12 +27,13 @@ const AddExercise = ({ history, userId }) => {
     const submitForm = event => {
         event.preventDefault();
         const reformattedExercise = {
-            ...exercise,
+            weight: exercise.weight,
+            reps: exercise.reps,
+            sets: exercise.sets,
             date_completed: exercise.date,
             workout_name: exercise.name
         }
-
-        axiosWithAuth() 
+        axiosWithAuth()
             .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, reformattedExercise)
             .then(res => {
                 console.log('success', res)
