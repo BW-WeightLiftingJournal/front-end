@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
-import { TweenMax, Bounce } from 'gsap'
+import { gsap, TweenMax, Bounce } from 'gsap'
 import { submitForm } from "../utilities/actions"
 import axios from "axios"
 
@@ -45,11 +45,7 @@ const AddExercise = ({ history, addNewExercise }) => {
     }
 
     useEffect(() => {
-
-        TweenMax.set(formItem, {
-            y: 0
-        })
-           TweenMax.to(
+           gsap.to(
             formItem,
             2,
                 {
