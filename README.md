@@ -26,13 +26,14 @@
 - What features may you wish to put in a future release?
 
 *STRETCH GOALS*
-Reminders
-Social media-ish things, likes, comments, shares, etc.
-Goal setting
-Mapping
-Recommendations
-Visual comparisons
-Cardio section
+
+	- Reminders
+	- Social media-ish things, likes, comments, shares, etc.
+	- Goal setting
+	- Mapping
+	- Recommendations
+	- Visual comparisons
+	- Cardio section
 
 - What do the top 3 similar apps do for their users?
 	- Mapping, likes, comments, shares
