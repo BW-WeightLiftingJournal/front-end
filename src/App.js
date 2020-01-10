@@ -9,6 +9,8 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import RecoverPassword from "./components/RecoverPassword"
 import AddExercise from "./components/AddExercise"
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import LuxonUtils from '@date-io/luxon'
 
 //utilities import
 import {Route} from "react-router-dom"
@@ -17,6 +19,7 @@ import PrivateRoute from "./utilities/PrivateRoute"
 function App() {
 
   return (
+    <MuiPickersUtilsProvider utils={LuxonUtils}>
     <div className="app-container">
       <Header />
       <Route exact path="/" component={Landing}/>
@@ -27,6 +30,7 @@ function App() {
       <Route exact path="/recover" component={RecoverPassword}/>
       <Footer/>
     </div>
+    </MuiPickersUtilsProvider>
   );
 }
 

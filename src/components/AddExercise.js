@@ -5,6 +5,7 @@ import { StyledFormButton } from '../utilities/styles'
 import { gsap, TweenMax, Bounce } from 'gsap'
 import { submitForm } from "../utilities/actions"
 import axios from "axios"
+import { DatePicker } from '@material-ui/pickers'
 
 const AddExercise = ({ history, addNewExercise }) => {
 
@@ -68,7 +69,7 @@ const AddExercise = ({ history, addNewExercise }) => {
             }
             }>
                 <div className='add-exercise-form'>
-                <TextField
+                <DatePicker
                     required
                     label="Date"
                     variant="outlined"
