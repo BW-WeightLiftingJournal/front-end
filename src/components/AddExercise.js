@@ -3,8 +3,8 @@ import { axiosWithAuth } from "../utilities/axiosAuth"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
-import { TweenMax, Bounce } from 'gsap'
-// import { submitForm } from "../utilities/actions"
+import { gsap, TweenMax, Bounce } from 'gsap'
+import { submitForm } from "../utilities/actions"
 // import axios from "axios"
 
 const AddExercise = ({ history, userId }) => {
@@ -50,15 +50,16 @@ const AddExercise = ({ history, userId }) => {
     }
 
     useEffect(() => {
-        TweenMax.to(
+           gsap.to(
             formItem,
             2,
                 {
                     y: -10,
                     ease: Bounce.easeOut,
                 }
-            )
-    })
+            ) 
+       }
+    )
 
 //In lieu of a succes message on successfull submit form will reroute to the home page.
 //There is also no form validation on button three inputs, this was done on purpose as we didn't want them to be required inputs for our app.
@@ -125,25 +126,3 @@ const mapStateToProps = state => ({
   })
   
 export default connect(mapStateToProps,{})(AddExercise);
-
-
-
-
-// const [exercises, setExercises ] = useState([]);
-
-//     const addNewExercise = exercise => {
-//         const newExercise = {
-//             date: exercise.date,
-//             exercise: exercise.exercise,
-//             weight: exercise.weight,
-//             reps: exercise.reps,
-//             sets: exercise.sets
-//         };
-
-//         const newExerciseCollection = [ ...exercises, newExercise];
-
-//         setExercises(newExerciseCollection);
-// } 
-
-/* <h1>New Exercises</h1>
-            <AddExercise addNewExercise={addNewExercise} /> */
