@@ -29,7 +29,7 @@ const AddExercise = ({ history, userId }) => {
             weight: exercise.weight,
             reps: exercise.reps,
             sets: exercise.sets,
-            date_completed: exercise.date,
+            date_completed: '12/29/19',
             workout_name: exercise.name
         }
 
