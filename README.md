@@ -1,27 +1,27 @@
 BW - Weight Lifting Journal
-https://airtable.com/shrSIr0PSTLSDcuJq/tblYIx0YVmkW7ZVQY/viwmFVeRoWbx8OuBH/recYOxEcYiiDfiFOB?blocks=hide
+
 Proposal
 
 - What problem does your app solve?
 
-	Record keeping, memory, substitutions
-	Organization
-	Go-to app for all things weight lifting
+	- Record keeping, memory, substitutions
+	- Organization
+	- Go-to app for all things weight lifting
 
 - Be as specific as possible; how does your app solve the problem?
 
 	- Users can log in and can create, review, update, and delete data on their workouts . 
-    - Can create a name of the exercise, amount lifted and/or reps completed, date, and region of the body exercise targets.
+    	- Can create a name of the exercise, amount lifted and/or reps completed, date, and region of the body exercise targets.
 
 - What is the mission statement?
 
-	Easy to use, convenient, accountability
+	- Easy to use, convenient, accountability
     
 Features
 
 - What features are required for your minimum viable product?
 	
-	-CRUD operations, name of the exercise, amount lifted and or reps completed, date, region of the body, etc.
+	- CRUD operations, name of the exercise, amount lifted and or reps completed, date, region of the body, etc.
 
 - What features may you wish to put in a future release?
 
@@ -35,38 +35,38 @@ Visual comparisons
 Cardio section
 
 - What do the top 3 similar apps do for their users?
-	-Mapping, likes, comments, shares
+	- Mapping, likes, comments, shares
 	
 Frameworks - Libraries
 
 - What 3rd party frameworks/libraries are you considering using?
 
-	-Material UI
+	- Material UI
 
 - Do APIs require you to contact its maintainer to gain access?
 
-	-No
+	- No
 
 - Are you required to pay to use the API?
 
-	-No
+	- No
 
 - Have you considered using Apple Frameworks? (MapKit, Healthkit, ARKit?)
-	-Yes
+	- Yes
 	
 Target Audience
 
 - Who is your target audience? Be specific.
 
-	-People who lift. Gymgoes, weightlifters, etc
+	- People who lift. Gymgoes, weightlifters, etc
 
 - What feedback have you gotten from potential users?
 
-	-Make it easy to use, organized, good UX & things mentioned in stretch goals
+	- Make it easy to use, organized, good UX & things mentioned in stretch goals
 
 - Have you validated the problem and your solution with your target audience? How?
 
-	-n/a
+	- n/a
 
 Research
 
