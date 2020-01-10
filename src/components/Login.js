@@ -28,6 +28,7 @@ const Login = ({
     if(!!token){
       localStorage.setItem('token', token);
       history.push('/Dashboard')
+      resetForm('loginCredentials')
     }
     // eslint-disable-next-line
   } ,[token])
@@ -43,11 +44,11 @@ const Login = ({
         autoComplete="off" 
         onSubmit={(e)=>{
           login(e, loginCredentials)
-          resetForm('loginCredentials')
         }}
       >
         <div className="login-form">
           <GrayTextField
+            disabled = {isLogging}
             error={error}
             required
             helperText={!loginCredentials.username && error && "Username Required"}
@@ -59,6 +60,7 @@ const Login = ({
           />
           <br/>
           <GrayTextField
+            disabled = {isLogging}
             error={error}
             required
             helperText={!loginCredentials.password && error && "Password Required"}

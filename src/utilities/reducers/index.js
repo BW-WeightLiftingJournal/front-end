@@ -19,7 +19,9 @@ import {
     SUBMIT_FORM,
     RETRIEVE_SUCCESS,
     RETRIEVE_START,
-    RETRIEVE_FAIL
+    RETRIEVE_FAIL,
+    VERIFY_START,
+    VERIFY_FAIL
     } 
 from "../actions"
 
@@ -30,6 +32,7 @@ const initialState = {
     loggedInUsername: '',
     userId: 0,
     error: '',
+    errorList: [],
     token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     isLoggingIn: false,
     isLoggingOut: false,
@@ -39,20 +42,92 @@ const initialState = {
     isEdit: false,
     editedItem: {},
     exerciseList: [
+        {
+            id: 2,
+            name: 'lunges',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/21/2019'
+        },
+        {
+            id: 0,
+            name: 'dumbbell',
+            weight: 20,
+            reps: 10,
+            sets: 3,
+            date: '12/20/2019'
+        },
+        {
+            id: 1,
+            name: 'benchpress',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/20/2019'
+        },
+        {
+            id: 1,
+            name: 'benchpress',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/20/2019'
+        },
+        {
+            id: 1,
+            name: 'benchpress',
+            weight: 200,
+            reps: 11,
+            sets: 2,
+            date: '12/20/2019'
+        },
         // {
-        //     id: 2,
-        //     name: 'lunges',
+        //     id: 1,
+        //     name: 'benchpress',
         //     weight: 200,
         //     reps: 11,
         //     sets: 2,
-        //     date: '12/21/2019'
+        //     date: '12/20/2019'
         // },
         // {
-        //     id: 0,
-        //     name: 'dumbbell',
-        //     weight: 20,
-        //     reps: 10,
-        //     sets: 3,
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
+        //     date: '12/20/2019'
+        // },
+        // {
+        //     id: 1,
+        //     name: 'benchpress',
+        //     weight: 200,
+        //     reps: 11,
+        //     sets: 2,
         //     date: '12/20/2019'
         // },
         // {
@@ -124,10 +199,11 @@ switch (type) {
             error: ''
         }
     case REGISTER_FAIL:
+        let serverError = payload[0]
         return {
             ...state,
             isRegistering: false,
-            error: 'Error.  One or more required items invalid'
+            errorList: serverError==='Request failed with status code 500' ? ['Username not available.'] : payload
         }
     case HANDLE_CHANGE:
         return {
@@ -138,9 +214,24 @@ switch (type) {
                 [payload.target.name]: payload.target.value
             }
         }
+    case VERIFY_START:
+        return {
+            ...state,
+            isVerify: true,
+            error: ''
+        }
     case VERIFY_EMAIL:
         return {
-            ...state
+            ...state,
+            recoverEmail: {...state.recoverEmail, message: 'Email sent'},
+            isVerify: false,
+            error: ''
+        }
+    case VERIFY_FAIL:
+        return {
+            ...state,
+            error: 'Please enter an email',
+            isVerify: false
         }
     case RESET_ERRORS:
         return {
@@ -187,7 +278,8 @@ switch (type) {
             ...state,
             isLoggingOut: false,
             error: '',
-            token: ''
+            token: '',
+            exerciseList: []
         }
     case LOGOUT_FAIL:
         return {

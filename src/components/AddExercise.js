@@ -12,7 +12,7 @@ const AddExercise = ({ history, addNewExercise, userId }) => {
     let formItem = useRef()
 
     const [exercise, setExercise] = useState({
-        workout_id: 2,
+        workout_id: 1,
         user_id: userId,
         date: '',
         name: '',
