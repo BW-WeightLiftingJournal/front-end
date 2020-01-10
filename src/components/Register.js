@@ -8,13 +8,14 @@ import {BlackButton, GrayTextField} from "../utilities/styles"
 
 const Register = ({
   history, 
-  error, 
+  errorList, 
   register,
   registerCredentials, 
   handleChange, 
   token,
   resetErrors,
-  isRegister
+  isRegister,
+  resetForm
   }) => {
 
   useEffect(()=>{
@@ -26,6 +27,7 @@ const Register = ({
     if(!!token){
       localStorage.setItem('token', token);
       history.push('/Dashboard')
+      resetForm('registerCredentials')
     }
     // eslint-disable-next-line
   } ,[token])
@@ -34,21 +36,21 @@ const Register = ({
     <div className="login-container">
       <FaDumbbell style={{fontSize: '4rem', color: '#F26363'}}/>
       <h2>Sign Up</h2>
-      {error ? <div style={{color: 'red'}}>{error}</div> : <br/>}
+      {!!errorList.length>0 ? <div style={{color: 'red'}}>{errorList.map((err, ind)=> <p key={ind}>{err}</p>)}</div> : <br/>}
       <br/>
       <form 
         noValidate 
         autoComplete="off" 
         onSubmit={(e)=>{
           register(e, registerCredentials)
-          resetForm('registerCredentials')
         }}
       >
         <div className="login-form">
           <GrayTextField
-            error={!registerCredentials.email && error}
+            disabled = {isRegister}
+            error={!registerCredentials.email && !!errorList.length>0}
             required
-            helperText={!registerCredentials.email && error && "Email Required"}
+            helperText={!registerCredentials.email && !!errorList.length>0 && "Email Required"}
             label="Email"
             variant="outlined"
             name="email"
@@ -57,9 +59,10 @@ const Register = ({
           />
           <br/>
           <GrayTextField
-            error={!registerCredentials.username && error}
+            disabled = {isRegister}
+            error={!registerCredentials.username && !!errorList.length>0}
             required
-            helperText={!registerCredentials.username && error && "Username Required"}
+            helperText={!registerCredentials.username && !!errorList.length>0 && "Username Required"}
             label="Username"
             variant="outlined"
             name="username"
@@ -68,9 +71,10 @@ const Register = ({
           />
           <br/>
           <GrayTextField
-            error={!registerCredentials.password && error}
+            disabled = {isRegister}
+            error={!registerCredentials.password && !!errorList.length>0}
             required
-            helperText={!registerCredentials.password && error && "Password Required"}
+            helperText={!registerCredentials.password && !!errorList.length>0 && "Password Required"}
             type="password"
             label="Password"
             variant="outlined"
@@ -97,11 +101,11 @@ const Register = ({
 
 const mapStateToProps = state => ({
   registerCredentials: state.registerCredentials,
-  error: state.error,
+  errorList: state.errorList,
   token: state.token,
   isRegister: state.isRegistering
 
 })
 
-export default connect(mapStateToProps,{handleChange, register, resetErrors})(Register);
+export default connect(mapStateToProps,{handleChange, register, resetErrors, resetForm})(Register);
 

@@ -18,6 +18,7 @@ import PrivateRoute from "./utilities/PrivateRoute"
 function App() {
 
   return (
+    <>
     <div className="app-container">
       <Header />
       <Route exact path="/" component={Landing}/>
@@ -27,8 +28,9 @@ function App() {
       <PrivateRoute exact path="/dashboard" component={Dashboard}/>
       <PrivateRoute exact path="/add" component={AddExercise}/> 
       <Route exact path="/recover" component={RecoverPassword}/>
-      <Footer/>
     </div>
+    <Footer/>
+    </>
   );
 }
 
