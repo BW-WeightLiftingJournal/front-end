@@ -7,12 +7,12 @@ import { submitForm } from "../utilities/actions"
 import axios from "axios"
 import { DatePicker } from '@material-ui/pickers'
 
-const AddExercise = ({ history, addNewExercise }) => {
+const AddExercise = ({ history, addNewExercise, userId }) => {
 
     let formItem = useRef()
 
     const [exercise, setExercise] = useState({
-        id: '',
+        user_id: userId,
         date: '',
         name: '',
         weight: '',
@@ -26,9 +26,14 @@ const AddExercise = ({ history, addNewExercise }) => {
 
     const submitForm = event => {
         event.preventDefault();
+        const reformattedExercise = {
+            ...exercise,
+            date_completed: exercise.date,
+            workout_name: exercise.name
+        }
 
         axios 
-            .post("https://bw-weight-lifting-journal.herokuapp.com/api")
+            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, reformattedExercise)
             .then(res => {
                 console.log('success', res)
             })
