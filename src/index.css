@@ -149,13 +149,13 @@ p, span {
 .single-exercise-data {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .single-exercise-data>p {
   margin-left: 8px;
 }
 
 .single-exercise-data>* {
-  border-right: 1px solid black;
   padding-right: 5px;
 }
 .single-exercise-edit {

@@ -2,7 +2,6 @@ import React from "react"
 import {connect} from "react-redux"
 import DeleteIcon from '@material-ui/icons/Delete';
 import {
-        startEdit, 
         finishEdit, 
         deleteItem, 
         copy, 
@@ -14,8 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 const Exercise = ({
         editedItem, 
         isEdit, 
-        exercise, 
-        startEdit, 
+        exercise,  
         finishEdit, 
         deleteItem, 
         handleChange,
@@ -56,11 +54,11 @@ const Exercise = ({
                         value={editedItem.weight}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <button>SAVE</button>
+                    <button style={{padding: '10px', borderRadius: '4px'}}>SAVE</button>
 
                 </form> :
                 <div className="single-exercise-data">
-                    <h4 style={{minWidth: '150px'}}>{exercise.name}</h4>
+                    <h4 style={{minWidth: '100px'}}>{exercise.name}</h4>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
                     <p>Weight: {exercise.weight} lbs</p>
@@ -93,7 +91,6 @@ const mapStateToProps = state => ({
   })
   
 export default connect(mapStateToProps,{
-        startEdit, 
         finishEdit, 
         deleteItem, 
         copy, 
