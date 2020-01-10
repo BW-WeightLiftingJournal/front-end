@@ -29,9 +29,10 @@ export const VERIFY_FAIL = 'VERIFY_FAIL'
 export const getList = (id)=> dispatch => {
   dispatch({type: RETRIEVE_START})
   axiosWithAuth()
-    .get(`https://bw-weight-lifting-journal.herokuapp.com/api/users/workouts/${id}`)
+    .get(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${id}`)
     .then(res=> {
-      dispatch({type: RETRIEVE_SUCCESS, payload: res})
+      console.log(res)
+      dispatch({type: RETRIEVE_SUCCESS, payload: res.data})
     })
     .catch(err=> {
       console.log(err)
@@ -137,8 +138,6 @@ export const finishEdit = (e, id, exercise) => dispatch => {
     dispatch({ type: FINISH_EDIT, payload: res.data })
   })
   .catch(err => console.log(err));
-  //following line is to test UI features without access to API.  can be removed once server is setup
-  // dispatch({ type: FINISH_EDIT, payload: exercise })
 }
 
 export const deleteItem = (id) => dispatch => {
@@ -148,11 +147,9 @@ export const deleteItem = (id) => dispatch => {
     dispatch({ type: DELETE, payload: res.data })
   })
   .catch(err => console.log(err));
-  //following line is to test UI features without access to API.  can be removed once server is setup
-  // dispatch({ type: DELETE, payload: id })
 }
 
-export const copy = (exercise)=> dispatch => {
+export const copy = (exercise, userId)=> dispatch => {
   const today = new Date()
   const date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
   const temp = 
@@ -161,24 +158,22 @@ export const copy = (exercise)=> dispatch => {
     date: date
   }
   axiosWithAuth()
-  .post('https://bw-weight-lifting-journal.herokuapp.com/api/add', temp)
+  .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, temp)
   .then(res => {
     dispatch({ type: COPY, payload: res.data })
   })
   .catch(err => console.log(err));
-  //following line is to test UI features without access to API.  can be removed once server is setup
-  dispatch({ type: COPY, payload: temp})
 }
-
-export const submitForm = (event, exercise) => dispatch=> {
+/*see AddExercise.js component for a local copy of this function*/
+// export const submitForm = (event, exercise) => dispatch=> {
   
-  event.preventDefault()
-  const newExercise = {
-    ...exercise,
-    id: new Date().getMilliseconds()
-  }
-  dispatch({
-    type: SUBMIT_FORM,
-    payload: newExercise
-  })
-}
+//   event.preventDefault()
+//   const newExercise = {
+//     ...exercise,
+//     id: new Date().getMilliseconds()
+//   }
+//   dispatch({
+//     type: SUBMIT_FORM,
+//     payload: newExercise
+//   })
+// }

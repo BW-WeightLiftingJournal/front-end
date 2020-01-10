@@ -4,15 +4,14 @@ import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { TweenMax, Bounce } from 'gsap'
-import { submitForm } from "../utilities/actions"
+// import { submitForm } from "../utilities/actions"
 // import axios from "axios"
 
-const AddExercise = ({ history, addNewExercise, userId }) => {
+const AddExercise = ({ history, userId }) => {
 
     let formItem = useRef()
 
     const [exercise, setExercise] = useState({
-        workout_id: 1,
         user_id: userId,
         date: '',
         name: '',
@@ -27,16 +26,19 @@ const AddExercise = ({ history, addNewExercise, userId }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        console.log(userId)
-
+        const reformattedExercise = {
+            weight: exercise.weight,
+            reps: exercise.reps,
+            sets: exercise.sets,
+            date_completed: exercise.date,
+            workout_name: exercise.name
+        }
         axiosWithAuth()
-            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/users/workouts/${userId}`, exercise)
+            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, reformattedExercise)
             .then(res => {
                 console.log('success', res)
             })
             .catch(error => console.log(error.response))
-
-        // addNewExercise(exercise);
 
         setExercise({ 
             date: '',
@@ -122,7 +124,7 @@ const mapStateToProps = state => ({
     ...state
   })
   
-export default connect(mapStateToProps,{submitForm})(AddExercise);
+export default connect(mapStateToProps,{})(AddExercise);
 
 
 
