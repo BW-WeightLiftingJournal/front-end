@@ -29,34 +29,34 @@ const Exercise = ({
                     className="single-exercise-edit" 
                     onSubmit={e=> finishEdit(e, exercise.id, editedItem)}
                     >
-                    <input 
+                    Name: <input 
                         type='text'
                         placeholder='Name'
                         name='workout_name'
                         value={editedItem.workout_name}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <input 
+                    Sets: <input 
                         type='text'
                         placeholder='Sets'
                         name='sets'
                         value={editedItem.sets}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <input 
+                    Reps: <input 
                         type='text'
                         placeholder='Reps'
                         name='reps'
                         value={editedItem.reps}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <input 
+                    Weight:<input 
                         type='text'
                         placeholder='Weight'
                         name='weight'
                         value={editedItem.weight}
                         onChange={e=> handleChange(e, 'editedItem')}
-                        />
+                        /> lbs
                     <button style={{padding: '10px', borderRadius: '4px'}}>SAVE</button>
 
                 </form> :

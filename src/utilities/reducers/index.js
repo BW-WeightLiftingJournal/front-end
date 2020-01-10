@@ -88,7 +88,8 @@ switch (type) {
         return {
             ...state,
             isFetching: false,
-            error: payload
+            error: payload,
+            exerciseList: []
         }
     case LOGIN_START:
         return {

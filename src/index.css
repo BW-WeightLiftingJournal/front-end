@@ -146,11 +146,12 @@ p, span {
   vertical-align: middle;
   align-items: center;
 }
-.single-exercise-data {
+.single-exercise-data, .single-exercise-edit {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 70%;
+  width: 80%;
+  align-items: center;
 }
 .single-exercise-data>p {
   margin-left: 8px;
@@ -159,10 +160,7 @@ p, span {
 .single-exercise-data>* {
   padding-right: 5px;
 }
-.single-exercise-edit {
-  display: flex;
-}
-.single-exercise-edit>* {
+.single-exercise-edit>*{
   width: 20%;
   padding: 5px;
   margin-right: 5px;
@@ -192,4 +190,19 @@ p, span {
 
 .add-title {
   margin-bottom: 10px;
+}
+.account-hide {
+  display: none;
+}
+.account-show {
+  display: block;
+}
+
+@media (max-width: 520px) {
+  .account-hide {
+    display: block;
+  }
+  .account-show {
+    display: none;
+  }
 }

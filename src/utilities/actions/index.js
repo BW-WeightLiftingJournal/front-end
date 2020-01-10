@@ -34,8 +34,8 @@ export const getList = (id)=> dispatch => {
       dispatch({type: RETRIEVE_SUCCESS, payload: res.data.workouts})
     })
     .catch(err=> {
-      console.log(err)
-      dispatch({type: RETRIEVE_FAIL, payload: 'Failed to retrieve Exercise List'})
+      console.log(err.message)
+      dispatch({type: RETRIEVE_FAIL, payload: err.message})
     })
 }
 
