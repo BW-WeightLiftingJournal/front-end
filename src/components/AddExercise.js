@@ -26,7 +26,9 @@ const AddExercise = ({ history, userId }) => {
     const submitForm = event => {
         event.preventDefault();
         const reformattedExercise = {
-            ...exercise,
+            weight: exercise.weight,
+            reps: exercise.reps,
+            sets: exercise.sets,
             date_completed: exercise.date,
             workout_name: exercise.name
         }
