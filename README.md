@@ -1,6 +1,6 @@
-BW - Weight Lifting Journal
+**BW - Weight Lifting Journal**
 
-Proposal
+**Proposal**
 
 - What problem does your app solve?
 
@@ -17,7 +17,7 @@ Proposal
 
 	- Easy to use, convenient, accountability
     
-Features
+**Features**
 
 - What features are required for your minimum viable product?
 	
@@ -25,7 +25,7 @@ Features
 
 - What features may you wish to put in a future release?
 
-STRETCH GOALS
+*STRETCH GOALS*
 Reminders
 Social media-ish things, likes, comments, shares, etc.
 Goal setting
@@ -37,7 +37,7 @@ Cardio section
 - What do the top 3 similar apps do for their users?
 	- Mapping, likes, comments, shares
 	
-Frameworks - Libraries
+**Frameworks - Libraries**
 
 - What 3rd party frameworks/libraries are you considering using?
 
@@ -54,7 +54,7 @@ Frameworks - Libraries
 - Have you considered using Apple Frameworks? (MapKit, Healthkit, ARKit?)
 	- Yes
 	
-Target Audience
+**Target Audience**
 
 - Who is your target audience? Be specific.
 
@@ -68,7 +68,7 @@ Target Audience
 
 	- n/a
 
-Research
+**Research**
 
 - Research thoroughly before writing a single line of code. Solidify the features of your app conceptually before implementation. Spend the weekend researching so you can hit the ground running on Monday.
 Prototype Key Feature(s)
