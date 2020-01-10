@@ -5,14 +5,13 @@ import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { gsap, TweenMax, Bounce } from 'gsap'
 import { submitForm } from "../utilities/actions"
-// import axios from "axios"
+import { DatePicker } from '@material-ui/pickers'
 
-const AddExercise = ({ history, addNewExercise, userId }) => {
+const AddExercise = ({ history, userId }) => {
 
     let formItem = useRef()
 
     const [exercise, setExercise] = useState({
-        workout_id: 1,
         user_id: userId,
         date: '',
         name: '',
@@ -27,16 +26,18 @@ const AddExercise = ({ history, addNewExercise, userId }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        console.log(userId)
+        const reformattedExercise = {
+            ...exercise,
+            date_completed: exercise.date,
+            workout_name: exercise.name
+        }
 
-        axiosWithAuth()
-            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/users/workouts/${userId}`, exercise)
+        axiosWithAuth() 
+            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, reformattedExercise)
             .then(res => {
                 console.log('success', res)
             })
             .catch(error => console.log(error.response))
-
-        // addNewExercise(exercise);
 
         setExercise({ 
             date: '',
@@ -71,7 +72,7 @@ const AddExercise = ({ history, addNewExercise, userId }) => {
             }
             }>
                 <div className='add-exercise-form'>
-                <TextField
+                <DatePicker
                     required
                     label="Date"
                     variant="outlined"
@@ -123,26 +124,4 @@ const mapStateToProps = state => ({
     ...state
   })
   
-export default connect(mapStateToProps,{submitForm})(AddExercise);
-
-
-
-
-// const [exercises, setExercises ] = useState([]);
-
-//     const addNewExercise = exercise => {
-//         const newExercise = {
-//             date: exercise.date,
-//             exercise: exercise.exercise,
-//             weight: exercise.weight,
-//             reps: exercise.reps,
-//             sets: exercise.sets
-//         };
-
-//         const newExerciseCollection = [ ...exercises, newExercise];
-
-//         setExercises(newExerciseCollection);
-// } 
-
-/* <h1>New Exercises</h1>
-            <AddExercise addNewExercise={addNewExercise} /> */
+export default connect(mapStateToProps,{})(AddExercise);
