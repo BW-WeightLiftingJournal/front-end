@@ -5,12 +5,14 @@ import {
         finishEdit, 
         deleteItem, 
         copy, 
-        handleChange
+        handleChange,
+        startEdit
     } from "../utilities/actions"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import EditIcon from '@material-ui/icons/Edit';
 
 const Exercise = ({
+        startEdit,
         editedItem, 
         isEdit, 
         exercise,  
@@ -30,8 +32,8 @@ const Exercise = ({
                     <input 
                         type='text'
                         placeholder='Name'
-                        name='name'
-                        value={editedItem.name}
+                        name='workout_name'
+                        value={editedItem.workout_name}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
                     <input 
@@ -59,7 +61,7 @@ const Exercise = ({
 
                 </form> :
                 <div className="single-exercise-data">
-                    <h4 style={{minWidth: '100px'}}>{exercise.name}</h4>
+                    <h4 style={{minWidth: '100px'}}>{exercise.workout_name}</h4>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
                     <p>Weight: {exercise.weight} lbs</p>
@@ -74,7 +76,7 @@ const Exercise = ({
                 <EditIcon
                     title='Edit'
                     style={{cursor: 'pointer', marginRight: '10px', color: '#69868C'}} 
-                    onClick={()=>copy(exercise.id)}
+                    onClick={()=>startEdit(exercise.id)}
                 />
                 <DeleteIcon 
                     title='Delete'
@@ -92,6 +94,7 @@ const mapStateToProps = state => ({
   })
   
 export default connect(mapStateToProps,{
+        startEdit,
         finishEdit, 
         deleteItem, 
         copy, 

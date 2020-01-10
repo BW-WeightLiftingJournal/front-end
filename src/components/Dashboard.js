@@ -5,7 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 const Dashboard = ({
     history,
-    message,
+    message
 
 }) => {
     const today = new Date()
@@ -30,7 +30,8 @@ const Dashboard = ({
 }
 
 const mapStateToProps = state => ({
-    message: state.loggedInUsername
+    message: state.loggedInUsername,
+    forceUpdate: state.forceUpdate
   })
   
 export default connect(mapStateToProps,{})(Dashboard);

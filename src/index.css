@@ -163,6 +163,7 @@ p, span {
   display: flex;
 }
 .single-exercise-edit>* {
+  width: 20%;
   padding: 5px;
   margin-right: 5px;
 }
