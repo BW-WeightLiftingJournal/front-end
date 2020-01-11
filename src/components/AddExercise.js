@@ -17,6 +17,12 @@ const AddExercise = ({ history, userId }) => {
         reps: '',
         sets: ''
     });
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const handleDateChange = date => {
+        setSelectedDate(date);
+    };
+    
 
     const handleChanges = event => {
         setExercise({ ...exercise, [event.target.name]: event.target.value });
@@ -24,12 +30,14 @@ const AddExercise = ({ history, userId }) => {
 
     const submitForm = event => {
         event.preventDefault();
+        const date = new Date(selectedDate)
+        const parsedDate = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
         const reformattedExercise = {
             user_id: userId,
             weight: exercise.weight,
             reps: exercise.reps,
             sets: exercise.sets,
-            date_completed: exercise.date,
+            date_completed: parsedDate,
             workout_name: exercise.name
         }
 
@@ -77,7 +85,8 @@ const AddExercise = ({ history, userId }) => {
                     label="Date"
                     variant="outlined"
                     name="date"
-                    onChange={handleChanges}
+                    value={selectedDate}
+                    onChange={handleDateChange}
                 />
                 <br/>
                 <TextField
