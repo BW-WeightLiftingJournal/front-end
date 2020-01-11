@@ -6,8 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const EditDialog = ()=> {
+const EditDialog = ({finishEdit, exercise})=> {
   const [open, setOpen] = useState(true);
+  const [editedExercise, setEditedExercise] = useState(exercise)
+
+  const handleChange = (event) => {
+      const {name, value} = event.target
+      setEditedExercise({...editedExercise, [name]: value})
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -24,6 +30,8 @@ const EditDialog = ()=> {
             label="Workout Name"
             type="text"
             fullWidth
+            value={editedExercise.workout_name}
+            onChange={handleChange}
           />
           <TextField
             margin="dense"
@@ -31,13 +39,17 @@ const EditDialog = ()=> {
             label="Sets"
             type="text"
             fullWidth
-          />
+            value={editedExercise.sets}
+            onChange={handleChange}          
+        />
           <TextField
             margin="dense"
             name="reps"
             label="Reps"
             type="text"
             fullWidth
+            value={editedExercise.reps}
+            onChange={handleChange}
           />
           <TextField
             margin="dense"
@@ -45,13 +57,19 @@ const EditDialog = ()=> {
             label="Weight (lbs)"
             type="text"
             fullWidth
+            value={editedExercise.weight}
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={e=> {
+              finishEdit(e, exercise.id, editedExercise)
+              handleClose()
+              }} 
+              color="primary">
             Save
           </Button>
         </DialogActions>

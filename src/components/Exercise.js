@@ -25,49 +25,17 @@ const Exercise = ({
     }) => {
     return (
         <div className="exercise-container">
-            {isEdit && <EditDialog />}
-            {isEdit && editedItem.id===exercise.id ? 
-                <form 
-                    className="single-exercise-edit" 
-                    onSubmit={e=> finishEdit(e, exercise.id, editedItem)}
-                    >
-                    Name: <input 
-                        type='text'
-                        placeholder='Name'
-                        name='workout_name'
-                        value={editedItem.workout_name}
-                        onChange={e=> handleChange(e, 'editedItem')}
-                        />
-                    Sets: <input 
-                        type='text'
-                        placeholder='Sets'
-                        name='sets'
-                        value={editedItem.sets}
-                        onChange={e=> handleChange(e, 'editedItem')}
-                        />
-                    Reps: <input 
-                        type='text'
-                        placeholder='Reps'
-                        name='reps'
-                        value={editedItem.reps}
-                        onChange={e=> handleChange(e, 'editedItem')}
-                        />
-                    Weight:<input 
-                        type='text'
-                        placeholder='Weight'
-                        name='weight'
-                        value={editedItem.weight}
-                        onChange={e=> handleChange(e, 'editedItem')}
-                        /> lbs
-                    <button style={{padding: '10px', borderRadius: '4px'}}>SAVE</button>
-
-                </form> :
+            {isEdit && 
+            <EditDialog 
+                finishEdit={finishEdit} 
+                exercise={exercise}
+            />}
                 <div className="single-exercise-data">
                     <h4 style={{minWidth: '100px'}}>{exercise.workout_name}</h4>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
                     <p>Weight: {exercise.weight} lbs</p>
-                </div>}
+                </div>
             
             <div className="single-exercise-buttons">
                 <FileCopyIcon

@@ -36,7 +36,6 @@ const AddExercise = ({ history, userId }) => {
         axiosWithAuth() 
             .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts`, reformattedExercise)
             .then(res => {
-                console.log('success', res)
             })
             .catch(error => console.log(error.response))
 
