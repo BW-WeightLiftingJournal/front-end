@@ -83,7 +83,7 @@ const Register = ({
             onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
-          <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25} style={{color: 'white'}}/> : 'Create Account'}</BlackButton>
+          <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25} style={{color: 'white'}}/> : <><p className='account-show'>{`Create Account`}</p><p className='account-hide'>{`Create`}</p></> }</BlackButton>
           <div>
             <p>Already have an account?</p>
             <Link to="/login" onClick={resetErrors}>

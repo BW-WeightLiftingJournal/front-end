@@ -31,12 +31,11 @@ export const getList = (id)=> dispatch => {
   axiosWithAuth()
     .get(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${id}`)
     .then(res=> {
-      console.log(res)
-      dispatch({type: RETRIEVE_SUCCESS, payload: res.data})
+      dispatch({type: RETRIEVE_SUCCESS, payload: res.data.workouts})
     })
     .catch(err=> {
-      console.log(err)
-      dispatch({type: RETRIEVE_FAIL, payload: 'Failed to retrieve Exercise List'})
+      console.log(err.message)
+      dispatch({type: RETRIEVE_FAIL, payload: err.message})
     })
 }
 
@@ -46,7 +45,6 @@ export const login = (event, credentials) => dispatch => {
   axios
     .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/login', credentials)
     .then(res => {
-      console.log(res)
       dispatch({ type: LOGIN_SUCCESS, payload: res.data})
       
     })
@@ -60,7 +58,6 @@ export const register = (event, credentials) => dispatch => {
   event.preventDefault()
   dispatch({ type: REGISTER_START });
   const errorList = validateCredentials(credentials)
-  console.log(errorList)
   if(!!errorList.length>0) dispatch({type: REGISTER_FAIL, payload: errorList})
   else {
     const correctedCredentials = {
@@ -133,7 +130,7 @@ export const startEdit = (id) => ({
 export const finishEdit = (e, id, exercise) => dispatch => {
   e.preventDefault()
   axiosWithAuth()
-  .put(`https://bw-weight-lifting-journal.herokuapp.com/api/edit/${id}`, exercise)
+  .put(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${id}`, exercise)
   .then(res => {
     dispatch({ type: FINISH_EDIT, payload: res.data })
   })
@@ -142,7 +139,7 @@ export const finishEdit = (e, id, exercise) => dispatch => {
 
 export const deleteItem = (id) => dispatch => {
   axiosWithAuth()
-  .delete(`https://bw-weight-lifting-journal.herokuapp.com/api/delete/${id}`)
+  .delete(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${id}`)
   .then(res => {
     dispatch({ type: DELETE, payload: res.data })
   })
@@ -154,11 +151,15 @@ export const copy = (exercise, userId)=> dispatch => {
   const date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
   const temp = 
   {
-    ...exercise,
-    date: date
+    user_id: userId,
+    weight: exercise.weight,
+    reps: exercise.reps,
+    sets: exercise.sets,
+    date_completed: date,
+    workout_name: exercise.workout_name
   }
   axiosWithAuth()
-  .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, temp)
+  .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts`, temp)
   .then(res => {
     dispatch({ type: COPY, payload: res.data })
   })

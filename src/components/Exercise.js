@@ -5,12 +5,15 @@ import {
         finishEdit, 
         deleteItem, 
         copy, 
-        handleChange
+        handleChange,
+        startEdit
     } from "../utilities/actions"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import EditIcon from '@material-ui/icons/Edit';
+import EditDialog from "./EditDialog"
 
 const Exercise = ({
+        startEdit,
         editedItem, 
         isEdit, 
         exercise,  
@@ -22,44 +25,45 @@ const Exercise = ({
     }) => {
     return (
         <div className="exercise-container">
+            {isEdit && <EditDialog />}
             {isEdit && editedItem.id===exercise.id ? 
                 <form 
                     className="single-exercise-edit" 
                     onSubmit={e=> finishEdit(e, exercise.id, editedItem)}
                     >
-                    <input 
+                    Name: <input 
                         type='text'
                         placeholder='Name'
-                        name='name'
-                        value={editedItem.name}
+                        name='workout_name'
+                        value={editedItem.workout_name}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <input 
+                    Sets: <input 
                         type='text'
                         placeholder='Sets'
                         name='sets'
                         value={editedItem.sets}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <input 
+                    Reps: <input 
                         type='text'
                         placeholder='Reps'
                         name='reps'
                         value={editedItem.reps}
                         onChange={e=> handleChange(e, 'editedItem')}
                         />
-                    <input 
+                    Weight:<input 
                         type='text'
                         placeholder='Weight'
                         name='weight'
                         value={editedItem.weight}
                         onChange={e=> handleChange(e, 'editedItem')}
-                        />
+                        /> lbs
                     <button style={{padding: '10px', borderRadius: '4px'}}>SAVE</button>
 
                 </form> :
                 <div className="single-exercise-data">
-                    <h4 style={{minWidth: '100px'}}>{exercise.name}</h4>
+                    <h4 style={{minWidth: '100px'}}>{exercise.workout_name}</h4>
                     <p>Sets: {exercise.sets}</p>
                     <p>Reps: {exercise.reps}</p>
                     <p>Weight: {exercise.weight} lbs</p>
@@ -74,7 +78,7 @@ const Exercise = ({
                 <EditIcon
                     title='Edit'
                     style={{cursor: 'pointer', marginRight: '10px', color: '#69868C'}} 
-                    onClick={()=>copy(exercise.id)}
+                    onClick={()=>startEdit(exercise.id)}
                 />
                 <DeleteIcon 
                     title='Delete'
@@ -92,6 +96,7 @@ const mapStateToProps = state => ({
   })
   
 export default connect(mapStateToProps,{
+        startEdit,
         finishEdit, 
         deleteItem, 
         copy, 

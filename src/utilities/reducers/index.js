@@ -40,32 +40,33 @@ const initialState = {
     isFetching: false,
     isVerify: false,
     isEdit: false,
+    forceUpdate: false,
     editedItem: {},
     exerciseList: [
-        {
-            id: 2,
-            name: 'lunges',
-            weight: 200,
-            reps: 11,
-            sets: 2,
-            date: '12/21/2019'
-        },
-        {
-            id: 0,
-            name: 'dumbbell',
-            weight: 20,
-            reps: 10,
-            sets: 3,
-            date: '12/20/2019'
-        },
-        {
-            id: 1,
-            name: 'benchpress',
-            weight: 200,
-            reps: 11,
-            sets: 2,
-            date: '12/20/2019'
-        }
+    //     {
+    //         id: 2,
+    //         name: 'lunges',
+    //         weight: 200,
+    //         reps: 11,
+    //         sets: 2,
+    //         date: '12/21/2019'
+    //     },
+    //     {
+    //         id: 0,
+    //         name: 'dumbbell',
+    //         weight: 20,
+    //         reps: 10,
+    //         sets: 3,
+    //         date: '12/20/2019'
+    //     },
+    //     {
+    //         id: 1,
+    //         name: 'benchpress',
+    //         weight: 200,
+    //         reps: 11,
+    //         sets: 2,
+    //         date: '12/20/2019'
+    //     }
     ]
 
 }
@@ -80,14 +81,15 @@ switch (type) {
     case RETRIEVE_SUCCESS:
         return {
             ...state,
-            exerciseList: !!payload.data ? payload.data : [],
+            exerciseList: !!payload ? payload : [],
             isFetching: false
         }
     case RETRIEVE_FAIL:
         return {
             ...state,
             isFetching: false,
-            error: payload
+            error: payload,
+            exerciseList: []
         }
     case LOGIN_START:
         return {
@@ -180,18 +182,17 @@ switch (type) {
         return {
             ...state,
             isEdit: false,
+            forceUpdate: !state.forceUpdate
         }
     case DELETE:
-        
         return {
             ...state,
-            exerciseList: state.exerciseList.filter(ele=> ele.id!==payload)
-            
+            forceUpdate: !state.forceUpdate
         }
     case COPY:
         return {
             ...state,
-            // exerciseList: [payload, ...state.exerciseList]
+            forceUpdate: !state.forceUpdate
         }
     case LOGOUT_START:
         return {

@@ -11,7 +11,6 @@ const AddExercise = ({ history, userId }) => {
     let formItem = useRef()
 
     const [exercise, setExercise] = useState({
-        user_id: userId,
         date: '',
         name: '',
         weight: '',
@@ -26,6 +25,7 @@ const AddExercise = ({ history, userId }) => {
     const submitForm = event => {
         event.preventDefault();
         const reformattedExercise = {
+            user_id: userId,
             weight: exercise.weight,
             reps: exercise.reps,
             sets: exercise.sets,
@@ -34,15 +34,15 @@ const AddExercise = ({ history, userId }) => {
         }
 
         axiosWithAuth() 
-            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${userId}`, reformattedExercise)
+            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts`, reformattedExercise)
             .then(res => {
                 console.log('success', res)
             })
             .catch(error => console.log(error.response))
 
         setExercise({ 
+            name: '',
             date: '',
-            exercise: '',
             weight: '',
             reps: '',
             sets: ''
