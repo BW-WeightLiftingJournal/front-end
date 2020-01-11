@@ -10,6 +10,7 @@ import {
     } from "../utilities/actions"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import EditIcon from '@material-ui/icons/Edit';
+import EditDialog from "./EditDialog"
 
 const Exercise = ({
         startEdit,
@@ -24,6 +25,7 @@ const Exercise = ({
     }) => {
     return (
         <div className="exercise-container">
+            {isEdit && <EditDialog />}
             {isEdit && editedItem.id===exercise.id ? 
                 <form 
                     className="single-exercise-edit" 
