@@ -12,11 +12,11 @@ const Login = ({
   error, 
   login, 
   loginCredentials, 
-  handleChange, 
-  token,
+  handleChange,
   resetErrors,
   isLogging,
-  resetForm
+  resetForm,
+  loggedIn
   }) => {
     
   useEffect(()=>{
@@ -25,13 +25,12 @@ const Login = ({
   },[])
 
   useEffect(()=> {
-    if(!!token){
-      localStorage.setItem('token', token);
+    if(!!loggedIn){
       history.push('/Dashboard')
       resetForm('loginCredentials')
     }
     // eslint-disable-next-line
-  } ,[token])
+  } ,[loggedIn])
 
   return (
     <div className="login-container">
@@ -100,8 +99,8 @@ const Login = ({
 const mapStateToProps = state => ({
   loginCredentials: state.loginCredentials,
   error: state.error,
-  token: state.token,
-  isLogging: state.isLoggingIn
+  isLogging: state.isLoggingIn,
+  loggedIn: state.loggedIn
 
 })
 

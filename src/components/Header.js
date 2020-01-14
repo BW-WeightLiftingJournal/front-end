@@ -5,7 +5,7 @@ import AccountMenu from "./AccountMenu"
 import {logout} from "../utilities/actions"
 import {connect} from "react-redux"
 
-const Header = ({token,logout}) => {
+const Header = ({loggedIn,logout}) => {
     return (
         <div className='header-container'>
             <FaDumbbell style={{fontSize: '3rem'}}/>
@@ -16,7 +16,7 @@ const Header = ({token,logout}) => {
                 <Link to="/about">
                     About
                 </Link>
-                {!!token ? 
+                {!!loggedIn ? 
                     <Link to="/login" onClick={logout}>
                         Logout
                     </Link>    
@@ -25,7 +25,7 @@ const Header = ({token,logout}) => {
                         Sign In
                     </Link>
                 }
-                {!!token ? 
+                {!!loggedIn ? 
                     <AccountMenu/>
                     :
                     <Link to="/register">
@@ -39,7 +39,7 @@ const Header = ({token,logout}) => {
 }
 
 const mapStateToProps = state => ({
-    token: state.token
+    loggedIn: state.loggedIn
 })
   
 export default connect(mapStateToProps,{logout})(Header);

@@ -33,7 +33,6 @@ const initialState = {
     userId: 0,
     error: '',
     errorList: [],
-    token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     isLoggingIn: false,
     isLoggingOut: false,
     isRegistering: false,
@@ -41,6 +40,7 @@ const initialState = {
     isVerify: false,
     isEdit: false,
     forceUpdate: false,
+    loggedIn: false,
     editedItem: {},
     exerciseList: [
     //     {
@@ -104,7 +104,7 @@ switch (type) {
             ...state,
             isLoggingIn: false,
             error: '',
-            token: tok,
+            loggedIn: !!payload.session,
             loggedInUsername: payload.message,
             userId: payload.session.user.id ? payload.session.user.id : payload.session.admin.id
         }
@@ -198,23 +198,21 @@ switch (type) {
         return {
             ...state,
             isLoggingOut: true,
-            error: '',
-            token: ''
+            error: ''
         }
     case LOGOUT_SUCCESS:
         return {
             ...state,
             isLoggingOut: false,
             error: '',
-            token: '',
+            loggedIn: false,
             exerciseList: []
         }
     case LOGOUT_FAIL:
         return {
             ...state,
             isLoggingOut: false,
-            error: 'Logout Fail',
-            token: ''
+            error: 'Logout Fail'
         }
     case SUBMIT_FORM:
         return {
