@@ -15,7 +15,8 @@ const Register = ({
   token,
   resetErrors,
   isRegister,
-  resetForm
+  resetForm,
+  loggedIn
   }) => {
 
   useEffect(()=>{
@@ -24,13 +25,13 @@ const Register = ({
   },[])
 
   useEffect(()=> {
-    if(!!token){
+    if(!!loggedIn){
       localStorage.setItem('token', token);
       history.push('/Dashboard')
       resetForm('registerCredentials')
     }
     // eslint-disable-next-line
-  } ,[token])
+  } ,[loggedIn])
 
   return (
     <div className="login-container">
@@ -103,7 +104,8 @@ const mapStateToProps = state => ({
   registerCredentials: state.registerCredentials,
   errorList: state.errorList,
   token: state.token,
-  isRegister: state.isRegistering
+  isRegister: state.isRegistering,
+  loggedIn: state.loggedIn
 
 })
 
