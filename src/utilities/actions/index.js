@@ -29,7 +29,7 @@ export const VERIFY_FAIL = 'VERIFY_FAIL'
 export const getList = (id)=> dispatch => {
   dispatch({type: RETRIEVE_START})
   axiosWithAuth()
-    .get(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${id}`)
+    .get(`${process.env.REACT_APP_BASE_URL}/api/workouts/${id}`)
     .then(res=> {
       dispatch({type: RETRIEVE_SUCCESS, payload: res.data.workouts})
     })
@@ -43,7 +43,7 @@ export const login = (event, credentials) => dispatch => {
   event.preventDefault()
   dispatch({ type: LOGIN_START });
   axios
-    .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/login', credentials)
+    .post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, credentials)
     .then(res => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data})
       
@@ -66,7 +66,7 @@ export const register = (event, credentials) => dispatch => {
       department: 'student'
     }
     axios
-      .post('https://bw-weight-lifting-journal.herokuapp.com/api/auth/register', correctedCredentials)
+      .post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, correctedCredentials)
       .then(res => {
         dispatch({ type: REGISTER_SUCCESS, payload: res })
         dispatch(login(event,credentials))
@@ -110,7 +110,7 @@ export const logout = ()=> dispatch => {
   localStorage.setItem('token', '')
   dispatch({ type: LOGOUT_START });
   axios
-  .get(`https://bw-weight-lifting-journal.herokuapp.com/api/auth/logout`)
+  .get(`${process.end.REACT_APP_BASE_URL}/api/auth/logout`)
   .then(res => {
     dispatch({ type: LOGOUT_SUCCESS})
   })
@@ -130,7 +130,7 @@ export const startEdit = (id) => ({
 export const finishEdit = (e, id, exercise) => dispatch => {
   e.preventDefault()
   axiosWithAuth()
-  .put(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${id}`, exercise)
+  .put(`${process.env.REACT_APP_BASE_URL}/api/workouts/${id}`, exercise)
   .then(res => {
     dispatch({ type: FINISH_EDIT, payload: res.data })
   })
@@ -139,7 +139,7 @@ export const finishEdit = (e, id, exercise) => dispatch => {
 
 export const deleteItem = (id) => dispatch => {
   axiosWithAuth()
-  .delete(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts/${id}`)
+  .delete(`${process.env.REACT_APP_BASE_URL}/api/workouts/${id}`)
   .then(res => {
     dispatch({ type: DELETE, payload: res.data })
   })
@@ -159,7 +159,7 @@ export const copy = (exercise, userId)=> dispatch => {
     workout_name: exercise.workout_name
   }
   axiosWithAuth()
-  .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts`, temp)
+  .post(`${process.env.REACT_APP_BASE_URL}/api/workouts`, temp)
   .then(res => {
     dispatch({ type: COPY, payload: res.data })
   })
