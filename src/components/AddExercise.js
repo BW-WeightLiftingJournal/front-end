@@ -42,7 +42,7 @@ const AddExercise = ({ history, userId }) => {
         }
 
         axiosWithAuth() 
-            .post(`https://bw-weight-lifting-journal.herokuapp.com/api/workouts`, reformattedExercise)
+            .post(`${process.env.REACT_APP_BASE_URL}/api/workouts`, reformattedExercise)
             .then(res => {
             })
             .catch(error => console.log(error.response))
