@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React from "react"
 import {connect} from "react-redux"
 import ExerciseList from "./ExerciseList"
 import AddIcon from '@material-ui/icons/Add';

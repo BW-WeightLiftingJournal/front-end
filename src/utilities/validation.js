@@ -1,20 +1,22 @@
 export const validateCredentials = (credentials) => {
-    const {username, email, password} = credentials
+    const {username, 
+        // email, 
+        password} = credentials
     let err = []
     let bool = false
-    if(!!email){
-        if(
-            !email.includes('@') || 
-            !email.includes('.') ||
-            email.charAt(0)==='@' ||
-            email.charAt(0)==='.' || 
-            email.charAt(email.length-1)==='@' ||
-            email.charAt(email.length-1)==='.'
-            ) {
-            err.push('Email is not valid')
-          }
-    }
-    else bool=true;
+    // if(!!email){
+    //     if(
+    //         !email.includes('@') || 
+    //         !email.includes('.') ||
+    //         email.charAt(0)==='@' ||
+    //         email.charAt(0)==='.' || 
+    //         email.charAt(email.length-1)==='@' ||
+    //         email.charAt(email.length-1)==='.'
+    //         ) {
+    //         err.push('Email is not valid')
+    //       }
+    // }
+    // else bool=true;
     
     if(!!username) {
         if(username.length < 8) {
