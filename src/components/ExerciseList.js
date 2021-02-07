@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import {connect} from "react-redux"
 import Exercise from "./Exercise"
 import {getList} from "../utilities/actions"
+import moment from "moment"
 
 const ExerciseList = ({
   exerciseList,
@@ -15,10 +16,21 @@ const ExerciseList = ({
     // eslint-disable-next-line
   }, [forceUpdate])
   
+  // const sortedList = exerciseList.sort((a, b)=> moment(a.date_completed).isBefore(moment(b.date_completed) ? -1 : 1))
   let isSame=true;
   let previousDate=''
   return (
     <div className="exercise-list-container">
+      <div className="exercise-container table-header">
+        <div className="single-exercise-data">
+          <h4 className="single-exercise-title">Name</h4>
+          <p>Weight (lbs)</p>
+          <p>Reps</p>
+          <p>Sets</p>
+        </div>
+        <span style={{width: "100px", textAlign: "center"}}>Options</span>
+      </div>
+      
       {exerciseList && exerciseList.map(item=>{
         isSame=item.date_completed===previousDate;
         previousDate=item.date_completed

@@ -1,3 +1,4 @@
+import moment from "moment"
 import { 
     LOGIN_START,
     LOGIN_SUCCESS,
@@ -80,9 +81,10 @@ switch (type) {
             isFetching: true
         }
     case RETRIEVE_SUCCESS:
+        const sorted = payload.sort((a, b)=> moment(a.date_completed).isBefore(moment(b.date_completed)) ? 1 : -1)
         return {
             ...state,
-            exerciseList: !!payload ? payload : [],
+            exerciseList: !!sorted ? sorted : [],
             isFetching: false
         }
     case RETRIEVE_FAIL:

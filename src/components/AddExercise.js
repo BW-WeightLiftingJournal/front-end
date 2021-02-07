@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react"
-import { axiosWithAuth } from "../utilities/axiosAuth"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'

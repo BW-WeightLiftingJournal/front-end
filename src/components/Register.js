@@ -43,7 +43,14 @@ const Register = ({
         noValidate 
         autoComplete="off" 
         onSubmit={(e)=>{
-          register(e, registerCredentials)
+          e.preventDefault()
+          const creds = {
+            username: e.target[0].value,
+            password: e.target[2].value
+          }
+          console.log(creds)
+          register(creds)
+
         }}
       >
         <div className="login-form">
@@ -61,27 +68,27 @@ const Register = ({
           <br/> */}
           <GrayTextField
             disabled = {isRegister}
-            error={!registerCredentials.username && !!errorList.length>0}
+            // error={!registerCredentials.username && !!errorList.length>0}
             required
-            helperText={!registerCredentials.username && !!errorList.length>0 && "Username Required"}
+            // helperText={!registerCredentials.username && !!errorList.length>0 && "Username Required"}
             label="Username"
             variant="outlined"
             name="username"
-            value={registerCredentials.username}
-            onChange={e=>handleChange(e, 'registerCredentials')}
+            // value={registerCredentials.username}
+            // onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
           <GrayTextField
             disabled = {isRegister}
-            error={!registerCredentials.password && !!errorList.length>0}
+            // error={!registerCredentials.password && !!errorList.length>0}
             required
-            helperText={!registerCredentials.password && !!errorList.length>0 && "Password Required"}
+            // helperText={!registerCredentials.password && !!errorList.length>0 && "Password Required"}
             type="password"
             label="Password"
             variant="outlined"
             name="password"
-            value={registerCredentials.password}
-            onChange={e=>handleChange(e, 'registerCredentials')}
+            // value={registerCredentials.password}
+            // onChange={e=>handleChange(e, 'registerCredentials')}
           />
           <br/>
           <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25} style={{color: 'white'}}/> : <><p className='account-show'>{`Create Account`}</p><p className='account-hide'>{`Create`}</p></> }</BlackButton>

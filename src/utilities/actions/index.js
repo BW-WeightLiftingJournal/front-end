@@ -40,8 +40,7 @@ export const getList = (id)=> dispatch => {
     })
 }
 
-export const login = (event, credentials) => dispatch => {
-  event.preventDefault()
+export const login = (credentials) => dispatch => {
   dispatch({ type: LOGIN_START });
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, credentials)
@@ -55,8 +54,7 @@ export const login = (event, credentials) => dispatch => {
     });
 };
 
-export const register = (event, credentials) => dispatch => {
-  event.preventDefault()
+export const register = (credentials) => dispatch => {
   dispatch({ type: REGISTER_START });
   const errorList = validateCredentials(credentials)
   if(!!errorList.length>0) dispatch({type: REGISTER_FAIL, payload: errorList})
@@ -64,13 +62,13 @@ export const register = (event, credentials) => dispatch => {
     const correctedCredentials = {
       username: credentials.username,
       password: credentials.password,
-      department: 'student'
+      department: 'Student'
     }
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, correctedCredentials)
       .then(res => {
         dispatch({ type: REGISTER_SUCCESS, payload: res })
-        dispatch(login(event,credentials))
+        dispatch(login(credentials))
       })
       .catch(err => {
         console.log(err.message)

@@ -170,7 +170,14 @@ span {
 	padding: 5px;
 	vertical-align: middle;
 	align-items: center;
+	border-radius: 4px;
 }
+
+.table-header {
+	opacity: 0.6;
+	font-weight: bold;
+}
+
 .single-exercise-data,
 .single-exercise-edit {
 	display: flex;

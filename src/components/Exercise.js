@@ -35,9 +35,9 @@ const Exercise = ({
             />}
                 <div className="single-exercise-data">
                     <h4 className="single-exercise-title">{exercise.workout_name}</h4>
-                    <p>{exercise.weight} lbs</p>
-                    <p>R: {exercise.reps}</p>
-                    <p>S: {exercise.sets}</p>
+                    <p>{exercise.weight}</p>
+                    <p>{exercise.reps}</p>
+                    <p>{exercise.sets}</p>
                 </div>
             
             <div className="single-exercise-buttons">
