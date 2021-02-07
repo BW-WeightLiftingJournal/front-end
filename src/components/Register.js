@@ -47,7 +47,7 @@ const Register = ({
         }}
       >
         <div className="login-form">
-          <GrayTextField
+          {/* <GrayTextField
             disabled = {isRegister}
             error={!registerCredentials.email && !!errorList.length>0}
             required
@@ -58,7 +58,7 @@ const Register = ({
             value={registerCredentials.email}
             onChange={e=>handleChange(e, 'registerCredentials')}
           />
-          <br/>
+          <br/> */}
           <GrayTextField
             disabled = {isRegister}
             error={!registerCredentials.username && !!errorList.length>0}
@@ -86,7 +86,7 @@ const Register = ({
           <br/>
           <BlackButton variant="outlined" type="submit">{isRegister ? <CircularProgress size={25} style={{color: 'white'}}/> : <><p className='account-show'>{`Create Account`}</p><p className='account-hide'>{`Create`}</p></> }</BlackButton>
           <div>
-            <p>Already have an account?</p>
+            <span>{"Already have an account? "}</span>
             <Link to="/login" onClick={resetErrors}>
               <span style={{textTransform: 'uppercase'}}>Sign in</span>
             </Link>

@@ -6,7 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const EditDialog = ({finishEdit, exercise})=> {
+
+const EditDialog = ({finishEdit, cancelEdit, exercise})=> {
   const [open, setOpen] = useState(true);
   const [editedExercise, setEditedExercise] = useState(exercise)
 
@@ -17,6 +18,7 @@ const EditDialog = ({finishEdit, exercise})=> {
 
   const handleClose = () => {
     setOpen(false);
+    cancelEdit()
   };
 
   return (

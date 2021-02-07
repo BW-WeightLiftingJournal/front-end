@@ -42,48 +42,49 @@ const Login = ({
         noValidate 
         autoComplete="off" 
         onSubmit={(e)=>{
-          login(e, loginCredentials)
+          e.preventDefault()
+          const creds = {
+            username: e.target[0].value,
+            password: e.target[2].value
+          }
+          login(e, creds)
         }}
       >
         <div className="login-form">
           <GrayTextField
             disabled = {isLogging}
-            error={error}
+            // error={error}
             required
             helperText={!loginCredentials.username && error && "Username Required"}
             label="Username"
             variant="outlined"
             name="username"
-            value={loginCredentials.username}
-            onChange={e=>handleChange(e, 'loginCredentials')}
           />
           <br/>
           <GrayTextField
             disabled = {isLogging}
-            error={error}
+            // error={error}
             required
             helperText={!loginCredentials.password && error && "Password Required"}
             type="password"
             label="Password"
             variant="outlined"
             name="password"
-            value={loginCredentials.password}
-            onChange={e=>handleChange(e, 'loginCredentials')}
           />
           <br/>
-          <FormControlLabel
+          {/* <FormControlLabel
             value="remember me"
             control={<GrayCheckbox/>}
             label="Remember me"
             labelPlacement="end"
-          />
+          /> */}
           <StyledButton variant="outlined" type="submit">{isLogging ? <CircularProgress size={25} style={{color: 'white'}}/> : 'Sign In'}</StyledButton>
           <div className="below-button">
-            <Link to="/recover">
+            {/* <Link to="/recover">
               Forgot password?
-            </Link>
+            </Link> */}
             <div style={{textAlign: 'right'}}>
-              <p>Don't have an account?</p>
+              <span>{"Don't have an account? "}</span>
               <Link to="/register" onClick={resetErrors}>
                 <span style={{textTransform: 'uppercase'}}>Sign up</span>
               </Link>
