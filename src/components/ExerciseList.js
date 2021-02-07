@@ -19,7 +19,7 @@ const ExerciseList = ({
   let previousDate=''
   return (
     <div className="exercise-list-container">
-      {exerciseList.map(item=>{
+      {exerciseList && exerciseList.map(item=>{
         isSame=item.date_completed===previousDate;
         previousDate=item.date_completed
         return (
@@ -30,6 +30,10 @@ const ExerciseList = ({
           
         )
       })}
+      {exerciseList && exerciseList.length <1 && 
+      <p style={{color: "white", textAlign: "center", fontWeight: "bold", marginTop: "15px"}}>Looks like you don't have any workouts recorded yet.  
+        Not to worry, just click the big + button at the top to get started!</p>}
+  
     </div>
   )
 }

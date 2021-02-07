@@ -6,7 +6,8 @@ import {
         deleteItem, 
         copy, 
         handleChange,
-        startEdit
+        startEdit,
+        cancelEdit
     } from "../utilities/actions"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import EditIcon from '@material-ui/icons/Edit';
@@ -21,20 +22,22 @@ const Exercise = ({
         deleteItem, 
         handleChange,
         copy,
-        userId
+        userId,
+        cancelEdit
     }) => {
     return (
         <div className="exercise-container">
-            {isEdit && 
+            {isEdit && editedItem.id===exercise.id &&
             <EditDialog 
                 finishEdit={finishEdit} 
                 exercise={exercise}
+                cancelEdit={cancelEdit}
             />}
                 <div className="single-exercise-data">
-                    <h4 style={{minWidth: '100px'}}>{exercise.workout_name}</h4>
-                    <p>Sets: {exercise.sets}</p>
-                    <p>Reps: {exercise.reps}</p>
-                    <p>Weight: {exercise.weight} lbs</p>
+                    <h4 className="single-exercise-title">{exercise.workout_name}</h4>
+                    <p>{exercise.weight} lbs</p>
+                    <p>R: {exercise.reps}</p>
+                    <p>S: {exercise.sets}</p>
                 </div>
             
             <div className="single-exercise-buttons">
@@ -68,5 +71,6 @@ export default connect(mapStateToProps,{
         finishEdit, 
         deleteItem, 
         copy, 
-        handleChange
+        handleChange,
+        cancelEdit
     })(Exercise);

@@ -1,208 +1,253 @@
 html {
-  height: 100%;
-  min-height: 100%;
+	height: 100%;
+	min-height: 100%;
 }
 body {
-
-  font-size: 62.5%;
-  height: 100%;
-  min-height: 100%;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
+	font-size: 62.5%;
+	height: 100%;
+	min-height: 100%;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 #root {
-  height: 100%;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	height: 100%;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 
-h1, h2, h3, h4 {
-  margin: 0;
-  text-transform: uppercase;
+h1,
+h2,
+h3,
+h4 {
+	margin: 0;
+	text-transform: uppercase;
 }
 
 h1 {
-  font-size: 2.7rem;
+	font-size: 2.7rem;
 }
 
 h2 {
-  font-size: 2.3rem;
+	font-size: 2.3rem;
 }
 
 h3 {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 div {
-  font-size: 1rem;
+	font-size: 1rem;
 }
 
 a {
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
-  cursor: pointer;
+	text-decoration: none;
+	color: black;
+	font-size: 1rem;
+	cursor: pointer;
 }
 a:hover {
-  color: #F26363;
+	color: #f26363;
 }
 
 ul {
-  list-style: none;
+	list-style: none;
 }
 
-p, span {
-  margin: 0;
+p,
+span {
+	margin: 0;
 }
-
+.app-container {
+	height: 100%;
+	/* min-height: 100%; */
+}
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px;
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
 }
 
 .navbar {
-  display: flex;
-  align-self: center;
+	display: flex;
+	align-self: center;
 }
-.navbar>* {
-  margin: 0 15px;
-  text-transform: uppercase;
-  font-weight: bold;
+.navbar > * {
+	margin: 0 15px;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 
 .login-container {
-  text-align: center;
+	text-align: center;
 }
 .login-form {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 50%;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	width: 50%;
 }
 
 .login-button {
-  margin: 10px auto;
+	margin: 10px auto;
 }
 
 .below-button {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .footer-container {
-  padding: 20px;
-  background-color: #69868C;
-  color: #F2F2F2;
-  text-align: center;
+	padding: 20px;
+	background-color: #69868c;
+	color: #f2f2f2;
+	text-align: center;
+}
+.icons > * {
+	padding: 0 5px;
+	vertical-align: middle;
+	font-size: 1.3rem;
+	color: white;
+}
+.icons > *:active,
+.icons > *:hover,
+.icons > *:visited {
+	color: white;
 }
 
+.footer-name {
+	display: flex;
+	justify-content: center;
+}
+.dashboard-container {
+	height: 100%;
+	min-height: 100%;
+	background-color: #809fa6;
+}
 .dashboard-top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background: #F26363;
-  align-items: center;
-  padding: 30px 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background: #f26363;
+	align-items: center;
+	padding: 30px 10px;
 }
 
 .add-button-dashboard {
-  border-radius: 4px;
-  padding: 5px 5px 3px 5px;
-  margin-right: 20px;
-  cursor: pointer;
-  background: white;
+	border-radius: 4px;
+	padding: 5px 5px 3px 5px;
+	margin-right: 20px;
+	cursor: pointer;
+	background: white;
 }
 
 .add-exercise-container {
-  text-align: center;
+	text-align: center;
 }
 
 .add-exercise-form {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 60%;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	width: 60%;
 }
 
 .exercise-container {
-  display: flex;
-  flex-direction: row;
-  background-color: #F2F2F2;
-  justify-content: space-between;
-  margin: 10px auto;
-  padding: 5px;
-  vertical-align: middle;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	background-color: #f2f2f2;
+	justify-content: space-between;
+	margin: 10px auto;
+	padding: 5px;
+	vertical-align: middle;
+	align-items: center;
 }
-.single-exercise-data, .single-exercise-edit {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 80%;
-  align-items: center;
+.single-exercise-data,
+.single-exercise-edit {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 80%;
+	align-items: center;
+	flex-grow: 3;
 }
-.single-exercise-data>p {
-  margin-left: 8px;
+/* .single-exercise-data > p,  .single-exercise-edit > p{
+	margin-left: 8px;
 }
 
-.single-exercise-data>* {
-  padding-right: 5px;
+.single-exercise-data > * {
+	padding-right: 5px;
 }
-.single-exercise-edit>*{
-  width: 20%;
-  padding: 5px;
-  margin-right: 5px;
+.single-exercise-edit > * {
+	width: 20%;
+	padding: 5px;
+	margin-right: 5px; 
+} */
+.single-exercise-data > *,
+.single-exercise-edit > * {
+	word-wrap: break-word;
+	flex-basis: 100%;
 }
+
+.single-exercise-title {
+	min-width: 200px;
+}
+
+@media (max-width: 750px) {
+	.single-exercise-title {
+		min-width: 20px;
+	}
+}
+
 .single-exercise-buttons {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	max-width: 100px;
+	flex-shrink: 1;
 }
 
 .short-inputs {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
 }
 
 .dashboard-body {
-  display: flex;
-  flex-direction: column;
-  background: #809FA6;
-  padding: 30px 10px;
+	display: flex;
+	flex-direction: column;
+	background: #809fa6;
+	padding: 30px 10px;
 }
 
 .short-input {
-  width: 50%;
+	width: 50%;
 }
 
 .add-title {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 .account-hide {
-  display: none;
+	display: none;
 }
 .account-show {
-  display: block;
+	display: block;
 }
 
 @media (max-width: 520px) {
-  .account-hide {
-    display: block;
-  }
-  .account-show {
-    display: none;
-  }
+	.account-hide {
+		display: block;
+	}
+	.account-show {
+		display: none;
+	}
 }

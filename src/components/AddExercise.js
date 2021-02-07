@@ -5,8 +5,9 @@ import TextField from '@material-ui/core/TextField'
 import { StyledFormButton } from '../utilities/styles'
 import { gsap, Bounce } from 'gsap'
 import { DatePicker } from '@material-ui/pickers'
+import {submitForm} from "../utilities/actions"
 
-const AddExercise = ({ history, userId }) => {
+const AddExercise = ({ history, userId, submitForm }) => {
 
     let formItem = useRef()
 
@@ -28,7 +29,7 @@ const AddExercise = ({ history, userId }) => {
         setExercise({ ...exercise, [event.target.name]: event.target.value });
     };
 
-    const submitForm = event => {
+    const handleSubmitForm = event => {
         event.preventDefault();
         const date = new Date(selectedDate)
         const parsedDate = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
@@ -41,11 +42,7 @@ const AddExercise = ({ history, userId }) => {
             workout_name: exercise.name
         }
 
-        axiosWithAuth() 
-            .post(`${process.env.REACT_APP_BASE_URL}/api/workouts`, reformattedExercise)
-            .then(res => {
-            })
-            .catch(error => console.log(error.response))
+        submitForm(reformattedExercise)
 
         setExercise({ 
             name: '',
@@ -75,7 +72,7 @@ const AddExercise = ({ history, userId }) => {
         <div ref={el => {formItem = el}} className='add-exercise-container'>
             <h2 className='add-title'>Add New Exercise</h2>
             <form onSubmit={e=>{
-                submitForm(e,exercise)
+                handleSubmitForm(e,exercise)
                 history.push('/dashboard')
             }
             }>
@@ -133,4 +130,4 @@ const mapStateToProps = state => ({
     ...state
   })
   
-export default connect(mapStateToProps,{})(AddExercise);
+export default connect(mapStateToProps,{submitForm})(AddExercise);

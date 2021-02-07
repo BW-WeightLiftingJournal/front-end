@@ -21,7 +21,8 @@ import {
     RETRIEVE_START,
     RETRIEVE_FAIL,
     VERIFY_START,
-    VERIFY_FAIL
+    VERIFY_FAIL,
+    CANCEL_EDIT
     } 
 from "../actions"
 
@@ -182,6 +183,14 @@ switch (type) {
         return {
             ...state,
             isEdit: false,
+            editedItem: {},
+            forceUpdate: !state.forceUpdate
+        }
+    case CANCEL_EDIT:
+        return {
+            ...state,
+            isEdit: false,
+            editedItem: {},
             forceUpdate: !state.forceUpdate
         }
     case DELETE:
@@ -217,7 +226,7 @@ switch (type) {
     case SUBMIT_FORM:
         return {
             ...state,
-            exerciseList: [payload, ...state.exerciseList]
+            forceUpdate: !state.forceUpdate
         }
     default:
         return state

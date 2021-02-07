@@ -16,6 +16,7 @@ export const RESET_ERRORS='RESET_CREDS'
 export const VERIFY_EMAIL = 'VERIFY_EMAIL'
 export const START_EDIT = 'START_EDIT'
 export const FINISH_EDIT = 'FINISH_EDIT'
+export const CANCEL_EDIT = 'CANCEL_EDIT'
 export const DELETE = 'DELETE'
 export const COPY = 'COPY'
 export const SUBMIT_FORM = "SUBMIT_FORM"
@@ -31,7 +32,7 @@ export const getList = (id)=> dispatch => {
   axiosWithAuth()
     .get(`${process.env.REACT_APP_BASE_URL}/api/workouts/${id}`)
     .then(res=> {
-      dispatch({type: RETRIEVE_SUCCESS, payload: res.data.workouts})
+      dispatch({type: RETRIEVE_SUCCESS, payload: res.data})
     })
     .catch(err=> {
       console.log(err.message)
@@ -110,7 +111,7 @@ export const logout = ()=> dispatch => {
   localStorage.setItem('token', '')
   dispatch({ type: LOGOUT_START });
   axios
-  .get(`${process.end.REACT_APP_BASE_URL}/api/auth/logout`)
+  .get(`${process.env.REACT_APP_BASE_URL}/api/auth/logout`)
   .then(res => {
     dispatch({ type: LOGOUT_SUCCESS})
   })
@@ -136,6 +137,10 @@ export const finishEdit = (e, id, exercise) => dispatch => {
   })
   .catch(err => console.log(err));
 }
+
+export const cancelEdit = () => ({
+  type: CANCEL_EDIT,
+})
 
 export const deleteItem = (id) => dispatch => {
   axiosWithAuth()
@@ -166,15 +171,15 @@ export const copy = (exercise, userId)=> dispatch => {
   .catch(err => console.log(err));
 }
 /*see AddExercise.js component for a local copy of this function*/
-// export const submitForm = (event, exercise) => dispatch=> {
-  
-//   event.preventDefault()
-//   const newExercise = {
-//     ...exercise,
-//     id: new Date().getMilliseconds()
-//   }
-//   dispatch({
-//     type: SUBMIT_FORM,
-//     payload: newExercise
-//   })
-// }
+export const submitForm = (exercise) => dispatch=> {
+  // const newExercise = {
+  //   ...exercise,
+  //   id: new Date().getMilliseconds()
+  // }
+  axiosWithAuth()
+  .post(`${process.env.REACT_APP_BASE_URL}/api/workouts`, exercise)
+  .then(res => {
+    dispatch({ type: SUBMIT_FORM, payload: res.data })
+  })
+  .catch(err => console.log(err));
+}
