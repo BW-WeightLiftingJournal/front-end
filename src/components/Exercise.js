@@ -84,10 +84,9 @@ const Exercise = ({
                     />
                 </Tooltip>
                 <Popper 
-
                     open={open} 
                     anchorEl={anchorRef.current} 
-                    placement="top"
+                    placement="top-left"
                 >
                     <ClickAwayListener onClickAway={handleClose}>
                         <div  style={{background: "white", borderRadius: "8px", padding: "5px"}}>

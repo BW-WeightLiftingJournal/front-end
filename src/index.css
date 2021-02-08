@@ -87,7 +87,8 @@ span {
 	font-weight: bold;
 }
 
-.login-container {
+.login-container,
+.about-container {
 	text-align: center;
 }
 .login-form {
