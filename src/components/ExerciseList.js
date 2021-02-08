@@ -16,7 +16,6 @@ const ExerciseList = ({
     // eslint-disable-next-line
   }, [forceUpdate])
   
-  // const sortedList = exerciseList.sort((a, b)=> moment(a.date_completed).isBefore(moment(b.date_completed) ? -1 : 1))
   let isSame=true;
   let previousDate=''
   return (
@@ -36,7 +35,7 @@ const ExerciseList = ({
         previousDate=item.date_completed
         return (
           <div key={item.id}>
-            {!isSame && <h4 style={{margin: '20px 0px 10px 10px', letterSpacing: '1.5px'}}>{item.date_completed}</h4>}
+            {!isSame && <h4 style={{margin: '20px 0px 10px 10px', letterSpacing: '1.5px'}}>{moment(item.date_completed).format("MMM DD, YYYY")}</h4>}
             <Exercise exercise={item}/>
           </div>
           

@@ -18,6 +18,23 @@ export const StyledButton = withStyles({
     },
 })(Button);
 
+export const RedButtonSmall = withStyles({
+    root: {
+        background: '#F26363',
+        margin: '10px 0',
+        height: '30px',
+        '&:hover': {
+            background: 'rgb(250, 102, 102)',
+        }
+    },
+    label: {
+        textTransform: 'uppercase',
+        color: 'white',
+        fontSize: '1rem'
+    },
+})(Button);
+
+
 export const BlackButton = withStyles({
     root: {
         background: 'black',

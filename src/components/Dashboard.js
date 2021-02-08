@@ -2,6 +2,7 @@ import React from "react"
 import {connect} from "react-redux"
 import ExerciseList from "./ExerciseList"
 import AddIcon from '@material-ui/icons/Add';
+import moment from "moment"
 
 const Dashboard = ({
     history,
@@ -10,7 +11,8 @@ const Dashboard = ({
 }) => {
 
     const today = new Date()
-    const date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
+    // const date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
+    const date = moment(today).format('MMM DD, YYYY')
     return (
         <div className="dashboard-container">
             <section className="dashboard-top">

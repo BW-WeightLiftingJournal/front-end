@@ -149,7 +149,9 @@ span {
 	cursor: pointer;
 	background: white;
 }
-
+.add-button-dashboard:hover {
+	opacity: 0.8;
+}
 .add-exercise-container {
 	text-align: center;
 }
