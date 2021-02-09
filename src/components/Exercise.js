@@ -65,9 +65,9 @@ const Exercise = ({
             />}
                 <div className="single-exercise-data">
                     <h4 className="single-exercise-title">{exercise.workout_name}</h4>
-                    <p>{exercise.weight.toFixed(1)}</p>
-                    <p>{exercise.reps}</p>
-                    <p>{exercise.sets}</p>
+                    <p>{exercise.weight ? exercise.weight.toFixed(1) : "N/A"}</p>
+                    <p>{exercise.reps || "N/A"}</p>
+                    <p>{exercise.sets || "N/A"}</p>
                 </div>
             
             <div className="single-exercise-buttons">
@@ -86,7 +86,7 @@ const Exercise = ({
                 <Popper 
                     open={open} 
                     anchorEl={anchorRef.current} 
-                    placement="top-left"
+                    placement="top-start"
                 >
                     <ClickAwayListener onClickAway={handleClose}>
                         <div  style={{background: "white", borderRadius: "8px", padding: "5px"}}>

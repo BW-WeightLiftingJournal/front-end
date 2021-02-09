@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {validateExercise} from "../utilities/validation"
 
 
 const EditDialog = ({finishEdit, cancelEdit, exercise})=> {
   const [open, setOpen] = useState(true);
   const [editedExercise, setEditedExercise] = useState(exercise)
+  const [errors, setErrors] = useState([])
 
   const handleChange = (event) => {
       const {name, value} = event.target
@@ -21,10 +23,26 @@ const EditDialog = ({finishEdit, cancelEdit, exercise})=> {
     cancelEdit()
   };
 
+  const handleFinishEdit = () => {
+    setErrors(validateExercise(editedExercise))
+  }
+
+  useEffect(()=> {
+    if (errors.length >0 && errors[0]==="clear") {
+      finishEdit(exercise.id, editedExercise)
+      handleClose()
+    }
+
+  }, [errors])
+
   return (
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Edit Exercise</DialogTitle>
+        {errors.length >0 && errors[0] !== "clear" ?<DialogContent>
+           <div style={{color: 'red'}}>{errors.map((err, ind)=> <p key={ind}>{err}</p>)}</div> 
+        </DialogContent>
+        : <br/>}
         <DialogContent>
           <TextField
             name="workout_name"
@@ -67,10 +85,7 @@ const EditDialog = ({finishEdit, cancelEdit, exercise})=> {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={e=> {
-              finishEdit(e, exercise.id, editedExercise)
-              handleClose()
-              }} 
+          <Button onClick={handleFinishEdit}
               color="primary">
             Save
           </Button>

@@ -1,3 +1,5 @@
+import { FaWeight } from "react-icons/fa"
+
 export const validateCredentials = (credentials) => {
     const {username, 
         // email, 
@@ -35,5 +37,29 @@ export const validateCredentials = (credentials) => {
         bool=true
     }
     if (bool) err.unshift('Missing one or more required items')
+    return err
+}
+
+
+// const reformattedExercise = {
+//     user_id: userId,
+//     weight: exercise.weight,
+//     reps: exercise.reps,
+//     sets: exercise.sets,
+//     date_completed: parsedDate,
+//     workout_name: exercise.name
+// }
+export const validateExercise = (exercise) => {
+    console.log(exercise)
+    let err = []
+    if (!exercise.workout_name || !exercise.date_completed) {
+        err.push("Missing one or more required items")
+    }
+    
+    if (!!exercise.weight && isNaN(exercise.weight)) err.push("Weight must be a positive number")
+    if (!!exercise.reps && isNaN(exercise.reps)) err.push("Reps must be a positive number")
+    if (!!exercise.sets && isNaN(exercise.sets)) err.push("Sets must be a positive number")
+    if (err.length === 0) err.push("clear")
+    console.log(err)
     return err
 }
