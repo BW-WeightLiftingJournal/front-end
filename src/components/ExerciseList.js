@@ -12,6 +12,7 @@ const ExerciseList = ({
 }) => {
 
   useEffect(()=> {
+    console.log('updating list')
     getList(userId)
     // eslint-disable-next-line
   }, [forceUpdate])
