@@ -22,16 +22,19 @@ function App() {
   return (
     <MuiPickersUtilsProvider utils={LuxonUtils}>
     <div className="app-container">
-      <Header />
-      <Route exact path="/" component={Login}/>
-      <Route exact path="/register" component={Register}/>
-      <Route exact path="/login" component={Login}/>
-      <Route exact path="/about" component={About}/>
-      <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-      <PrivateRoute exact path="/add" component={AddExercise}/> 
-      <Route exact path="/recover" component={RecoverPassword}/>
-     </div>
-     <Footer/>
+      <div className="content-wrapper">
+        <Header />
+        <Route exact path="/" component={Login}/>
+        <Route exact path="/register" component={Register}/>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/about" component={About}/>
+        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+        <PrivateRoute exact path="/add" component={AddExercise}/> 
+        <Route exact path="/recover" component={RecoverPassword}/>
+      </div>
+      <Footer/>
+    </div>
+     
     </MuiPickersUtilsProvider>
   );
 }
