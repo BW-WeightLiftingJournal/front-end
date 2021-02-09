@@ -4,6 +4,7 @@ import { StyledButton, GrayTextField } from '../utilities/styles'
 import { DatePicker } from '@material-ui/pickers'
 import {submitForm} from "../utilities/actions"
 import {validateExercise} from "../utilities/validation"
+import moment from "moment"
 
 
 const AddExercise = ({history, userId, submitForm }) => {
@@ -22,6 +23,7 @@ const AddExercise = ({history, userId, submitForm }) => {
     const [reformattedExercise, setReformattedExercise] = useState({})
 
     const handleDateChange = date => {
+        console.log(`handleDateChange: ${date}`)
         setSelectedDate(date);
     };
     
@@ -33,13 +35,16 @@ const AddExercise = ({history, userId, submitForm }) => {
     const handleSubmitForm = async event => {
         event.preventDefault();
         const date = new Date(selectedDate)
-        const parsedDate = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
+        console.log(`handleSubmit: ${date}`)
+        // const parsedDate = moment(date).format('YYYY-MM-DD')
+        //const parsedDate =  `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
+        // console.log(`parsed: ${parsedDate}`)
         const formatted = {
             user_id: userId,
             weight: exercise.weight,
             reps: exercise.reps,
             sets: exercise.sets,
-            date_completed: parsedDate,
+            date_completed: date,
             workout_name: exercise.name
         }
         setReformattedExercise(formatted)
