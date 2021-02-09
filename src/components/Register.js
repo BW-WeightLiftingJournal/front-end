@@ -48,7 +48,6 @@ const Register = ({
             username: e.target[0].value,
             password: e.target[2].value
           }
-          console.log(creds)
           register(creds)
 
         }}
