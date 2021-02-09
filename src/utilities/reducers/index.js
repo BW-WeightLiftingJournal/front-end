@@ -135,7 +135,7 @@ switch (type) {
         return {
             ...state,
             isRegistering: false,
-            errorList: serverError==='Request failed with status code 500' ? ['Username not available.'] : payload
+            errorList: serverError==='Request failed with status code 400' ? ['Username not available.'] : payload
         }
     case HANDLE_CHANGE:
         return {
