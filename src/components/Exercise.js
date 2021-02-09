@@ -65,7 +65,10 @@ const Exercise = ({
             />}
                 <div className="single-exercise-data">
                     <h4 className="single-exercise-title">{exercise.workout_name}</h4>
-                    <p>{exercise.weight ? exercise.weight.toFixed(1) : "N/A"}</p>
+                    <p>{exercise.weight ? 
+                        exercise.weight
+                        // exercise.weight.toFixed(1) 
+                        : "N/A"}</p>
                     <p>{exercise.reps || "N/A"}</p>
                     <p>{exercise.sets || "N/A"}</p>
                 </div>
