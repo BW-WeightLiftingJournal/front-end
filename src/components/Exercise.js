@@ -74,7 +74,7 @@ const Exercise = ({
                 </div>
             
             <div className="single-exercise-buttons">
-                <Tooltip title="Copy">
+                <Tooltip title="Copy" ref={anchorRef} >
                     <FileCopyIcon
                         style={{cursor: 'pointer', marginRight: '10px', opacity: '60%'}} 
                         onClick={()=>copy(exercise, userId)}
@@ -89,7 +89,7 @@ const Exercise = ({
                 <Popper 
                     open={open} 
                     anchorEl={anchorRef.current} 
-                    placement="top-start"
+                    placement="top"
                 >
                     <ClickAwayListener onClickAway={handleClose}>
                         <div  style={{background: "white", borderRadius: "8px", padding: "5px"}}>
@@ -102,7 +102,6 @@ const Exercise = ({
                 <Tooltip title="Delete">
                     <DeleteIcon 
                         style={{color: '#F26363', cursor: 'pointer'}}
-                        ref={anchorRef} 
                         fontSize='default' 
                         onClick={(e)=>handleDelete(e)}
                     />
