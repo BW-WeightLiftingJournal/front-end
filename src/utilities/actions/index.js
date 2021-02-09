@@ -126,8 +126,7 @@ export const startEdit = (id) => ({
   payload: id
 })
 
-export const finishEdit = (e, id, exercise) => dispatch => {
-  e.preventDefault()
+export const finishEdit = (id, exercise) => dispatch => {
   axiosWithAuth()
   .put(`${process.env.REACT_APP_BASE_URL}/api/workouts/${id}`, exercise)
   .then(res => {

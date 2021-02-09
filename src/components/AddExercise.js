@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from "react"
 import {connect} from "react-redux"
 import TextField from '@material-ui/core/TextField'
-import { StyledFormButton } from '../utilities/styles'
-import { gsap, Bounce } from 'gsap'
+import { StyledFormButton, GrayTextField } from '../utilities/styles'
 import { DatePicker } from '@material-ui/pickers'
 import {submitForm} from "../utilities/actions"
+import {validateExercise} from "../utilities/validation"
 
-const AddExercise = ({ history, userId, submitForm }) => {
+
+const AddExercise = ({history, userId, submitForm }) => {
+    const [errors, setErrors ] = useState([])
 
     let formItem = useRef()
 
@@ -18,6 +20,7 @@ const AddExercise = ({ history, userId, submitForm }) => {
         sets: ''
     });
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [reformattedExercise, setReformattedExercise] = useState({})
 
     const handleDateChange = date => {
         setSelectedDate(date);
@@ -28,11 +31,11 @@ const AddExercise = ({ history, userId, submitForm }) => {
         setExercise({ ...exercise, [event.target.name]: event.target.value });
     };
 
-    const handleSubmitForm = event => {
+    const handleSubmitForm = async event => {
         event.preventDefault();
         const date = new Date(selectedDate)
         const parsedDate = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
-        const reformattedExercise = {
+        const formatted = {
             user_id: userId,
             weight: exercise.weight,
             reps: exercise.reps,
@@ -40,39 +43,33 @@ const AddExercise = ({ history, userId, submitForm }) => {
             date_completed: parsedDate,
             workout_name: exercise.name
         }
+        setReformattedExercise(formatted)
 
-        submitForm(reformattedExercise)
+        setErrors(validateExercise(formatted))
 
-        setExercise({ 
-            name: '',
-            date: '',
-            weight: '',
-            reps: '',
-            sets: ''
-        });
+        
     }
-
-    useEffect(() => {
-           gsap.to(
-            formItem,
-            2,
-                {
-                    y: -10,
-                    ease: Bounce.easeOut,
-                }
-            ) 
-       }
-    )
-
-//In lieu of a succes message on successfull submit form will reroute to the home page.
-//There is also no form validation on button three inputs, this was done on purpose as we didn't want them to be required inputs for our app.
+    useEffect(()=> {
+        if (errors.length >0 && errors[0]==="clear") {
+            submitForm(reformattedExercise)
+            setExercise({ 
+                name: '',
+                date: '',
+                weight: '',
+                reps: '',
+                sets: ''
+            });
+            history.push('/dashboard')
+        }
+    }, [errors])
+            
 
     return (
         <div ref={el => {formItem = el}} className='add-exercise-container'>
             <h2 className='add-title'>Add New Exercise</h2>
+            {errors.length >0 && errors[0] !== "clear" ? <div style={{color: 'red'}}>{errors.map((err, ind)=> <p key={ind}>{err}</p>)}</div> : <br/>}
             <form onSubmit={e=>{
                 handleSubmitForm(e,exercise)
-                history.push('/dashboard')
             }
             }>
                 <div className='add-exercise-form'>
@@ -85,7 +82,7 @@ const AddExercise = ({ history, userId, submitForm }) => {
                     onChange={handleDateChange}
                 />
                 <br/>
-                <TextField
+                <GrayTextField
                     required
                     variant='outlined'
                     label='Exercise Name'
@@ -93,32 +90,37 @@ const AddExercise = ({ history, userId, submitForm }) => {
                     onChange={handleChanges}
                 />
                 <br/>
+                <GrayTextField                  
+                    variant='outlined'
+                    label='Weight Lifted'
+                    name='weight'
+                    onChange={handleChanges}
+                />
+                <br/>
                 <div className='short-inputs'>
-                    <TextField                  
-                        className='short-input'
-                        variant='outlined'
-                        label='Weight Lifted'
-                        name='weight'
-                        onChange={handleChanges}
-                    />
-                    <br/>
-                    <TextField
+                    <GrayTextField
                         className='short-input'
                         variant='outlined'
                         label='Reps Completed'
                         name='reps'
                         onChange={handleChanges}
                     />
+                    <br/>
+                    <GrayTextField
+                        className='short-input'
+                        variant='outlined'
+                        label='Sets Completed'
+                        name='sets'
+                        onChange={handleChanges}
+                    />
                 </div>
                 <br/>
-                <TextField
-                    variant='outlined'
-                    label='Sets Completed'
-                    name='sets'
-                    onChange={handleChanges}
-                />
-                <br/>
-                    <StyledFormButton variant='outlined' type='submit'> ADD EXCERCISE</StyledFormButton>
+                    <StyledFormButton 
+                        variant='outlined' 
+                        type='submit'
+                    > 
+                        ADD EXCERCISE
+                    </StyledFormButton>
                 </div>
                 </form>
             </div>
