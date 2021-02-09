@@ -1,16 +1,16 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import {connect} from "react-redux"
 import { StyledButton, GrayTextField } from '../utilities/styles'
 import { DatePicker } from '@material-ui/pickers'
 import {submitForm} from "../utilities/actions"
 import {validateExercise} from "../utilities/validation"
-import moment from "moment"
+// import moment from "moment"
 
 
 const AddExercise = ({history, userId, submitForm }) => {
     const [errors, setErrors ] = useState([])
 
-    let formItem = useRef()
+    // let formItem = useRef()
 
     const [exercise, setExercise] = useState({
         date: '',
@@ -23,7 +23,7 @@ const AddExercise = ({history, userId, submitForm }) => {
     const [reformattedExercise, setReformattedExercise] = useState({})
 
     const handleDateChange = date => {
-        console.log(`handleDateChange: ${date}`)
+        // console.log(`handleDateChange: ${date}`)
         setSelectedDate(date);
     };
     
@@ -35,7 +35,7 @@ const AddExercise = ({history, userId, submitForm }) => {
     const handleSubmitForm = async event => {
         event.preventDefault();
         const date = new Date(selectedDate)
-        console.log(`handleSubmit: ${date}`)
+        // console.log(`handleSubmit: ${date}`)
         // const parsedDate = moment(date).format('YYYY-MM-DD')
         //const parsedDate =  `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
         // console.log(`parsed: ${parsedDate}`)
@@ -65,11 +65,14 @@ const AddExercise = ({history, userId, submitForm }) => {
             });
             history.push('/dashboard')
         }
+        // eslint-disable-next-line
     }, [errors])
             
 
     return (
-        <div ref={el => {formItem = el}} className='add-exercise-container'>
+        <div 
+        // ref={el => {formItem = el}} 
+        className='add-exercise-container'>
             <h2 className='add-title'>Add New Exercise</h2>
             {errors.length >0 && errors[0] !== "clear" ? <div style={{color: 'red'}}>{errors.map((err, ind)=> <p key={ind}>{err}</p>)}</div> : <br/>}
             <form onSubmit={e=>{
@@ -90,14 +93,14 @@ const AddExercise = ({history, userId, submitForm }) => {
                 <GrayTextField
                     required
                     variant='outlined'
-                    label='Exercise Name'
+                    label='Exercise'
                     name='name'
                     onChange={handleChanges}
                 />
                 <br/>
                 <GrayTextField                  
                     variant='outlined'
-                    label='Weight Lifted'
+                    label='Weight'
                     name='weight'
                     onChange={handleChanges}
                 />
@@ -106,7 +109,7 @@ const AddExercise = ({history, userId, submitForm }) => {
                     <GrayTextField
                         className='short-input'
                         variant='outlined'
-                        label='Reps Completed'
+                        label='Reps'
                         name='reps'
                         onChange={handleChanges}
                     />
@@ -114,7 +117,7 @@ const AddExercise = ({history, userId, submitForm }) => {
                     <GrayTextField
                         className='short-input'
                         variant='outlined'
-                        label='Sets Completed'
+                        label='Sets'
                         name='sets'
                         onChange={handleChanges}
                     />

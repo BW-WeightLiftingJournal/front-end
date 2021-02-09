@@ -14,7 +14,8 @@ export const StyledButton = withStyles({
     label: {
         textTransform: 'uppercase',
         color: 'white',
-        fontSize: '1.5rem'
+        fontSize: '1.5rem',
+        lineHeight: '20px'
     },
 })(Button);
 

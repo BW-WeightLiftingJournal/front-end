@@ -32,7 +32,7 @@ const EditDialog = ({finishEdit, cancelEdit, exercise})=> {
       finishEdit(exercise.id, editedExercise)
       handleClose()
     }
-
+// eslint-disable-next-line
   }, [errors])
 
   return (
