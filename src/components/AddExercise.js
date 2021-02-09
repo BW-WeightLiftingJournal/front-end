@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
 import {connect} from "react-redux"
-import TextField from '@material-ui/core/TextField'
 import { StyledFormButton, GrayTextField } from '../utilities/styles'
 import { DatePicker } from '@material-ui/pickers'
 import {submitForm} from "../utilities/actions"
@@ -15,9 +14,9 @@ const AddExercise = ({history, userId, submitForm }) => {
     const [exercise, setExercise] = useState({
         date: '',
         name: '',
-        weight: '',
-        reps: '',
-        sets: ''
+        weight: null,
+        reps: null,
+        sets: null
     });
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [reformattedExercise, setReformattedExercise] = useState({})
@@ -55,9 +54,9 @@ const AddExercise = ({history, userId, submitForm }) => {
             setExercise({ 
                 name: '',
                 date: '',
-                weight: '',
-                reps: '',
-                sets: ''
+                weight: null,
+                reps: null,
+                sets: null
             });
             history.push('/dashboard')
         }
