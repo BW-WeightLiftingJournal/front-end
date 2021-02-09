@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
 import {connect} from "react-redux"
-import { StyledFormButton, GrayTextField } from '../utilities/styles'
+import { StyledButton, GrayTextField } from '../utilities/styles'
 import { DatePicker } from '@material-ui/pickers'
 import {submitForm} from "../utilities/actions"
 import {validateExercise} from "../utilities/validation"
@@ -75,8 +75,9 @@ const AddExercise = ({history, userId, submitForm }) => {
                 <DatePicker
                     required
                     label="Date"
-                    variant="outlined"
+                    inputVariant="outlined"
                     name="date"
+                    disableFuture
                     value={selectedDate}
                     onChange={handleDateChange}
                 />
@@ -114,12 +115,12 @@ const AddExercise = ({history, userId, submitForm }) => {
                     />
                 </div>
                 <br/>
-                    <StyledFormButton 
+                    <StyledButton 
                         variant='outlined' 
                         type='submit'
                     > 
                         ADD EXCERCISE
-                    </StyledFormButton>
+                    </StyledButton>
                 </div>
                 </form>
             </div>
