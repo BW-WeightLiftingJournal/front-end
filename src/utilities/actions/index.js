@@ -71,7 +71,7 @@ export const register = (credentials) => dispatch => {
         dispatch(login(credentials))
       })
       .catch(err => {
-        console.log(err.message)
+        // console.log(err)
         const eList = [err.message]
         dispatch({ type: REGISTER_FAIL, payload: eList })
       });
