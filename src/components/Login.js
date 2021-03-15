@@ -96,6 +96,11 @@ const Login = ({
           {/* </div> */}
         </div>
       </form>
+      <div className="test-user-box">
+            <p><strong>For testing purposes:</strong></p>
+            <p>username: <em>test-user</em></p>
+            <p>password: <em>test-pass</em></p>
+      </div>
       
     </div>
   );
