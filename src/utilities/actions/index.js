@@ -1,6 +1,7 @@
 import { axiosWithAuth } from "../axiosAuth"
 import axios from "axios"
 import {validateCredentials} from "../validation"
+import moment from "moment"
 
 export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -149,8 +150,7 @@ export const deleteItem = (id) => dispatch => {
 }
 
 export const copy = (exercise, userId)=> dispatch => {
-  const today = new Date()
-  const date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
+  const date = moment(new Date())
   const temp = 
   {
     user_id: userId,

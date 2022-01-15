@@ -102,7 +102,7 @@ const Exercise = ({
                 <Tooltip title="Delete">
                     <DeleteIcon 
                         style={{color: '#F26363', cursor: 'pointer'}}
-                        fontSize='default' 
+                        fontSize='medium' 
                         onClick={(e)=>handleDelete(e)}
                     />
                     

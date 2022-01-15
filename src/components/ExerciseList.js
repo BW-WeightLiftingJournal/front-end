@@ -30,18 +30,20 @@ const ExerciseList = ({
         <span style={{width: "100px", textAlign: "center"}}>Options</span>
       </div>
       
-      {exerciseList && exerciseList.map(item=>{
-        isSame=item.date_completed===previousDate;
+      {exerciseList?.map(item=>{
+        const dateCompletedMoment = moment(item.date_completed).format("MMM DD, YYYY")
+        const previousDateMoment = moment(previousDate).format("MMM DD, YYYY")
+        isSame=dateCompletedMoment===previousDateMoment;
         previousDate=item.date_completed
         return (
           <div key={item.id}>
-            {!isSame && <h4 style={{margin: '20px 0px 10px 10px', letterSpacing: '1.5px'}}>{moment(item.date_completed).format("MMM DD, YYYY")}</h4>}
+            {!isSame && <h4 style={{margin: '20px 0px 10px 10px', letterSpacing: '1.5px'}}>{dateCompletedMoment}</h4>}
             <Exercise exercise={item}/>
           </div>
           
         )
       })}
-      {exerciseList && exerciseList.length <1 && 
+      {exerciseList?.length <1 && 
       <p style={{color: "white", textAlign: "center", fontWeight: "bold", marginTop: "15px"}}>Looks like you don't have any workouts recorded yet.  
         Not to worry, just click the big + button at the top to get started!</p>}
   
