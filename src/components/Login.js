@@ -9,6 +9,7 @@ import {CircularProgress,
 import {StyledButton, 
   // GrayCheckbox, 
   GrayTextField} from "../utilities/styles"
+import Welcome from "./Welcome";
 
 
 const Login = ({
@@ -38,6 +39,7 @@ const Login = ({
 
   return (
     <div className="login-container">
+      <Welcome />
       <FaDumbbell style={{fontSize: '4rem'}}/>
       <h2>Sign In</h2>
       {error ? <div style={{color: 'red'}}>{error}</div> : <br/>}
